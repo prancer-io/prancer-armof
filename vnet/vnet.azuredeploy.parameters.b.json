@@ -1,0 +1,53 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "Vnetname": {
+      "value": "prancer-vnet2"
+    },
+    "addressPrefix": {
+      "value": "10.154.0.0/16"
+    },
+    "DNSServerAddress": {
+      "value": ["10.154.0.1"]
+    },
+    "tagsByResource": {
+      "value": {
+        "Project": "Prancer",
+        "Envirnment": "Production"
+          }
+    },
+    "Subnets": {
+      "value": [
+        {
+          "name": "prancer-frontend",
+          "properties": {
+            "addressPrefix": "10.154.0.0/24",
+            "delegations": [
+              {
+                  "name": "Microsoft.Databricks.workspaces",
+                  "properties": {
+                      "serviceName": "Microsoft.Databricks/workspaces"
+                  }
+              }
+          ],
+          "serviceEndpoints": [
+            {
+                "service": "Microsoft.Sql",
+                "locations": [
+                    "eastus"
+                ]
+            },
+            {
+                "service": "Microsoft.AzureActiveDirectory",
+                "locations": [
+                    "*"
+                ]
+            }
+          ]          
+          }
+        }
+      ]
+    }
+  }
+}

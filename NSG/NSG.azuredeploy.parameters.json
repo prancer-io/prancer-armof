@@ -1,0 +1,58 @@
+
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "Environment": {
+      "value": "Production"
+    },
+    "Project": {
+      "value": "Prancer"
+    },
+    "NSGProperties": {
+        "value": {
+          "SecurityRules": [
+            {
+              "name": "block-port-range-20-22",
+              "properties": {
+                "protocol": "Tcp",
+                "access": "Deny",
+                "priority": 100,
+                "direction": "Inbound",
+                "sourcePortRange": "*",
+                "destinationPortRange": "",
+                "destinationAddressPrefix": "*",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [
+                  "20",
+                  "21",
+                  "22"
+                ],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": [],
+                "sourceAddressPrefix": "*"
+              }
+            },
+            {
+              "name": "block-port-3306",
+              "properties": {
+                "description": "allow inbound traffic",
+                "protocol": "Tcp",
+                "access": "Deny",
+                "priority": 101,
+                "direction": "Inbound",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3306",
+                "destinationAddressPrefix": "*",
+                "sourcePortRanges": [],
+                "destinationPortRanges": [],
+                "sourceAddressPrefixes": [],
+                "destinationAddressPrefixes": [],
+                "sourceAddressPrefix": "*"
+              }
+            }
+          ]
+        }
+      }
+    }
+}

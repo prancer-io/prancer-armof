@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "Vnetname": {
+      "defaultValue": "prancer-vnet",
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Virtual Network"
+      }
+    },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "10.254.0.0/16",
+      "allowedValues": [
+        "10.254.0.0/16",
+        "10.154.0.0/16"
+      ],
+      "metadata": {
+        "description": "The CIDR address space for your Virtual Network in Azure"
+      }
+    },
+    "DNSServerAddress": {
+      "type": "array",
+      "metadata": {
+        "Description": "The DNS address(es) of the DNS Server(s) used by the VNET"
+      }
+    },
+    "Subnets": {
+      "type": "array",
+      "metadata": {
+        "Description": "Subnets with the address prefixes"
+      }
+    },
+    "tagsByResource": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+          "description": "Optional tags provided by the user via createUiDefinition.json"
+      }
+  }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "apiVersion": "2019-09-01",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('Vnetname')]",
+      "location": "[resourceGroup().location]",
+      "tags": "[parameters('tagsByResource')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [ "[parameters('addressPrefix')]" ]
+        },
+        "dhcpOptions": {
+          "dnsServers": "[parameters('DNSServerAddress')]"
+        },
+        "subnets": "[parameters('Subnets')]"
+      }
+    }
+  ]
+}
