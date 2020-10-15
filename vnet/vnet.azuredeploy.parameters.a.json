@@ -23,14 +23,7 @@
           "name": "prancer-frontend",
           "properties": {
             "addressPrefix": "10.254.0.0/24",
-            "delegations": [
-              {
-                  "name": "Microsoft.Databricks.workspaces",
-                  "properties": {
-                      "serviceName": "Microsoft.Databricks/workspaces"
-                  }
-              }
-          ],
+            "delegations": [],
           "serviceEndpoints": [
             {
                 "service": "Microsoft.Sql",
@@ -51,7 +44,6 @@
           "name": "prancer-backend",
           "properties": {
             "addressPrefix": "10.254.2.0/24",
-            "delegation":[],
             "serviceEndpoints":[]
           }
         },
@@ -59,7 +51,6 @@
           "name": "prancer-backup",
           "properties": {
             "addressPrefix": "10.254.222.0/24",
-            "delegation":[],
             "serviceEndpoints":[]
           }
         }

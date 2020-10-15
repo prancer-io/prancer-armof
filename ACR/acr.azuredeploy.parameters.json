@@ -22,10 +22,7 @@
       },
       "actions": {
         "value": [
-          "push",
-          "delete",
-          "chart_push",
-          "chart_delete"
+          "push"
         ]
       },
       "webhooks__serviceUri": {
