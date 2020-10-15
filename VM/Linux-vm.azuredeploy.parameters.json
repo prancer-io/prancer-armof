@@ -44,7 +44,9 @@
         "NSGRGName": {
             "value": "prancer"
         },
-
+        "diagnosticsStorageAccountName": {
+            "value": "prancerstorageaccount007"
+        },
         "dataDisks": {
             "value": [
                 {

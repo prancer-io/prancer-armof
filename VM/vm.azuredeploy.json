@@ -65,9 +65,6 @@
               "description": "Password for the Virtual Machine."
             }
         },
-        "patchMode": {
-            "type": "string"
-        },
         "VirtualNetworkRGName":{
             "type": "string",
             "metadata": {
@@ -90,6 +87,9 @@
             "type": "string"
         },
         "version":{
+            "type": "string"
+        },
+        "diagnosticsStorageAccountName": {
             "type": "string"
         }
     },
@@ -193,18 +193,12 @@
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineComputerName')]",
                     "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]",
-                    "windowsConfiguration": {
-                        "enableAutomaticUpdates": true,
-                        "provisionVmAgent": true,
-                        "patchSettings": {
-                            "patchMode": "[parameters('patchMode')]"
-                        }
-                    }
+                    "adminPassword": "[parameters('adminPassword')]"
                 },
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
-                        "enabled": true
+                        "enabled": true,
+                        "storageUri": "[concat('https://', parameters('diagnosticsStorageAccountName'), '.blob.core.windows.net/')]"
                     }
                 }
             }
