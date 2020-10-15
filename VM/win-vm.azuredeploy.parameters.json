@@ -5,23 +5,14 @@
         "location": {
             "value": "eastus"
         },
-        "networkInterfaceName": {
-            "value": "westus873"
-        },
-        "networkSecurityGroupId": {
-            "value": "/subscriptions/b2dbb99e-1315-4654-8a72-15c0bd5f07da/resourceGroups/Prancer/providers/Microsoft.Network/networkSecurityGroups/prancer-nsg"
-        },
         "subnetName": {
             "value": "prancer-backend"
         },
-        "virtualNetworkId": {
-            "value": "/subscriptions/b2dbb99e-1315-4654-8a72-15c0bd5f07da/resourceGroups/Prancer/providers/Microsoft.Network/virtualNetworks/prancer-vnet"
-        },
         "virtualMachineName": {
-            "value": "westus"
+            "value": "prancerwinvm"
         },
         "virtualMachineComputerName": {
-            "value": "westus"
+            "value": "prancerwinvm"
         },
         "virtualMachineRG": {
             "value": "Prancer"
@@ -41,12 +32,19 @@
         "version":{
             "value": "latest"
         },
-        "ExistingVirtualNetworkRGName":{
+        "VirtualNetworkRGName":{
             "value": "Prancer"
         },
-        "ExistingVirtualNetworkName":{
+        "VirtualNetworkName":{
             "value": "prancer-vnet"
         },
+        "NSGName": {
+            "value": "prancer-nsg"
+        },
+        "NSGRGName": {
+            "value": "prancer"
+        },
+
         "dataDisks": {
             "value": [
                 {
