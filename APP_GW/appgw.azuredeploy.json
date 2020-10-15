@@ -6,43 +6,26 @@
             "type": "string"
         },
         "applicationGatewayName": {
-            "type": "string",
-            "metadata": {
-              "description": "Application Gateway name"
-            }
+            "type": "string"
         },
         "tier": {
             "type": "string"
         },
         "skuSize": {
-            "type": "string",
-            "allowedValues": [
-              "Standard_Small",
-              "Standard_Medium",
-              "Standard_Large"
-            ]
+            "type": "string"
         },
         "capacity": {
             "type": "int",
             "defaultValue": 2
         },
         "subnetName": {
-            "type": "string",
-            "metadata": {
-              "description": "Subnet prefix"
-            }
+            "type": "string"
         },
         "zones": {
-            "type": "array",
-            "metadata": {
-              "description": "Sku Name"
-            }
+            "type": "array"
         },
         "publicIpAddressName": {
-            "type": "string",
-            "metadata": {
-              "description": "Backend pool ip addresses"
-            }
+            "type": "string"
         },
         "sku": {
             "type": "string"
@@ -52,25 +35,10 @@
         },
         "publicIpZones": {
             "type": "array"
-        },
-        "autoScaleMaxCapacity": {
-            "type": "int"
-        },
-        "ExistingVirtualNetworkRGName":{
-            "type": "string",
-            "metadata": {
-                "description": "Virtual Network name"
-              }
-        },
-        "ExistingVirtualNetworkName":{
-            "type": "string",
-            "metadata": {
-              "description": "Virtual Network Resource Group"
-            }
         }
     },
     "variables": {
-        "vnetId": "[resourceId(parameters('ExistingVirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('ExistingVirtualNetworkName'))]",
+        "vnetId": "/subscriptions/b2dbb99e-1315-4654-8a72-15c0bd5f07da/resourceGroups/Prancer/providers/Microsoft.Network/virtualNetworks/prancer-vnet",
         "publicIPRef": "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('publicIpAddressName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
         "applicationGatewayId": "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]"
@@ -89,7 +57,8 @@
             "properties": {
                 "sku": {
                     "name": "[parameters('skuSize')]",
-                    "tier": "[parameters('tier')]"
+                    "tier": "[parameters('tier')]",
+                    "capacity": "[parameters('capacity')]"
                 },
                 "gatewayIPConfigurations": [
                     {
@@ -121,15 +90,15 @@
                 ],
                 "backendAddressPools": [
                     {
-                        "name": "prancer-backend",
+                        "name": "Pancer_BE",
                         "properties": {
                             "backendAddresses": [
                                 {
-                                    "ipAddress": "10.254.2.10",
+                                    "ipAddress": "10.254.0.11",
                                     "fqdn": null
                                 },
                                 {
-                                    "ipAddress": "10.254.2.11",
+                                    "ipAddress": "10.254.0.12",
                                     "fqdn": null
                                 }
                             ]
@@ -138,7 +107,7 @@
                 ],
                 "backendHttpSettingsCollection": [
                     {
-                        "name": "app_gw_be",
+                        "name": "Pancer_Http",
                         "properties": {
                             "Port": 80,
                             "Protocol": "Http",
@@ -149,7 +118,7 @@
                 ],
                 "httpListeners": [
                     {
-                        "name": "prancer-app-gw-listner",
+                        "name": "Pancer_listener",
                         "properties": {
                             "frontendIPConfiguration": {
                                 "id": "[concat(variables('applicationGatewayId'), '/frontendIPConfigurations/appGwPublicFrontendIp')]"
@@ -164,28 +133,24 @@
                 ],
                 "requestRoutingRules": [
                     {
-                        "Name": "prancer-app-gw-ip-conf",
+                        "Name": "Pancer_rt",
                         "properties": {
                             "RuleType": "Basic",
                             "httpListener": {
-                                "id": "[concat(variables('applicationGatewayId'), '/httpListeners/prancer-app-gw-listner')]"
+                                "id": "[concat(variables('applicationGatewayId'), '/httpListeners/Pancer_listener')]"
                             },
                             "backendAddressPool": {
-                                "id": "[concat(variables('applicationGatewayId'), '/backendAddressPools/prancer-backend')]"
+                                "id": "[concat(variables('applicationGatewayId'), '/backendAddressPools/Pancer_BE')]"
                             },
                             "backendHttpSettings": {
-                                "id": "[concat(variables('applicationGatewayId'), '/backendHttpSettingsCollection/app_gw_be')]"
+                                "id": "[concat(variables('applicationGatewayId'), '/backendHttpSettingsCollection/Pancer_Http')]"
                             }
                         }
                     }
                 ],
                 "enableHttp2": true,
                 "sslCertificates": [],
-                "probes": [],
-                "autoscaleConfiguration": {
-                    "minCapacity": "[parameters('capacity')]",
-                    "maxCapacity": "[parameters('autoScaleMaxCapacity')]"
-                }
+                "probes": []
             }
         },
         {

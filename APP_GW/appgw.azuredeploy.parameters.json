@@ -6,7 +6,7 @@
             "value": "eastus"
         },
         "applicationGatewayName": {
-            "value": "prancer-app-gw"
+            "value": "Pancer"
         },
         "tier": {
             "value": "Standard_v2"
@@ -15,28 +15,19 @@
             "value": "Standard_v2"
         },
         "capacity": {
-            "value": 0
+            "value": 2
         },
         "subnetName": {
             "value": "prancer-frontend"
         },
-        "zones": {
-            "value": []
-        },
         "publicIpAddressName": {
-            "value": "prancer-pip"
+            "value": "GW_IP"
         },
         "sku": {
             "value": "Standard"
         },
         "allocationMethod": {
             "value": "Static"
-        },
-        "publicIpZones": {
-            "value": []
-        },
-        "autoScaleMaxCapacity": {
-            "value": 10
         }
     }
 }
