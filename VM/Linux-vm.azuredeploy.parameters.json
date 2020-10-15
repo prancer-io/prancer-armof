@@ -9,10 +9,10 @@
             "value": "prancer-backend"
         },
         "virtualMachineName": {
-            "value": "prancerwinvm"
+            "value": "prancerlinvm"
         },
         "virtualMachineComputerName": {
-            "value": "prancerwinvm"
+            "value": "prancerlinvm"
         },
         "virtualMachineRG": {
             "value": "Prancer"
@@ -21,13 +21,13 @@
             "value": "Premium_LRS"
         },
         "publisher":{
-            "value": "MicrosoftWindowsServer"
+            "value": "RedHat"
         },
         "offer":{
-            "value": "WindowsServer"
+            "value": "RHEL"
         },
         "sku":{
-            "value": "2016-Datacenter"
+            "value": "8.2"
         },
         "version":{
             "value": "latest"
