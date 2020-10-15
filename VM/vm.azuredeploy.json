@@ -3,22 +3,37 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+              "description": "Location for all resources."
+            }
         },
         "networkInterfaceName": {
             "type": "string"
         },
-        "networkSecurityGroupId": {
-            "type": "string"
+        "NSGName": {
+            "type": "string",
+            "metadata": {
+              "description": "Name of the NSG"
+            }
+        },
+        "NSGRGName": {
+            "type": "string",
+            "metadata": {
+              "description": "Resource Group of the NSG"
+            }
         },
         "subnetName": {
-            "type": "string"
-        },
-        "virtualNetworkId": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+              "description": "Name of the Subnet where we want to"
+            }
         },
         "virtualMachineName": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+              "description": "Name of the virtual machine."
+            }
         },
         "virtualMachineComputerName": {
             "type": "string"
@@ -36,21 +51,44 @@
             "type": "array"
         },
         "virtualMachineSize": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+              "description": "Size of the virtual machine."
+            }
         },
         "adminUsername": {
-            "type": "string"
+            "type": "string",
+            "metadata": {
+              "description": "Username for the Virtual Machine."
+            }
         },
         "adminPassword": {
-            "type": "secureString"
+            "type": "secureString",
+            "metadata": {
+              "description": "Password for the Virtual Machine."
+            }
         },
         "patchMode": {
             "type": "string"
+        },
+        "ExistingVirtualNetworkRGName":{
+            "type": "string",
+            "metadata": {
+                "description": "Virtual Network name"
+              }
+        },
+        "ExistingVirtualNetworkName":{
+            "type": "string",
+            "metadata": {
+              "description": "Virtual Network Resource Group"
+            }
         }
     },
     "variables": {
-        "nsgId": "[parameters('networkSecurityGroupId')]",
+        
+        "nsgId": "[resourceId(parameters('NSGRGName'), 'Microsoft.Network/networkSecurityGroups', parameters('NSGName'))]",
         "vnetId": "[parameters('virtualNetworkId')]",
+        "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
     },
     "resources": [
@@ -112,10 +150,10 @@
                         }
                     },
                     "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "2016-Datacenter",
-                        "version": "latest"
+                        "publisher": "parameters('publisher')",
+                        "offer": "parameters('offer')",
+                        "sku": "parameters('sku')",
+                        "version": "parameters('version')"
                     },
                     "copy": [
                         {

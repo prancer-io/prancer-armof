@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "networkInterfaceName": {
+            "value": "westus873"
+        },
+        "networkSecurityGroupId": {
+            "value": "/subscriptions/b2dbb99e-1315-4654-8a72-15c0bd5f07da/resourceGroups/Prancer/providers/Microsoft.Network/networkSecurityGroups/prancer-nsg"
+        },
+        "subnetName": {
+            "value": "prancer-backend"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/b2dbb99e-1315-4654-8a72-15c0bd5f07da/resourceGroups/Prancer/providers/Microsoft.Network/virtualNetworks/prancer-vnet"
+        },
+        "virtualMachineName": {
+            "value": "westus"
+        },
+        "virtualMachineComputerName": {
+            "value": "westus"
+        },
+        "virtualMachineRG": {
+            "value": "Prancer"
+        },
+        "osDiskType": {
+            "value": "Premium_LRS"
+        },
+        "publisher":{
+            "value": "MicrosoftWindowsServer"
+        },
+        "offer":{
+            "value": "WindowsServer"
+        },
+        "sku":{
+            "value": "2016-Datacenter"
+        },
+        "version":{
+            "value": "latest"
+        },
+        "ExistingVirtualNetworkRGName":{
+            "value": "Prancer"
+        },
+        "ExistingVirtualNetworkName":{
+            "value": "prancer-vnet"
+        },
+        "dataDisks": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "caching": "None",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "westus_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                }
+            ]
+        },
+        "dataDiskResources": {
+            "value": [
+                {
+                    "name": "westus_DataDisk_0",
+                    "sku": "Premium_LRS",
+                    "properties": {
+                        "diskSizeGB": 1024,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                }
+            ]
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS1_v2"
+        },
+        "adminUsername": {
+            "value": "dcadmin"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        }
+    }
+}
