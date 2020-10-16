@@ -1,0 +1,30 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VNET1": {
+      "value": "prancer-vnet"
+    },
+    "VNET1RG": {
+      "value": "Prancer"
+    },
+    "VNET2": {
+      "value": "prancer-vnet2"
+    },
+    "VNET2RG": {
+      "value": "Prancer"
+    },
+    "AllowVirtualNetworkAccess": {
+      "value": "true"
+    },
+    "AllowForwardedTraffic": {
+      "value": "true"
+    },
+    "AllowGatewayTransit": {
+      "value": "false"
+    },
+    "UseRemoteGateways": {
+      "value": "false"
+    }
+  }
+}
