@@ -1,0 +1,90 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "subnetName": {
+            "value": "prancer-backend"
+        },
+        "virtualMachineName": {
+            "value": "prancerwinvm"
+        },
+        "virtualMachineComputerName": {
+            "value": "prancerwinvm"
+        },
+        "virtualMachineRG": {
+            "value": "Prancer"
+        },
+        "osDiskType": {
+            "value": "Premium_LRS"
+        },
+        "publisher":{
+            "value": "MicrosoftWindowsServer"
+        },
+        "offer":{
+            "value": "WindowsServer"
+        },
+        "sku":{
+            "value": "2016-Datacenter"
+        },
+        "version":{
+            "value": "latest"
+        },
+        "VirtualNetworkRGName":{
+            "value": "Prancer"
+        },
+        "VirtualNetworkName":{
+            "value": "prancer-vnet"
+        },
+        "NSGName": {
+            "value": "prancer-nsg"
+        },
+        "NSGRGName": {
+            "value": "prancer"
+        },
+        "diagnosticsStorageAccountName": {
+            "value": "prancerstorageaccount007"
+        },
+
+        "dataDisks": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "caching": "None",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "prancerlinvm_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                }
+            ]
+        },
+        "dataDiskResources": {
+            "value": [
+                {
+                    "name": "prancerlinvm_DataDisk_0",
+                    "sku": "Premium_LRS",
+                    "properties": {
+                        "diskSizeGB": 1024,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                }
+            ]
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS1_v2"
+        },
+        "adminUsername": {
+            "value": "dcadmin"
+        },
+        "adminPassword": {
+            "value": null
+        }
+    }
+}

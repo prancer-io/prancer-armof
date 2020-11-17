@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "Vnetname": {
+      "value": "prancer-vnet"
+    },
+    "addressPrefix": {
+      "value": "10.254.0.0/16"
+    },
+    "DNSServerAddress": {
+      "value": ["10.254.0.1"]
+    },
+    "tagsByResource": {
+      "value": {
+        "Project": "Prancer",
+        "Envirnment": "Production"
+          }
+    },
+    "Subnets": {
+      "value": [
+        {
+          "name": "prancer-frontend",
+          "properties": {
+            "addressPrefix": "10.254.0.0/24",
+            "delegations": [],
+          "serviceEndpoints": [
+            {
+                "service": "Microsoft.Sql",
+                "locations": [
+                    "eastus"
+                ]
+            },
+            {
+                "service": "Microsoft.AzureActiveDirectory",
+                "locations": [
+                    "*"
+                ]
+            }
+          ]          
+          }
+        },
+        {
+          "name": "prancer-backend",
+          "properties": {
+            "addressPrefix": "10.254.2.0/24",
+            "serviceEndpoints":[]
+          }
+        },
+        {
+          "name": "prancer-backup",
+          "properties": {
+            "addressPrefix": "10.254.222.0/24",
+            "serviceEndpoints":[]
+          }
+        }
+      ]
+    }
+  }
+}

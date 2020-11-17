@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "NSGName": {
+        "defaultValue": "prancer-nsg",
+        "type": "string",
+        "metadata": {
+          "description": "Financial owner and thus Accountable for resource"
+        }
+      },
+      "Environment": {
+        "defaultValue": "Production",
+        "allowedValues": [ "Production" ],
+        "type": "string",
+        "metadata": {
+          "description": "Identify the environment in which the application is running "
+        }
+      },
+      "Project": {
+        "type": "string",
+        "defaultValue": "Prancer",
+        "metadata": {
+          "description": "Name of the Project"
+        }
+      },
+      "NSGProperties" :{
+          "type": "object"
+          }
+    },
+    "variables": {
+        
+      },
+    "resources": [
+    {
+        "name": "[parameters('NSGName')]",
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "apiVersion": "2020-05-01",
+        "location": "[resourceGroup().location]",
+        "tags": {
+          "Environment": "[parameters('Environment')]",
+          "Project": "[parameters('Project')]"
+                },
+        "properties": "[parameters('NSGProperties')]"
+    }
+  ]
+}
