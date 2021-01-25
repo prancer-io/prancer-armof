@@ -12,7 +12,7 @@
         "value": "eastus"
       },
       "acrSku": {
-        "value": "Standard"
+        "value": "Classic"
       },
       "status": {
         "value": "enabled"
@@ -26,7 +26,7 @@
         ]
       },
       "webhooks__serviceUri": {
-        "value": "https://mywebhookreceiver.example/mytag"
+        "value": "http://mywebhookreceiver.example/mytag"
       }
     }
   }

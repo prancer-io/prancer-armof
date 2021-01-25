@@ -15,7 +15,7 @@
             "value": "1.17.11"
         },
         "networkPlugin": {
-            "value": "azure"
+            "value": "kubenet"
         },
         "enableRBAC": {
             "value": true
@@ -54,7 +54,7 @@
             "value": "eastus"
         },
         "networkPolicy": {
-            "value": "azure"
+            "value": "calico"
         },
         "acrName": {
             "value": "asadsadasdas"
