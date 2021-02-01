@@ -18,13 +18,13 @@
             "value": "kubenet"
         },
         "enableRBAC": {
-            "value": true
+            "value": false
         },
         "enablePrivateCluster": {
             "value": false
         },
         "enableHttpApplicationRouting": {
-            "value": false
+            "value": true
         },
         "enableAzurePolicy": {
             "value": false

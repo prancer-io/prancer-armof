@@ -90,7 +90,7 @@
         },
         "enableOmsAgent": {
             "type": "bool",
-            "defaultValue": true,
+            "defaultValue": false,
             "metadata": {
                 "description": "Boolean flag to turn on and off omsagent addon."
             }
@@ -175,26 +175,26 @@
                 "description": "A CIDR notation IP for Docker bridge."
             }
         },
-        "VirtualNetworkRGName":{
+        "VirtualNetworkRGName": {
             "type": "string",
             "metadata": {
                 "description": "Virtual Network name"
-              }
-        },
-        "VirtualNetworkName":{
-            "type": "string",
-            "metadata": {
-              "description": "Virtual Network Resource Group"
             }
         },
-        "SubnetName":{
+        "VirtualNetworkName": {
+            "type": "string",
+            "metadata": {
+                "description": "Virtual Network Resource Group"
+            }
+        },
+        "SubnetName": {
             "type": "string"
         }
 
     },
     "variables": {
-       "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
-       "vnetSubnetID":"[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+        "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
+        "vnetSubnetID": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
     },
     "resources": [
         {
@@ -210,7 +210,7 @@
                     {
                         "name": "prancer",
                         "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
-                        "count": 3,
+                        "count": 1,
                         "vmSize": "Standard_DS2_v2",
                         "osType": "Linux",
                         "storageProfile": "ManagedDisks",
