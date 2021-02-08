@@ -40,7 +40,7 @@
         "tags": {
           "Environment": "[parameters('Environment')]",
           "Project": "[parameters('Project')]"
-                },
+        },
         "properties": "[parameters('NSGProperties')]"
     }
   ]
