@@ -112,7 +112,7 @@
                         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
                     ],
                     "properties": {
-                        "state": "Enabled",
+                        "state": "Disabled",
                         "emailAccountAdmins": true
                     }
                 },
