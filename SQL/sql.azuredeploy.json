@@ -111,19 +111,6 @@
                     }
                 },
                 {
-                    "condition": "[parameters('enableADS')]",
-                    "type": "securityAlertPolicies",
-                    "apiVersion": "2017-03-01-preview",
-                    "name": "Default",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
-                    ],
-                    "properties": {
-                        "state": "Disabled",
-                        "emailAccountAdmins": true
-                    }
-                },
-                {
                     "condition": "[parameters('enableVA')]",
                     "type": "vulnerabilityAssessments",
                     "apiVersion": "2018-06-01-preview",
@@ -159,6 +146,17 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "Microsoft.Sql/servers/securityAlertPolicies",
+            "apiVersion": "2020-02-02-preview",
+            "name": "[concat(parameters('serverName'), '/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Disabled"
+            }
         }
     ]
 }
