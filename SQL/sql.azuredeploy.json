@@ -36,6 +36,13 @@
         "serverTags": {
             "type": "object",
             "defaultValue": {}
+        },
+        "databaseName": {
+            "type": "string",
+            "defaultValue": "my-database"
+        },
+        "aadTenantId": {
+            "type": "securestring"
         }
     },
     "variables": {
@@ -133,6 +140,22 @@
                             "isEnabled": true,
                             "emailSubscriptionAdmins": true
                         }
+                    }
+                },
+                {
+                    "name": "ActiveDirectory",
+                    "type": "administrators",
+                    "apiVersion": "2014-04-01-Preview",
+                    "dependsOn": [
+                      "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
+                      "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
+                    ],
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "administratorType": "",
+                      "login": "[parameters('administratorLogin')]",
+                      "sid": "[parameters('administratorLoginPassword')]",
+                      "tenantId": "[parameters('aadTenantId')]"
                     }
                 }
             ]
