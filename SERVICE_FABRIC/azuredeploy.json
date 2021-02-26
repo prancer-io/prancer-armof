@@ -1,0 +1,240 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location of the Cluster"
+        }
+      },
+      "clusterName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of your cluster - Between 3 and 23 characters. Letters and numbers only"
+        }
+      },
+      "adminUsername": {
+        "type": "string",
+        "metadata": {
+          "description": "Remote desktop user Id"
+        }
+      },
+      "adminPassword": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Remote desktop user password. Must be a strong password"
+        }
+      },
+      "vmImagePublisher": {
+        "type": "string",
+        "defaultValue": "MicrosoftWindowsServer",
+        "metadata": {
+          "description": "VM image Publisher"
+        }
+      },
+      "vmImageOffer": {
+        "type": "string",
+        "defaultValue": "WindowsServer",
+        "metadata": {
+          "description": "VM image offer"
+        }
+      },
+      "vmImageSku": {
+        "type": "string",
+        "defaultValue": "2019-Datacenter",
+        "metadata": {
+          "description": "VM image SKU"
+        }
+      },
+      "vmImageVersion": {
+        "type": "string",
+        "defaultValue": "latest",
+        "metadata": {
+          "description": "VM image version"
+        }
+      },
+      "loadBalancedAppPort1": {
+        "type": "int",
+        "defaultValue": 80,
+        "metadata": {
+          "description": "Input endpoint1 for the application to use. Replace it with what your application uses"
+        }
+      },
+      "loadBalancedAppPort2": {
+        "type": "int",
+        "defaultValue": 8081,
+        "metadata": {
+          "description": "Input endpoint2 for the application to use. Replace it with what your application uses"
+        }
+      },
+      "certificateStoreValue": {
+        "type": "string",
+        "defaultValue": "My",
+        "allowedValues": [
+          "My"
+        ],
+        "metadata": {
+          "description": "The store name where the cert will be deployed in the virtual machine"
+        }
+      },
+      "certificateThumbprint": {
+        "type": "string",
+        "metadata": {
+          "description": "Certificate Thumbprint"
+        }
+      },
+      "sourceVaultResourceId": {
+        "type": "string",
+        "metadata": {
+          "description": "Resource Id of the key vault, is should be in the format of /subscriptions/<Sub ID>/resourceGroups/<Resource group name>/providers/Microsoft.KeyVault/vaults/<vault name>"
+        }
+      },
+      "certificateUrlValue": {
+        "type": "string",
+        "metadata": {
+          "description": "Refers to the location URL in your key vault where the certificate was uploaded"
+        }
+      },
+      "clusterProtectionLevel": {
+        "type": "string",
+        "defaultValue": "EncryptAndSign",
+        "allowedValues": [
+          "None",
+          "Sign",
+          "EncryptAndSign"
+        ],
+        "metadata": {
+          "description": "Protection level.Three values are allowed - EncryptAndSign, Sign, None. It is best to keep the default of EncryptAndSign, unless you have a need not to"
+        }
+      },
+      "nt0InstanceCount": {
+        "type": "int",
+        "defaultValue": 5,
+        "metadata": {
+          "description": "Instance count for node type"
+        }
+      },
+      "nodeDataDrive": {
+        "type": "string",
+        "defaultValue": "Temp",
+        "allowedValues": [
+          "OS",
+          "Temp"
+        ],
+        "metadata": {
+          "description": "The drive to use to store data on a cluster node."
+        }
+      },
+      "nodeTypeSize": {
+        "type": "string",
+        "defaultValue": "Standard_D2_v2",
+        "metadata": {
+          "description": "The VM size to use for cluster nodes."
+        }
+      }
+    },
+    "variables": {
+      "dnsName": "[parameters('clusterName')]",
+      "vmName": "vm",
+      "virtualNetworkName": "VNet",
+      "addressPrefix": "10.0.0.0/16",
+      "nicName": "NIC",
+      "lbIPName": "PublicIP-LB-FE",
+      "overProvision": false,
+      "nt0applicationStartPort": "20000",
+      "nt0applicationEndPort": "30000",
+      "nt0ephemeralStartPort": "49152",
+      "nt0ephemeralEndPort": "65534",
+      "nt0fabricTcpGatewayPort": "19000",
+      "nt0fabricHttpGatewayPort": "19080",
+      "subnet0Name": "Subnet-0",
+      "subnet0Prefix": "10.0.0.0/24",
+      "subnet0Ref": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', variables('virtualNetworkName'), variables('subnet0Name'))]",
+      "supportLogStorageAccountName": "[concat( uniqueString(resourceGroup().id),'2')]",
+      "applicationDiagnosticsStorageAccountName": "[concat(uniqueString(resourceGroup().id), '3' )]",
+      "lbName": "[concat('LB','-', parameters('clusterName'),'-',variables('vmNodeType0Name'))]",
+      "lbIPConfig0": "[resourceId('Microsoft.Network/loadBalancers/frontendIPConfigurations/', variables('lbName'), 'LoadBalancerIPConfig')]",
+      "lbPoolID0": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools', variables('lbName'), 'LoadBalancerBEAddressPool')]",
+      "lbProbeID0": "[resourceId('Microsoft.Network/loadBalancers/probes', variables('lbName'), 'FabricGatewayProbe')]",
+      "lbHttpProbeID0": "[resourceId('Microsoft.Network/loadBalancers/probes', variables('lbName'), 'FabricHttpGatewayProbe')]",
+      "lbNatPoolID0": "[resourceId('Microsoft.Network/loadBalancers/inboundNatPools', variables('lbName'), 'LoadBalancerBEAddressNatPool')]",
+      "vmNodeType0Name": "[toLower(concat('NT1', variables('vmName')))]",
+      "vmNodeType0Size": "[parameters('nodeTypeSize')]"
+    },
+    "resources": [
+      {
+        "apiVersion": "2019-03-01",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "name": "[parameters('clusterName')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[variables('supportLogStorageAccountName')]"
+        ],
+        "azureActiveDirectory": {
+            "tenantId": "[parameters('tenantId')]",
+            "clusterApplication": "[parameters('clusterApplicationId')]",
+            "clientApplication": "[parameters('clientApplicationId')]"
+        },
+        "tags": {
+          "resourceType": "Service Fabric",
+          "clusterName": "[parameters('clusterName')]"
+        },
+        "properties": {
+          "certificate": {
+            "thumbprint": "[parameters('certificateThumbprint')]",
+            "x509StoreName": "[parameters('certificateStoreValue')]"
+          },
+          "clusterState": "Default",
+          "diagnosticsStorageAccountConfig": {
+            "blobEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('supportLogStorageAccountName')), '2018-07-01').primaryEndpoints.blob]",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "queueEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('supportLogStorageAccountName')), '2018-07-01').primaryEndpoints.queue]",
+            "storageAccountName": "[variables('supportLogStorageAccountName')]",
+            "tableEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('supportLogStorageAccountName')), '2018-07-01').primaryEndpoints.table]"
+          },
+          "fabricSettings": [
+            {
+              "parameters": [
+                {
+                  "name": "ClusterProtectionLevel",
+                  "value": "[parameters('clusterProtectionLevel')]"
+                }
+              ],
+              "name": "Security"
+            }
+          ],
+          "managementEndpoint": "[concat('https://',reference(variables('lbIPName')).dnsSettings.fqdn,':',variables('nt0fabricHttpGatewayPort'))]",
+          "nodeTypes": [
+            {
+              "name": "[variables('vmNodeType0Name')]",
+              "applicationPorts": {
+                "endPort": "[variables('nt0applicationEndPort')]",
+                "startPort": "[variables('nt0applicationStartPort')]"
+              },
+              "clientConnectionEndpointPort": "[variables('nt0fabricTcpGatewayPort')]",
+              "durabilityLevel": "Silver",
+              "ephemeralPorts": {
+                "endPort": "[variables('nt0ephemeralEndPort')]",
+                "startPort": "[variables('nt0ephemeralStartPort')]"
+              },
+              "httpGatewayEndpointPort": "[variables('nt0fabricHttpGatewayPort')]",
+              "isPrimary": true,
+              "vmInstanceCount": "[parameters('nt0InstanceCount')]"
+            }
+          ],
+          "provisioningState": "Default",
+          "reliabilityLevel": "Silver",
+          "upgradeMode": "Automatic",
+          "vmImage": "Windows"
+        }
+      }
+    ],
+    "outputs": {
+      "clusterProperties": {
+        "value": "[reference(parameters('clusterName'))]",
+        "type": "object"
+      }
+    }
+  }
