@@ -43,6 +43,10 @@
         },
         "aadTenantId": {
             "type": "securestring"
+        },
+        "storageAccountName" : {
+            "type": "string",
+            "defaultValue": "storage-account"
         }
     },
     "variables": {
@@ -156,6 +160,48 @@
             ],
             "properties": {
                 "state": "Disabled"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Disabled"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/auditingSettings",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "retentionDays": 30,
+                "isAzureMonitorTargetEnabled": true,
+                "state": "Enabled",
+                "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/auditingSettings",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Enabled",
+                "storageEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').PrimaryEndpoints.Blob]",
+                "storageAccountAccessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').keys[0].value]",
+                "retentionDays": 30,
+                "auditActionsAndGroups": null,
+                "storageAccountSubscriptionId": "[subscription().subscriptionId]",
+                "isStorageSecondaryKeyInUse": false
             }
         }
     ]
