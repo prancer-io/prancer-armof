@@ -170,7 +170,7 @@
                 "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
             ],
             "properties": {
-                "state": "Disabled"
+                "state": "Enabled"
             }
         },
         {

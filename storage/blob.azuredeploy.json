@@ -34,6 +34,14 @@
         },
         "containerName": {
             "type": "string"
+        },
+        "workspaceName" : {
+            "type": "string",
+            "defaultValue": "GEN-UNIQUE"
+        },
+        "storageSinkName": {
+            "type": "String",
+            "defaultValue": "StorageSinkName"
         }
     },
     "variables": {},
@@ -91,6 +99,64 @@
             ],
             "properties": {
                 "publicAccess": "None"
+            }
+        },
+        {
+            "type" : "Microsoft.Storage/storageAccounts/blobServices/providers/diagnosticsettings",
+            "name": "[concat(parameters('storageAccountName'), '/blobServices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
+            "apiVersion": "2017-05-01-preview",
+            "properties": {
+              "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+              "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
+              "logs": [
+                  {
+                      "category": "StorageRead",
+                      "enabled": false
+                  },
+                  {
+                      "category": "StorageWrite",
+                      "enabled": true
+                  },
+                  {
+                      "category": "StorageDelete",
+                      "enabled": true
+                  }
+              ],
+              "metrics": [
+                  {
+                      "category": "Transaction",
+                      "enabled": true
+                  }
+              ]
+            }
+        },
+        {
+            "type" : "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('storageAccountName'), '/blobServices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
+            "properties": {
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
+                "logs": [
+                    {
+                        "category": "StorageRead",
+                        "enabled": true
+                    },
+                    {
+                        "category": "StorageWrite",
+                        "enabled": true
+                    },
+                    {
+                        "category": "StorageDelete",
+                        "enabled": true
+                    }
+                ],
+                "metrics": [
+                    {
+                        "category": "Transaction",
+                        "enabled": true
+                    }
+                ]
             }
         }
     ],

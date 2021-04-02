@@ -71,6 +71,9 @@
                         "diskSizeGB": 1024,
                         "creationData": {
                             "createOption": "empty"
+                        },
+                        "encryptionSettingsCollection": {
+                            "enabled": false
                         }
                     }
                 }
