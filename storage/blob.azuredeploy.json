@@ -137,20 +137,6 @@
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
-                "logs": [
-                    {
-                        "category": "StorageRead",
-                        "enabled": true
-                    },
-                    {
-                        "category": "StorageWrite",
-                        "enabled": true
-                    },
-                    {
-                        "category": "StorageDelete",
-                        "enabled": true
-                    }
-                ],
                 "metrics": [
                     {
                         "category": "Transaction",
