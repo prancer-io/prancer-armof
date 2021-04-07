@@ -203,6 +203,32 @@
                 "storageAccountSubscriptionId": "[subscription().subscriptionId]",
                 "isStorageSecondaryKeyInUse": false
             }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "recurringScans": {
+                    "isEnabled": false,
+                    "emailSubscriptionAdmins": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Disabled",
+                "disabledAlerts" : [ "Sql_Injection" , "Sql_Injection_Vulnerability" ]
+            }
         }
     ]
 }
