@@ -131,9 +131,9 @@
             }
         },
         {
-            "type" : "microsoft.storage/storageaccounts/queueservices/providers/diagnosticsettings",
+            "type" : "Microsoft.Storage/storageAccounts/queueservices/providers/diagnosticsettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(parameters('storageAccountName'), '/blobServices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
+            "name": "[concat(parameters('storageAccountName'), '/queueservices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
