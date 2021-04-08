@@ -98,7 +98,7 @@
                 "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
-                "publicAccess": "None"
+                "publicAccess": "Container"
             }
         },
         {
@@ -134,6 +134,35 @@
             "type" : "Microsoft.Storage/storageAccounts/queueservices/providers/diagnosticsettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('storageAccountName'), '/queueservices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
+            "properties": {
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
+                "logs": [
+                    {
+                        "category": "StorageRead",
+                        "enabled": true
+                    },
+                    {
+                        "category": "StorageWrite",
+                        "enabled": false
+                    },
+                    {
+                        "category": "StorageDelete",
+                        "enabled": false
+                    }
+                ],
+                "metrics": [
+                    {
+                        "category": "Transaction",
+                        "enabled": true
+                    }
+                ]
+            }
+        },
+        {
+            "type" : "Microsoft.Storage/storageAccounts/tableservices/providers/diagnosticsettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('storageAccountName'), '/tableservices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
             "properties": {
                 "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
                 "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
