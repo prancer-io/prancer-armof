@@ -74,7 +74,10 @@
                         "principalType": "ServicePrincipal"
                     }
                 }
-            ]
+            ],
+            "properties": {
+                "supportsHttpsTrafficOnly": true
+            }
         },
         {
             "type": "Microsoft.Sql/servers",
