@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "administratorLogin": {
@@ -47,6 +47,14 @@
         "storageAccountName" : {
             "type": "string",
             "defaultValue": "storage-account"
+        },
+        "firewallRuleName" : {
+            "type" : "string",
+            "defaultValue": "IPRange1"
+        },
+        "allowPublicAccess" : {
+            "type" : "string",
+            "defaultValue": "0.0.0.0"
         }
     },
     "variables": {
@@ -184,7 +192,7 @@
             "properties": {
                 "retentionDays": 30,
                 "isAzureMonitorTargetEnabled": true,
-                "state": "Enabled",
+                "state": "Disabled",
                 "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
             }
         },
@@ -217,6 +225,16 @@
                     "isEnabled": false,
                     "emailSubscriptionAdmins": false
                 }
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/firewallrules",
+            "name": "[concat(parameters('serverName'), '/', parameters('firewallRuleName'))]",
+            "apiVersion": "2014-04-01-preview",
+            "location": "[parameters('location')]",
+            "properties": {
+                "startIpAddress": "[parameters('allowPublicAccess')]",
+                "endIpAddress": "[parameters('allowPublicAccess')]"
             }
         }
     ]
