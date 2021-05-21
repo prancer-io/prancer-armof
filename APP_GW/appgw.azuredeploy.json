@@ -35,6 +35,45 @@
         },
         "publicIpZones": {
             "type": "array"
+        },
+        "wafEnabled": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+            "description": "WAF Enabled"
+            }
+        },
+        "wafMode": {
+            "type": "string",
+            "allowedValues": [
+            "Detection",
+            "Prevention"
+            ],
+            "defaultValue": "Detection",
+            "metadata": {
+            "description": "WAF Mode"
+            }
+        },
+        "wafRuleSetType": {
+            "type": "string",
+            "allowedValues": [
+            "OWASP"
+            ],
+            "defaultValue": "OWASP",
+            "metadata": {
+            "description": "WAF Rule Set Type"
+            }
+        },
+        "wafRuleSetVersion": {
+            "type": "string",
+            "allowedValues": [
+            "2.2.9",
+            "3.0"
+            ],
+            "defaultValue": "3.0",
+            "metadata": {
+            "description": "WAF Rule Set Version"
+            }
         }
     },
     "variables": {
@@ -169,6 +208,13 @@
                         "TLS_RSA_WITH_AES_256_CBC_SHA",
                         "TLS_RSA_WITH_AES_128_CBC_SHA"
                     ]
+                },
+                "webApplicationFirewallConfiguration": {
+                    "enabled": "[parameters('wafEnabled')]",
+                    "firewallMode": "[parameters('wafMode')]",
+                    "ruleSetType": "[parameters('wafRuleSetType')]",
+                    "ruleSetVersion": "[parameters('wafRuleSetVersion')]",
+                    "disabledRuleGroups": []
                 },
                 "enableHttp2": true,
                 "sslCertificates": [],
