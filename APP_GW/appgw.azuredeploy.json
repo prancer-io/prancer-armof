@@ -38,7 +38,7 @@
         },
         "wafEnabled": {
             "type": "bool",
-            "defaultValue": true,
+            "defaultValue": false,
             "metadata": {
             "description": "WAF Enabled"
             }
