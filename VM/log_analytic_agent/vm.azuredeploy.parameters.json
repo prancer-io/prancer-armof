@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+          "value": "my-windows-vm"
+        },
+        "location": {
+          "value": "westus"
+        },
+        "workspaceId": {
+          "value": ""
+        },
+        "workspaceKey": {
+          "value": "Tse-gj9CemT6A80urYa2hwtjvA5axv1xobXgKR17kbVdtacU6cEf+SNo2TdHGVKTsZHZd1W9QKRXfh+$fVY9dA=="
+        }
+    }
+  }

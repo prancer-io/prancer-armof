@@ -92,7 +92,8 @@
         "useRemoteGateways": "[parameters('UseRemoteGateways')]",
         "remoteVirtualNetwork": {
           "id": "[resourceId(parameters('VNET1RG'), 'Microsoft.Network/virtualNetworks', parameters('VNET1'))]"
-        }
+        },
+        "peeringState" : "Disconnected"
       }
     }
   ]

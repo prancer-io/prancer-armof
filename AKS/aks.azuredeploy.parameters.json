@@ -15,16 +15,16 @@
             "value": "1.17.11"
         },
         "networkPlugin": {
-            "value": "azure"
+            "value": "kubenet"
         },
         "enableRBAC": {
-            "value": true
+            "value": false
         },
         "enablePrivateCluster": {
             "value": false
         },
         "enableHttpApplicationRouting": {
-            "value": false
+            "value": true
         },
         "enableAzurePolicy": {
             "value": false
@@ -54,7 +54,7 @@
             "value": "eastus"
         },
         "networkPolicy": {
-            "value": "azure"
+            "value": "calico"
         },
         "acrName": {
             "value": "asadsadasdas"

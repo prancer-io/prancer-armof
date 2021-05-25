@@ -68,9 +68,13 @@
                     "name": "prancerlinvm_DataDisk_0",
                     "sku": "Premium_LRS",
                     "properties": {
+                        "osType":"Linux",
                         "diskSizeGB": 1024,
                         "creationData": {
                             "createOption": "empty"
+                        },
+                        "encryptionSettingsCollection": {
+                            "enabled": false
                         }
                     }
                 }

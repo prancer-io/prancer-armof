@@ -1,0 +1,103 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vulnerabilityAssessments_Default_storageContainerPath": {
+            "type": "SecureString"
+        },
+        "managedInstances_my_instance_name": {
+            "defaultValue": "my-instance",
+            "type": "String"
+        },
+        "virtualNetworks_vnet_my_instance_externalid": {
+            "defaultValue": "/subscriptions/d34d6141-7a19-****-****-************/resourceGroups/rg-sql-test/providers/Microsoft.Network/virtualNetworks/vnet-my-instance",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Sql/managedInstances",
+            "apiVersion": "2020-02-02-preview",
+            "name": "[parameters('managedInstances_my_instance_name')]",
+            "location": "australiacentral",
+            "sku": {
+                "name": "GP_Gen5",
+                "tier": "GeneralPurpose",
+                "family": "Gen5",
+                "capacity": 4
+            },
+            "identity": {
+                "principalId": "f92885da-e0ee-****-****-************",
+                "tenantId": "f997f2f9-a48f-****-****-************",
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "administratorLogin": "test",
+                "subnetId": "[concat(parameters('virtualNetworks_vnet_my_instance_externalid'), '/subnets/ManagedInstance')]",
+                "licenseType": "LicenseIncluded",
+                "vCores": 4,
+                "storageSizeInGB": 32,
+                "collation": "SQL_Latin1_General_CP1_CI_AS",
+                "publicDataEndpointEnabled": false,
+                "proxyOverride": "Proxy",
+                "timezoneId": "UTC",
+                "maintenanceConfigurationId": "/subscriptions/d34d6141-7a19-****-****-************/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
+                "minimalTlsVersion": "1.2",
+                "storageAccountType": "GRS",
+                "zoneRedundant": false
+            }
+        },
+        {
+            "type": "Microsoft.Sql/managedInstances/encryptionProtector",
+            "apiVersion": "2017-10-01-preview",
+            "name": "[concat(parameters('managedInstances_my_instance_name'), '/current')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/managedInstances', parameters('managedInstances_my_instance_name'))]"
+            ],
+            "kind": "servicemanaged",
+            "properties": {
+                "serverKeyName": "ServiceManaged",
+                "serverKeyType": "ServiceManaged"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/managedInstances/keys",
+            "apiVersion": "2017-10-01-preview",
+            "name": "[concat(parameters('managedInstances_my_instance_name'), '/ServiceManaged')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/managedInstances', parameters('managedInstances_my_instance_name'))]"
+            ],
+            "kind": "servicemanaged",
+            "properties": {
+                "serverKeyType": "ServiceManaged"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/managedInstances/securityAlertPolicies",
+            "apiVersion": "2020-02-02-preview",
+            "name": "[concat(parameters('managedInstances_my_instance_name'), '/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/managedInstances', parameters('managedInstances_my_instance_name'))]"
+            ],
+            "properties": {
+                "state": "Disabled"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/managedInstances/vulnerabilityAssessments",
+            "apiVersion": "2018-06-01-preview",
+            "name": "[concat(parameters('managedInstances_my_instance_name'), '/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/managedInstances', parameters('managedInstances_my_instance_name'))]"
+            ],
+            "properties": {
+                "recurringScans": {
+                    "isEnabled": false,
+                    "emailSubscriptionAdmins": true
+                },
+                "storageContainerPath": "[parameters('vulnerabilityAssessments_Default_storageContainerPath')]"
+            }
+        }
+    ]
+}

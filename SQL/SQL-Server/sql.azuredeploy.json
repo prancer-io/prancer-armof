@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "administratorLogin": {
@@ -36,6 +36,25 @@
         "serverTags": {
             "type": "object",
             "defaultValue": {}
+        },
+        "databaseName": {
+            "type": "string",
+            "defaultValue": "my-database"
+        },
+        "aadTenantId": {
+            "type": "securestring"
+        },
+        "storageAccountName" : {
+            "type": "string",
+            "defaultValue": "storage-account"
+        },
+        "firewallRuleName" : {
+            "type" : "string",
+            "defaultValue": "IPRange1"
+        },
+        "allowPublicAccess" : {
+            "type" : "string",
+            "defaultValue": "0.0.0.0"
         }
     },
     "variables": {
@@ -104,19 +123,6 @@
                     }
                 },
                 {
-                    "condition": "[parameters('enableADS')]",
-                    "type": "securityAlertPolicies",
-                    "apiVersion": "2017-03-01-preview",
-                    "name": "Default",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
-                    ],
-                    "properties": {
-                        "state": "Enabled",
-                        "emailAccountAdmins": true
-                    }
-                },
-                {
                     "condition": "[parameters('enableVA')]",
                     "type": "vulnerabilityAssessments",
                     "apiVersion": "2018-06-01-preview",
@@ -134,8 +140,102 @@
                             "emailSubscriptionAdmins": true
                         }
                     }
+                },
+                {
+                    "name": "ActiveDirectory",
+                    "type": "administrators",
+                    "apiVersion": "2014-04-01-Preview",
+                    "dependsOn": [
+                      "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
+                      "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
+                    ],
+                    "location": "[parameters('location')]",
+                    "properties": {
+                      "administratorType": "",
+                      "login": "[parameters('administratorLogin')]",
+                      "sid": "[parameters('administratorLoginPassword')]",
+                      "tenantId": "[parameters('aadTenantId')]"
+                    }
                 }
             ]
+        },
+        {
+            "type": "Microsoft.Sql/servers/securityAlertPolicies",
+            "apiVersion": "2020-02-02-preview",
+            "name": "[concat(parameters('serverName'), '/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Disabled"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/securityAlertPolicies",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Disabled",
+                "disabledAlerts" : [ "Sql_Injection" , "Sql_Injection_Vulnerability" ]
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/auditingSettings",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "retentionDays": 30,
+                "isAzureMonitorTargetEnabled": true,
+                "state": "Disabled",
+                "storageAccountSubscriptionId": "00000000-0000-0000-0000-000000000000"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/auditingSettings",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "state": "Enabled",
+                "storageEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').PrimaryEndpoints.Blob]",
+                "storageAccountAccessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').keys[0].value]",
+                "retentionDays": 30,
+                "auditActionsAndGroups": null,
+                "storageAccountSubscriptionId": "[subscription().subscriptionId]",
+                "isStorageSecondaryKeyInUse": false
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/vulnerabilityAssessments",
+            "apiVersion": "2020-08-01-preview",
+            "name": "[concat(parameters('serverName'), '/master/Default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ],
+            "properties": {
+                "recurringScans": {
+                    "isEnabled": false,
+                    "emailSubscriptionAdmins": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/firewallrules",
+            "name": "[concat(parameters('serverName'), '/', parameters('firewallRuleName'))]",
+            "apiVersion": "2014-04-01-preview",
+            "location": "[parameters('location')]",
+            "properties": {
+                "startIpAddress": "[parameters('allowPublicAccess')]",
+                "endIpAddress": "[parameters('allowPublicAccess')]"
+            }
         }
     ]
 }
