@@ -6,7 +6,7 @@
             "value": false
         },
         "administratorLogin": {
-            "value": "Pancer"
+            "value": "Prancer"
         },
         "administratorLoginPassword": {
             "value": null
@@ -18,7 +18,7 @@
             "value": "eastus"
         },
         "serverName": {
-            "value": "pancersqlserver"
+            "value": "prancersqlserver"
         },
         "enableVA": {
             "value": false
