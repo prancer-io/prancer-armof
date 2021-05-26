@@ -91,7 +91,7 @@
         "secretName":{
             "value": "prancer-secret"
         },
-        "secretVale":{
+        "secretValue":{
             "value": "53cr3t"
         }
     }
