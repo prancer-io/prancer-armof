@@ -58,6 +58,14 @@
         "storageAccountType": {
             "type": "string",
             "defaultValue": ""
+        },
+        "databases_master_name": {
+            "defaultValue": "master",
+            "type": "String"
+        },
+        "transparentDataEncryption_current_name": {
+            "defaultValue": "current",
+            "type": "String"
         }
     },
     "variables": {},
@@ -82,6 +90,19 @@
                 "name": "[parameters('skuName')]",
                 "tier": "[parameters('tier')]"
             }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/transparentDataEncryption",
+            "name": "[concat(parameters('serverName'), '/', parameters('databases_master_name'), '/', parameters('transparentDataEncryption_current_name'))]",
+            "apiVersion": "2014-04-01",
+            "location": "West US",
+            "scale": null,
+            "properties": {
+                "status": "Disabled"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+            ]
         }
     ]
 }

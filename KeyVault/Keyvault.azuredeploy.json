@@ -70,9 +70,21 @@
             "metadata": {
                 "description": "Value for the Secrets to be store"
               }
+        },
+        "logsRetentionInDays": {
+            "type": "int",
+            "defaultValue": 0,
+            "minValue": 0,
+            "maxValue": 365,
+            "metadata": {
+                "description": "Specifies the number of days that logs are gonna be kept. If you do not want to apply any retention policy and retain data forever, set value to 0."
+            }
         }
     },
-    "variables": {},
+    "variables": {
+        "uniqueString": "[uniqueString(subscription().id, resourceGroup().id)]",
+        "diagnosticStorageAccountName": "[toLower( substring( replace( concat( parameters('keyVaultName'), variables('uniqueString'), variables('uniqueString') ), '-', ''), 0, 23) )]"
+    },
     "resources": [
         {
             "apiVersion": "2018-02-14",
@@ -106,9 +118,37 @@
               "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
             ],
             "properties": {
-              "value": "[parameters('secretValue')]"
+                "value": "[parameters('secretValue')]",
+                "attributes": {
+                    "enabled": false,
+                    "nbf": 0,
+                    "exp": 0
+                }
             }
-          }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
+            "name": "[concat(parameters('keyVaultName'), '/Microsoft.Insights/service')]",
+            "apiVersion": "2016-09-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('diagnosticStorageAccountName'))]"
+            ],
+            "properties": {
+                "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', variables('diagnosticStorageAccountName'))]",
+                "logs": [
+                    {
+                        "category": "AuditEvent",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": "[parameters('LogsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        }
     ],
     "outputs": {}
 }
