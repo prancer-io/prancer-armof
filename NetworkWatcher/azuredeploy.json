@@ -31,7 +31,7 @@
     },
     "RetentionDays": {
       "type": "int",
-      "defaultValue": 0,
+      "defaultValue": 90,
       "minValue": 0,
       "maxValue": 365,
       "metadata": {
@@ -63,7 +63,7 @@
     }
   },
   "variables": {
-    "storageAccountName": "[concat('flowlogs', uniquestring(resourceGroup().id))]",    
+    "storageAccountName": "[concat('flowlogs', uniquestring(resourceGroup().id))]",
     "storageAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
   },
   "resources": [
@@ -76,8 +76,7 @@
         "name": "[parameters('storageAccountType')]"
       },
       "kind": "StorageV2",
-      "properties": {
-      }
+      "properties": {}
     },
     {
       "type": "Microsoft.Network/networkWatchers/flowLogs",
