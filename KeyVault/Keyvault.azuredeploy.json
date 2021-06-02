@@ -79,6 +79,58 @@
             "metadata": {
                 "description": "Specifies the number of days that logs are gonna be kept. If you do not want to apply any retention policy and retain data forever, set value to 0."
             }
+        },
+        "keyName": {
+            "type": "string",
+            "defaultValue" : "GEN-UNIQUE",
+            "metadata": {
+                "description": "Specifies the name of the key to be created."
+            }
+        },
+        "attributes": {
+            "type": "object",
+            "defaultValue": {
+                "enabled": false,
+                "nbf": 1585206000,
+                "exp": 1679814000
+            },
+            "metadata": {
+                "description": "The attributes of a key managed by the key vault service."
+            }
+        },
+        "key_ops": {
+            "type": "array",
+            "defaultValue": [],
+            "metadata": {
+                "description": "JSON web key operations. Operations include: 'encrypt', 'decrypt', 'sign', 'verify', 'wrapKey', 'unwrapKey'"
+            }
+        },
+        "key_size": {
+            "type": "int",
+            "defaultValue": 4096,
+            "metadata": {
+                "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
+            }
+        },
+        "kty": {
+            "type": "string",
+            "defaultValue": "RSA",
+            "allowedValues": [
+                "EC",     // Elliptic Curve.
+                "EC-HSM", // Elliptic Curve with a private key which is not exportable from the HSM.
+                "RSA",    // RSA (https://tools.ietf.org/html/rfc3447)
+                "RSA-HSM" // RSA with a private key which is not exportable from the HSM.
+            ],
+            "metadata": {
+                "description": "The type of key to create"
+            }
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": {},
+            "metadata": {
+                "description": "Tags to be assigned to the Key."
+            }
         }
     },
     "variables": {
@@ -120,9 +172,7 @@
             "properties": {
                 "value": "[parameters('secretValue')]",
                 "attributes": {
-                    "enabled": false,
-                    "nbf": 0,
-                    "exp": 0
+                    "enabled": false
                 }
             }
         },
@@ -140,13 +190,25 @@
                 "logs": [
                     {
                         "category": "AuditEvent",
-                        "enabled": true,
+                        "enabled": false,
                         "retentionPolicy": {
                             "enabled": false,
                             "days": "[parameters('LogsRetentionInDays')]"
                         }
                     }
                 ]
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/keys",
+            "apiVersion": "2019-09-01",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('keyName'))]",
+            "tags": "[parameters('tags')]",
+            "properties": {
+                "attributes": "[parameters('attributes')]",
+                "kty": "[parameters('kty')]",
+                "key_ops": "[parameters('key_ops')]",
+                "key_size": "[parameters('key_size')]"
             }
         }
     ],
