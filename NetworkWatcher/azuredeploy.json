@@ -63,7 +63,7 @@
     }
   },
   "variables": {
-    "storageAccountName": "[concat('flowlogs', uniquestring(resourceGroup().id))]",    
+    "storageAccountName": "[concat('flowlogs', uniquestring(resourceGroup().id))]",
     "storageAccountResourceId": "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
   },
   "resources": [
@@ -76,8 +76,7 @@
         "name": "[parameters('storageAccountType')]"
       },
       "kind": "StorageV2",
-      "properties": {
-      }
+      "properties": {}
     },
     {
       "type": "Microsoft.Network/networkWatchers/flowLogs",
@@ -87,7 +86,7 @@
       "properties": {
         "targetResourceId": "[parameters('existingNSG')]",
         "storageId": "[variables('storageAccountResourceId')]",
-        "enabled": false,
+        "enabled": true,
         "retentionPolicy": {
           "days": "[parameters('RetentionDays')]",
           "enabled": true
@@ -95,6 +94,11 @@
         "format": {
           "type": "JSON",
           "version": "[parameters('FlowLogsversion')]"
+        },
+        "flowAnalyticsConfiguration": {
+          "networkWatcherFlowAnalyticsConfiguration": {
+            "enabled": true
+          }
         }
       }
     }
