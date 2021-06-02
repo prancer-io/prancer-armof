@@ -6,19 +6,19 @@
             "type": "string",
             "metadata": {
                 "description": "Name of the KeyVault"
-              }
+            }
         },
         "location": {
             "type": "string",
             "metadata": {
                 "description": "Location of the Keyvault Deploy"
-              }
+            }
         },
         "sku": {
             "type": "string",
             "metadata": {
                 "description": "Mentioned the SKU of the azure Keyvault"
-              }
+            }
         },
         "accessPolicies": {
             "type": "array"
@@ -30,25 +30,25 @@
             "type": "bool",
             "metadata": {
                 "description": "Enable for Azure Virtual Machines for deployment"
-              }
+            }
         },
         "enabledForTemplateDeployment": {
             "type": "bool",
             "metadata": {
                 "description": "Enable Azure Resource Manager for template deployment"
-              }
+            }
         },
         "enabledForDiskEncryption": {
             "type": "bool",
             "metadata": {
                 "description": "Enable for Azure Disk Encryption for volume encryption"
-              }
+            }
         },
         "enableRbacAuthorization": {
             "type": "bool",
             "metadata": {
                 "description": "Enable RBAC authntication for the keyvault access"
-              }
+            }
         },
         "enableSoftDelete": {
             "type": "bool"
@@ -59,17 +59,17 @@
         "networkAcls": {
             "type": "object"
         },
-        "secretName":{
+        "secretName": {
             "type": "securestring",
             "metadata": {
                 "description": "Value for the Secrets to be store"
-              }
+            }
         },
-        "secretValue":{
+        "secretValue": {
             "type": "securestring",
             "metadata": {
                 "description": "Value for the Secrets to be store"
-              }
+            }
         },
         "logsRetentionInDays": {
             "type": "int",
@@ -82,7 +82,7 @@
         },
         "keyName": {
             "type": "string",
-            "defaultValue" : "GEN-UNIQUE",
+            "defaultValue": "GEN-UNIQUE",
             "metadata": {
                 "description": "Specifies the name of the key to be created."
             }
@@ -167,7 +167,7 @@
             "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'))]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
             ],
             "properties": {
                 "value": "[parameters('secretValue')]",
@@ -190,7 +190,7 @@
                 "logs": [
                     {
                         "category": "AuditEvent",
-                        "enabled": false,
+                        "enabled": true,
                         "retentionPolicy": {
                             "enabled": false,
                             "days": "[parameters('LogsRetentionInDays')]"
