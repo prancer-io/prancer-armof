@@ -98,7 +98,7 @@
             "location": "West US",
             "scale": null,
             "properties": {
-                "status": "Disabled"
+                "status": "Enabled"
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
