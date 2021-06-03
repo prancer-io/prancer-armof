@@ -177,6 +177,22 @@
             }
         },
         {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2019-09-01",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'), '-default')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+              "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+            ],
+            "properties": {
+                "value": "[parameters('secretValue')]",
+                "attributes": {
+                    "enabled": true,
+                    "exp" : 1679814000
+                }
+            }
+        },
+        {
             "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
             "name": "[concat(parameters('keyVaultName'), '/Microsoft.Insights/service')]",
             "apiVersion": "2016-09-01",
