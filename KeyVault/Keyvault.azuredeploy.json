@@ -187,8 +187,7 @@
             "properties": {
                 "value": "[parameters('secretValue')]",
                 "attributes": {
-                    "enabled": true,
-                    "exp" : 1679814000
+                    "enabled": true
                 }
             }
         },
@@ -222,6 +221,20 @@
             "tags": "[parameters('tags')]",
             "properties": {
                 "attributes": "[parameters('attributes')]",
+                "kty": "[parameters('kty')]",
+                "key_ops": "[parameters('key_ops')]",
+                "key_size": "[parameters('key_size')]"
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/keys",
+            "apiVersion": "2019-09-01",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('keyName'), '-default')]",
+            "tags": "[parameters('tags')]",
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                },
                 "kty": "[parameters('kty')]",
                 "key_ops": "[parameters('key_ops')]",
                 "key_size": "[parameters('key_size')]"
