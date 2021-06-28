@@ -44,16 +44,16 @@
         "aadTenantId": {
             "type": "securestring"
         },
-        "storageAccountName" : {
+        "storageAccountName": {
             "type": "string",
             "defaultValue": "storage-account"
         },
-        "firewallRuleName" : {
-            "type" : "string",
+        "firewallRuleName": {
+            "type": "string",
             "defaultValue": "IPRange1"
         },
-        "allowPublicAccess" : {
-            "type" : "string",
+        "allowPublicAccess": {
+            "type": "string",
             "defaultValue": "0.0.0.0"
         }
     },
@@ -146,15 +146,15 @@
                     "type": "administrators",
                     "apiVersion": "2014-04-01-Preview",
                     "dependsOn": [
-                      "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
-                      "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
+                        "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
+                        "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
                     ],
                     "location": "[parameters('location')]",
                     "properties": {
-                      "administratorType": "",
-                      "login": "[parameters('administratorLogin')]",
-                      "sid": "[parameters('administratorLoginPassword')]",
-                      "tenantId": "[parameters('aadTenantId')]"
+                        "administratorType": "",
+                        "login": "[parameters('administratorLogin')]",
+                        "sid": "[parameters('administratorLoginPassword')]",
+                        "tenantId": "[parameters('aadTenantId')]"
                     }
                 }
             ]
@@ -178,8 +178,12 @@
                 "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
             ],
             "properties": {
-                "state": "Disabled",
-                "disabledAlerts" : [ "Sql_Injection" , "Sql_Injection_Vulnerability" ]
+                "state": "Enabled",
+                "disabledAlerts": [
+                    "Sql_Injection",
+                    "Sql_Injection_Vulnerability"
+                ],
+                "retentionDays": 180
             }
         },
         {
