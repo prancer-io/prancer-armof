@@ -81,7 +81,7 @@
                 "[resourceId('Microsoft.Sql/managedInstances', parameters('managedInstances_my_instance_name'))]"
             ],
             "properties": {
-                "state": "Disabled"
+                "state": "Enabled"
             }
         },
         {
