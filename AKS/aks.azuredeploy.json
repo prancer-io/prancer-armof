@@ -90,7 +90,7 @@
         },
         "enableOmsAgent": {
             "type": "bool",
-            "defaultValue": false,
+            "defaultValue": true,
             "metadata": {
                 "description": "Boolean flag to turn on and off omsagent addon."
             }
@@ -190,7 +190,6 @@
         "SubnetName": {
             "type": "string"
         }
-
     },
     "variables": {
         "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
@@ -269,9 +268,7 @@
                         {
                             "type": "Microsoft.Network/virtualNetworks/subnets/providers/roleAssignments",
                             "apiVersion": "2017-05-01",
-                            
                             "name": "[concat(parameters('VirtualNetworkName'), '/', parameters('SubnetName'), '/Microsoft.Authorization/', guid(resourceGroup().id, deployment().name))]",
-                            
                             "properties": {
                                 "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
                                 "principalId": "[reference(parameters('resourceName')).identityProfile.kubeletidentity.objectId]",
