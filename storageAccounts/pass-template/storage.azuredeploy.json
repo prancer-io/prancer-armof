@@ -106,7 +106,7 @@
         },
         "networkAclsDefaultAction": {
             "type": "string",
-            "defaultValue": "Allow",
+            "defaultValue": "Deny",
             "allowedValues": [
                 "Allow",
                 "Deny"
