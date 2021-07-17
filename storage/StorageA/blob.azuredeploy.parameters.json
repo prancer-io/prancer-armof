@@ -30,9 +30,9 @@
             "value": "AzureServices"
         },
         "networkAclsDefaultAction": {
-            "value": "Allow"
+            "value": "Deny"
         },
-        "containerName":{
+        "containerName": {
             "value": "prancerstoragecontainer"
         }
     }
