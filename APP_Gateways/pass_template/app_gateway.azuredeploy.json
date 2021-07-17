@@ -1,0 +1,188 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "adminUsername": {
+        "type": "String",
+        "metadata": {
+          "description": "Admin username for the backend servers"
+        }
+      },
+      "adminPassword": {
+        "type": "SecureString",
+        "metadata": {
+          "description": "Password for the admin account on the backend servers"
+        }
+      },
+      "location": {
+        "defaultValue": "[resourceGroup().location]",
+        "type": "String",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      },
+      "vmSize": {
+        "defaultValue": "Standard_B2ms",
+        "type": "String",
+        "metadata": {
+          "description": "Size of the virtual machine."
+        }
+      }
+    },
+    "variables": {
+      "virtualMachines_myVM_name": "myVM",
+      "virtualNetworks_myVNet_name": "myVNet",
+      "net_interface": "net-int",
+      "ipconfig_name": "ipconfig",
+      "publicIPAddress": "public_ip",
+      "nsg_name": "vm-nsg",
+      "applicationGateways_myAppGateway_name": "myAppGateway",
+      "vnet_prefix": "10.0.0.0/16",
+      "ag_subnet_prefix": "10.0.0.0/24",
+      "backend_subnet_prefix": "10.0.1.0/24",
+      "AGWafPol01": "WafPol01"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "apiVersion": "2020-06-01",
+        "name": "[concat(variables('nsg_name'), copyIndex(1))]",
+        "location": "[parameters('location')]",
+        "copy": {
+          "name": "nsg-loop",
+          "count": 2
+        },
+        "properties": {
+          "securityRules": [
+            {
+              "name": "RDP",
+              "properties": {
+                "protocol": "TCP",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "*",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 300,
+                "direction": "Inbound"
+              }
+            }
+          ]
+        }
+  
+      },
+      {
+        "type": "Microsoft.Network/applicationGateways",
+        "apiVersion": "2020-06-01",
+        "name": "[variables('applicationGateways_myAppGateway_name')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_myVNet_name'))]",
+          "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddress'), '0'))]",
+          "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', variables('AGWafPol01'))]"
+        ],
+        "properties": {
+          "sku": {
+            "name": "WAF_v2",
+            "tier": "WAF_v2",
+            "capacity": 2
+          },
+          "gatewayIPConfigurations": [
+            {
+              "name": "appGatewayIpConfig",
+              "properties": {
+                "subnet": {
+                  "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworks_myVNet_name'), 'myAGSubnet')]"
+                }
+              }
+            }
+          ],
+          "frontendIPConfigurations": [
+            {
+              "name": "appGwPublicFrontendIp",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(variables('publicIPAddress'), '0'))]"
+                }
+              }
+            }
+          ],
+          "frontendPorts": [
+            {
+              "name": "port_80",
+              "properties": {
+                "port": 80
+              }
+            }
+          ],
+          "backendAddressPools": [
+            {
+              "name": "myBackendPool",
+              "properties": {}
+            }
+          ],
+          "backendHttpSettingsCollection": [
+            {
+              "name": "myHTTPSetting",
+              "properties": {
+                "port": 80,
+                "protocol": "Http",
+                "cookieBasedAffinity": "Disabled",
+                "pickHostNameFromBackendAddress": false,
+                "requestTimeout": 20
+              }
+            }
+          ],
+          "httpListeners": [
+            {
+              "name": "myListener",
+              "properties": {
+                "firewallPolicy": {
+                  "id": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', variables('AGWafPol01'))]"
+                },
+                "frontendIPConfiguration": {
+                  "id": "[resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', variables('applicationGateways_myAppGateway_name'), 'appGwPublicFrontendIp')]"
+                },
+                "frontendPort": {
+                  "id": "[resourceId('Microsoft.Network/applicationGateways/frontendPorts', variables('applicationGateways_myAppGateway_name'), 'port_80')]"
+                },
+                "protocol": "Http",
+                "requireServerNameIndication": false
+              }
+            }
+          ],
+          "requestRoutingRules": [
+            {
+              "name": "myRoutingRule",
+              "properties": {
+                "ruleType": "Basic",
+                "httpListener": {
+                  "id": "[resourceId('Microsoft.Network/applicationGateways/httpListeners', variables('applicationGateways_myAppGateway_name'), 'myListener')]"
+                },
+                "backendAddressPool": {
+                  "id": "[resourceId('Microsoft.Network/applicationGateways/backendAddressPools', variables('applicationGateways_myAppGateway_name'), 'myBackendPool')]"
+                },
+                "backendHttpSettings": {
+                  "id": "[resourceId('Microsoft.Network/applicationGateways/backendHttpSettingsCollection', variables('applicationGateways_myAppGateway_name'), 'myHTTPSetting')]"
+                }
+              }
+            }
+          ],
+          "enableHttp2": false,
+          "webApplicationFirewallConfiguration": {
+            "enabled": true,
+            "firewallMode": "Prevention",
+            "ruleSetType": "OWASP",
+            "ruleSetVersion": "3.1",
+            "requestBodyCheck": true,
+            "maxRequestBodySizeInKb": 128,
+            "fileUploadLimitInMb": 100
+          },
+          "firewallPolicy": {
+            "id": "[resourceId('Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies', variables('AGWafPol01'))]"
+          }
+        }
+      }
+    ]
+  }
