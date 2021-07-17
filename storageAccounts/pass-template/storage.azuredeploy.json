@@ -136,9 +136,38 @@
                 "networkAcls": {
                     "bypass": "[parameters('networkAclsBypass')]",
                     "defaultAction": "[parameters('networkAclsDefaultAction')]"
+                },
+                "encryption": {
+                    "services": {
+                        "blob": {
+                            "enabled": true,
+                            "keyType": "string"
+                        },
+                        "file": {
+                            "enabled": true,
+                            "keyType": "string"
+                        },
+                        "table": {
+                            "enabled": "boolean",
+                            "keyType": "string"
+                        },
+                        "queue": {
+                            "enabled": "boolean",
+                            "keyType": "string"
+                        }
+                    },
+                    "keySource": "Microsoft.Keyvault",
+                    "requireInfrastructureEncryption": "boolean",
+                    "keyvaultproperties": {
+                        "keyname": "string",
+                        "keyversion": "string",
+                        "keyvaulturi": "string"
+                    },
+                    "identity": {
+                        "userAssignedIdentity": "string"
+                    }
                 }
             }
-        }
     ],
     "outputs": {
         "storageAccountName": {
