@@ -134,7 +134,7 @@
             "cipherSuites": [
               "string"
             ],
-            "minProtocolVersion": "TLSv1_1"
+            "minProtocolVersion": "TLSv1_2"
           },
         }
       },
