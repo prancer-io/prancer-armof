@@ -1,0 +1,118 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the KeyVault"
+              }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location of the Keyvault Deploy"
+              }
+        },
+        "sku": {
+            "type": "string",
+            "metadata": {
+                "description": "Mentioned the SKU of the azure Keyvault"
+              }
+        },
+        "accessPolicies": {
+            "type": "array"
+        },
+        "tenant": {
+            "type": "string"
+        },
+        "enabledForDeployment": {
+            "type": "bool",
+            "metadata": {
+                "description": "Enable for Azure Virtual Machines for deployment"
+              }
+        },
+        "enabledForTemplateDeployment": {
+            "type": "bool",
+            "metadata": {
+                "description": "Enable Azure Resource Manager for template deployment"
+              }
+        },
+        "enabledForDiskEncryption": {
+            "type": "bool",
+            "metadata": {
+                "description": "Enable for Azure Disk Encryption for volume encryption"
+              }
+        },
+        "enableRbacAuthorization": {
+            "type": "bool",
+            "metadata": {
+                "description": "Enable RBAC authntication for the keyvault access"
+              }
+        },
+        "enableSoftDelete": {
+            "type": "bool"
+        },
+        "enablePurgeProtection": {
+            "type": "bool"
+        },
+        "softDeleteRetentionInDays": {
+            "type": "int"
+        },
+        "networkAcls": {
+            "type": "object"
+        },
+        "secretName":{
+            "type": "securestring",
+            "metadata": {
+                "description": "Value for the Secrets to be store"
+              }
+        },
+        "secretValue":{
+            "type": "securestring",
+            "metadata": {
+                "description": "Value for the Secrets to be store"
+              }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2018-02-14",
+            "name": "[parameters('keyVaultName')]",
+            "location": "[resourceGroup().location]",
+            "type": "Microsoft.KeyVault/vaults",
+            "properties": {
+                "enabledForDeployment": "[parameters('enabledForDeployment')]",
+                "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
+                "enabledForDiskEncryption": "[parameters('enabledForDiskEncryption')]",
+                "enableRbacAuthorization": "[parameters('enableRbacAuthorization')]",
+                "accessPolicies": "[parameters('accessPolicies')]",
+                "tenantId": "[parameters('tenant')]",
+                "sku": {
+                    "name": "[parameters('sku')]",
+                    "family": "A"
+                },
+                "enableSoftDelete": "[parameters('enableSoftDelete')]",
+                "enablePurgeProtection":  "[parameters('enablePurgeProtection')]",
+                "softDeleteRetentionInDays": "[parameters('softDeleteRetentionInDays')]",
+                "networkAcls": "[parameters('networkAcls')]"
+            },
+            "tags": {},
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2019-09-01",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'))]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+              "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+            ],
+            "properties": {
+              "value": "[parameters('secretValue')]"
+            }
+          }
+    ],
+    "outputs": {}
+}
