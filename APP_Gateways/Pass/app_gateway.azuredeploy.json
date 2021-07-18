@@ -124,10 +124,18 @@
           "name": "Standard"
         },
         "properties": {
-          "publicIPAllocationMethod": "Static"
-        }
-      },
-      {
+          "publicIPAllocationMethod": "Static",
+          "sslPolicy": {
+            "disabledSslProtocols": [
+              "string"
+            ],
+            "policyType": "string",
+            "policyName": "string",
+            "cipherSuites": [
+              "string"
+            ],
+            "minProtocolVersion": "TLSv1_1"
+        },
         "apiVersion": "2020-05-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[variables('virtualNetworkName')]",
@@ -226,7 +234,7 @@
                 "FrontendPort": {
                   "id": "[resourceId('Microsoft.Network/applicationGateways/frontendPorts', variables('applicationGatewayName'), 'appGatewayFrontendPort')]"
                 },
-                "Protocol": "Http"
+                "Protocol": "Https"
               }
             }
           ],
