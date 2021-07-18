@@ -237,7 +237,7 @@
                 "FrontendPort": {
                   "id": "[resourceId('Microsoft.Network/applicationGateways/frontendPorts', variables('applicationGatewayName'), 'appGatewayFrontendPort')]"
                 },
-                "Protocol": "Https"
+                "protocol": "Https"
               }
             }
           ],
