@@ -125,17 +125,6 @@
         },
         "properties": {
           "publicIPAllocationMethod": "Static",
-          "sslPolicy": {
-            "disabledSslProtocols": [
-              "string"
-            ],
-            "policyType": "string",
-            "policyName": "string",
-            "cipherSuites": [
-              "string"
-            ],
-            "minProtocolVersion": "TLSv1_2"
-          },
         }
       },
       {
@@ -172,7 +161,18 @@
           "sku": {
             "name": "[parameters('applicationGatewaySize')]",
             "tier": "WAF_v2",
-            "capacity": "[parameters('applicationGateWayCapacity')]"
+            "capacity": "[parameters('applicationGateWayCapacity')]",
+            "sslPolicy": {
+            "disabledSslProtocols": [
+              "string"
+            ],
+            "policyType": "string",
+            "policyName": "string",
+            "cipherSuites": [
+              "string"
+            ],
+            "minProtocolVersion": "TLSv1_2"
+            },
           },
           "gatewayIPConfigurations": [
             {
