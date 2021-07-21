@@ -19,7 +19,7 @@
       },
       "acrAdminUserEnabled": {
         "type": "bool",
-        "defaultValue": false,
+        "defaultValue": true,
         "metadata": {
           "description": "Enable an admin user that has push/pull permission to the registry."
         }
