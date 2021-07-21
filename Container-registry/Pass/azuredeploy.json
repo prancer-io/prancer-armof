@@ -18,7 +18,7 @@
         "minLength": 5
       },
       "acrAdminUserEnabled": {
-        "type": "string",
+        "type": "bool",
         "defaultValue": false,
         "metadata": {
           "description": "Enable an admin user that has push/pull permission to the registry."
