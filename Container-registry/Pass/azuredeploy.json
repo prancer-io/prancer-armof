@@ -59,7 +59,7 @@
           "name": "[parameters('acrSku')]"
         },
         "properties": {
-          "adminUserEnabled": "[parameters('acrAdminUserEnabled')]"
+          "adminUserEnabled": false
         }
       }
     ],
