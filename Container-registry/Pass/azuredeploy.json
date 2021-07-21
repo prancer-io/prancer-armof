@@ -164,7 +164,7 @@
         "name": "Basic"
       },
       "properties": {
-        "adminUserEnabled": true
+        "adminUserEnabled": false
       }
     }
   ],
