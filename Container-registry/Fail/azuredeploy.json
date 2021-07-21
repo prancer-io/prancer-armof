@@ -19,7 +19,7 @@
       },
       "acrAdminUserEnabled": {
         "type": "bool",
-        "defaultValue": true,
+        "defaultValue": false,
         "metadata": {
           "description": "Enable an admin user that has push/pull permission to the registry."
         }
@@ -33,7 +33,7 @@
       },
       "acrSku": {
         "type": "string",
-        "defaultValue": "Basic",
+        "defaultValue": "classic",
         "metadata": {
           "description": "Tier of your Azure Container Registry."
         },
