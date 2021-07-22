@@ -187,7 +187,6 @@
                 "version": "9.6",
                 "administratorLogin": "[parameters('databaseAdministratorLogin')]",
                 "administratorLoginPassword": "[parameters('databaseAdministratorLoginPassword')]",
-                "sslEnforcement": "Disabled",
                 "storageProfile": {
                     "backupRetentionDays": 7,
                     "geoRedundantBackup": "Disabled",
