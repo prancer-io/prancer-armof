@@ -224,7 +224,6 @@
         "type": "Microsoft.DocumentDB/databaseAccounts",
         "name": "[parameters('databaseAccountName')]",
         "location": "[parameters('location')]",
-        "tags": {},
         "properties": {
           "name": "[parameters('databaseAccountName')]",
           "databaseAccountOfferType": "[parameters('documentDBOfferType')]",
