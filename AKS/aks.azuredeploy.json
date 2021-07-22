@@ -189,8 +189,35 @@
         },
         "SubnetName": {
             "type": "string"
+        },
+        "aadProfileManaged": {
+          "defaultValue": false,
+          "type": "bool",
+          "metadata": {
+            "description": "Specifies whether to enable managed AAD integration."
+          }
+        },
+        "aadProfileEnableAzureRBAC": {
+          "defaultValue": false,
+          "type": "bool",
+          "metadata": {
+            "description": "Specifies whether to  to enable Azure RBAC for Kubernetes authorization."
+          }
+        },
+        "aadProfileAdminGroupObjectIDs": {
+          "defaultValue": [],
+          "type": "array",
+          "metadata": {
+            "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
+          }
+        },
+        "aadProfileTenantId": {
+          "defaultValue": "[subscription().tenantId]",
+          "type": "string",
+          "metadata": {
+            "description": "Specifies the tenant id of the Azure Active Directory used by the AKS cluster for authentication."
+          }
         }
-
     },
     "variables": {
         "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
