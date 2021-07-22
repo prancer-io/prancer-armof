@@ -1,0 +1,74 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sqlServerName": {
+            "type": "string",
+            "defaultValue": "sql-server",
+            "metadata": {
+                "description": "Azure SQL server name to create"
+            }
+        },
+        "sqlServerAdministrator": {
+            "type": "string",
+            "metadata": {
+                "description": "Azure SQL server administrator name"
+            }
+        },
+        "sqlServerAdministratorPwd": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Azure SQL server administrator password"
+            }
+        },
+        "keyVaultName": {
+            "type": "string",
+            "metadata": {
+                "description": "Key vault name where the key to use is stored"
+            }
+        },
+        "keyVaultResourceGroupName": {
+            "type": "string",
+            "metadata": {
+                "description": "Key vault resource group name where it is stored"
+            }
+        },
+        "keyName": {
+            "type": "string",
+            "metadata": {
+                "description": "Key name in the key vault to use as encryption protector"
+            }
+        },
+        "keyVersion": {
+            "type": "string",
+            "metadata": {
+                "description": "Version of the key in the key vault to use as encryption protector"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        }
+    },
+    "variables": {
+        "sqlServerKeyName": "[concat(parameters('keyVaultName'), '_', parameters('keyName'), '_', parameters('keyVersion'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('sqlServerName'), '/current')]",
+            "type": "Microsoft.Sql/servers/encryptionProtector",
+            "apiVersion": "2020-02-02-preview",
+            "kind": "azurekeyvault",
+            "dependsOn": [
+                "[resourceId('Microsoft.SQL/servers/keys', parameters('sqlServerName'), variables('sqlServerKeyName'))]"
+            ],
+            "properties": {
+                "serverKeyName": "[variables('sqlServerKeyName')]",
+                "serverKeyType": "AzureKeyVault"
+            }
+        }
+    ]
+}
