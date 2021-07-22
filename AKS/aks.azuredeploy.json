@@ -229,6 +229,15 @@
                     "dnsServiceIP": "[parameters('dnsServiceIP')]",
                     "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
                 },
+                "aadProfile": {
+                  "managed": "[parameters('aadProfileManaged')]",
+                  "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
+                  "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
+                  "clientAppID": "",
+                  "serverAppID": "",
+                  "serverAppSecret": "",
+                  "tenantID": "[parameters('aadProfileTenantId')]"
+                },
                 "apiServerAccessProfile": {
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
                 },
