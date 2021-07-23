@@ -211,6 +211,24 @@
             "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
           }
         },
+        "clientAppID": {
+            "type": "string",
+            "metadata": {
+              "description": "The client AAD application ID."
+            }
+        },
+        "serverAppID": {
+            "type": "string",
+            "metadata": {
+              "description": "The server AAD application ID."
+            }
+        },
+        "serverAppSecret": {
+            "type": "string",
+            "metadata": {
+              "description": "The server AAD application secret."
+            }
+        },
         "aadProfileTenantId": {
           "defaultValue": "[subscription().tenantId]",
           "type": "string",
@@ -260,9 +278,9 @@
                   "managed": "[parameters('aadProfileManaged')]",
                   "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
                   "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
-                  "clientAppID": "",
-                  "serverAppID": "",
-                  "serverAppSecret": "",
+                  "clientAppID": "[parameters('clientAppID')]",
+                  "serverAppID": "[parameters('serverAppID')]",
+                  "serverAppSecret": "[parameters('serverAppSecret')]",
                   "tenantID": "[parameters('aadProfileTenantId')]"
                 },
                 "apiServerAccessProfile": {
