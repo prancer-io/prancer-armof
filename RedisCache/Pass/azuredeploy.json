@@ -81,7 +81,7 @@
             "properties": {
                 "linkedRedisCacheId": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]",
                 "linkedRedisCacheLocation": "[parameters('secondaryLocation')]",
-                "serverRole": "Primary"
+                "serverRole": "Secondary"
             }
         }
     ],
