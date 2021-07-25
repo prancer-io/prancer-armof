@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "stackName": {
-            "value": "GEN-UNIQUE"
+            "value": "administrators"
         },
         "aadUserObjectId": {
             "value": "GEN-GUID"
