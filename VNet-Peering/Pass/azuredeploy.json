@@ -46,27 +46,6 @@
     },
     "resources": [
       {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2020-05-01",
-        "name": "[parameters('vnet1Name')]",
-        "location": "[parameters('location')]",
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": [
-              "[variables('vnet1Config').addressSpacePrefix]"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "[variables('vnet1Config').subnetName]",
-              "properties": {
-                "addressPrefix": "[variables('vnet1Config').subnetPrefix]"
-              }
-            }
-          ]
-        }
-      },
-      {
         "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
         "apiVersion": "2020-05-01",
         "name": "[format('{0}/{1}', parameters('vnet1Name'), format('{0}-{1}', parameters('vnet1Name'), parameters('vnet2Name')))]",
@@ -85,27 +64,6 @@
         ]
       },
       {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2020-05-01",
-        "name": "[parameters('vnet2Name')]",
-        "location": "[parameters('location')]",
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": [
-              "[variables('vnet2Config').addressSpacePrefix]"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "[variables('vnet2Config').subnetName]",
-              "properties": {
-                "addressPrefix": "[variables('vnet2Config').subnetPrefix]"
-              }
-            }
-          ]
-        }
-      },
-      {
         "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
         "apiVersion": "2020-05-01",
         "name": "[format('{0}/{1}', parameters('vnet2Name'), format('{0}-{1}', parameters('vnet2Name'), parameters('vnet1Name')))]",
@@ -114,6 +72,7 @@
           "allowForwardedTraffic": false,
           "allowGatewayTransit": false,
           "useRemoteGateways": false,
+          "peeringState": "Connected",
           "remoteVirtualNetwork": {
             "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet1Name'))]"
           }
