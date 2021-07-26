@@ -72,7 +72,7 @@
           "allowForwardedTraffic": false,
           "allowGatewayTransit": false,
           "useRemoteGateways": false,
-          "peeringState": "Connected",
+          "peeringState": "Disconnected",
           "remoteVirtualNetwork": {
             "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnet1Name'))]"
           }
