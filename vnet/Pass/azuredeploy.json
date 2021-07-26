@@ -329,7 +329,11 @@
             "apiVersion": "2020-08-01",
             "name": "[concat(variables('virtualNetworkName'), '/', variables('virtualSubnetName'))]",
             "properties": {
-                "addressPrefix": "[variables('vnetSubnet')]"
+                "addressPrefix": "[variables('vnetSubnet')]",
+                "networkSecurityGroup": {
+                    "id": "string",
+                    "location": "Microsoft.Network/networkSecurityGroups/vns3ControllerName"
+                }    
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]"
