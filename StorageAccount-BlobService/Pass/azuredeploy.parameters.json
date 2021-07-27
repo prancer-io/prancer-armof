@@ -4,6 +4,15 @@
     "parameters": {
         "location": {
             "value": "eastus"
+        },
+        "accountName": {
+            "value": "prancer"
+        },
+        "skuName": {
+            "value": "Standard_LRS"
+        },
+        "blobContainerName": {
+            "value": "prancer-blobContainer"
         }
     }
 }
