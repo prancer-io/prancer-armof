@@ -6,7 +6,7 @@
         "value": "GEN-UNIQUE"
       },
       "sqlAdministratorLoginPassword": {
-        "value": ""
+        "value": "GEN-PASSWORD"
       },
       "privateDnsZoneName": {
         "value": "privatelink.database.windows.net"
