@@ -159,7 +159,7 @@
             "properties": {
                 "addressPrefix": "[variables('vnetSubnet')]",
                 "networkSecurityGroup": {
-                    "id": "Microsoft.Network/virtualNetworks/subnets/VNS3_VirtualSubnet",
+                    "id": "Microsoft.Network/networkSecurityGroups/vns3ControllerName",
                     "location": "eastus"
                 }    
             },
