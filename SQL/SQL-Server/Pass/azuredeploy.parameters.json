@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "sqlAdministratorLogin": {
-        "value": "GEN-UNIQUE"
+        "value": ""
       },
       "sqlAdministratorLoginPassword": {
         "value": ""
       },
       "privateDnsZoneName": {
-        "value": "privatelink.database.windows.net"
+        "value": ""
       }
     }
   }
