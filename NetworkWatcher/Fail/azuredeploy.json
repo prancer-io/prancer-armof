@@ -44,7 +44,6 @@
                 },
                 "flowAnalyticsConfiguration": {
                     "networkWatcherFlowAnalyticsConfiguration": {
-                        "enabled": false
                     }
                 }
             }
