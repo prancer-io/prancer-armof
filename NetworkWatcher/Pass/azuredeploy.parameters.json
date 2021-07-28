@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "existingNSG": {
+            "value": "GET-PREREQ-existingNSG"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "NetworkWatcherName": {
+            "value": "NetworkWatcher_eastus"
+        },
+        "FlowLogName": {
+            "value": "FlowLog1"
+        },
+        "existingNSG": {
+            "value": "GET-PREREQ-existingNSG"
+        },
+        "RetentionDays": {
+            "value": 91
+        },
+        "FlowLogsversion": {
+            "value": "2"
+        },
+        "storageAccountResourceId": {
+            "value": "Standard_LRS"
+        }
+    }
+}

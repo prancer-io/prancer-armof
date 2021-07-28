@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "NetworkWatcherName": {
+            "type": "string"
+        },
+        "FlowLogName": {
+            "type": "string"
+        },
+        "existingNSG": {
+            "type": "string"
+        },
+        "RetentionDays": {
+            "type": "int"
+        },
+        "FlowLogsversion": {
+            "type": "string"
+        },
+        "storageAccountResourceId": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkWatchers/flowLogs",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('NetworkWatcherName'), '/', parameters('FlowLogName'))]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "targetResourceId": "[parameters('existingNSG')]",
+                "storageId": "[parameters('storageAccountResourceId')]",
+                "enabled": true,
+                "retentionPolicy": {
+                    "days": "[parameters('RetentionDays')]",
+                    "enabled": true
+                },
+                "format": {
+                    "type": "JSON",
+                    "version": "[parameters('FlowLogsversion')]"
+                }
+            }
+        }
+    ]
+}
