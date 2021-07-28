@@ -41,6 +41,11 @@
                 "format": {
                     "type": "JSON",
                     "version": "[parameters('FlowLogsversion')]"
+                },
+                "flowAnalyticsConfiguration": {
+                    "networkWatcherFlowAnalyticsConfiguration": {
+                        "enabled": true
+                    }
                 }
             }
         }
