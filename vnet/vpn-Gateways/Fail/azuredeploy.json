@@ -303,7 +303,6 @@
                                 {
                                     "saLifeTimeSeconds": "[parameters('saLifeTimeSeconds')]",
                                     "saDataSizeKilobytes": "[parameters('saDataSizeKilobytes')]",
-                                    "ipsecEncryption": "[parameters('ipsecEncryption')]",
                                     "ipsecIntegrity": "[parameters('ipsecIntegrity')]",
                                     "ikeEncryption": "[parameters('iKEEncryption')]",
                                     "ikeIntegrity": "[parameters('ikeIntegrity')]",
