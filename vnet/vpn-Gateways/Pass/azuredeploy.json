@@ -114,7 +114,7 @@
         },
         "ipsecEncryption": {
             "type": "string",
-            "defaultValue": "AES256",
+            "defaultValue": "DES",
             "allowedValues": [
                 "None",
                 "DES",
@@ -298,7 +298,19 @@
                             "enableBgp": "[parameters('enableBgp')]",
                             "remoteVpnSite": {
                                 "id": "[resourceId('Microsoft.Network/vpnSites', parameters('vpnsitename'))]"
-                            }
+                            },
+                            "ipsecPolicies": [
+                                {
+                                    "saLifeTimeSeconds": "[parameters('saLifeTimeSeconds')]",
+                                    "saDataSizeKilobytes": "[parameters('saDataSizeKilobytes')]",
+                                    "ipsecEncryption": "[parameters('ipsecEncryption')]",
+                                    "ipsecIntegrity": "[parameters('ipsecIntegrity')]",
+                                    "ikeEncryption": "[parameters('iKEEncryption')]",
+                                    "ikeIntegrity": "[parameters('ikeIntegrity')]",
+                                    "dhGroup": "[parameters('dhGroup')]",
+                                    "pfsGroup": "[parameters('pfsGroup')]"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -307,19 +319,7 @@
                 },
                 "bgpSettings": {
                     "asn": 65515
-                },
-                "ipsecPolicies": [
-                    {
-                        "saLifeTimeSeconds": "[parameters('saLifeTimeSeconds')]",
-                        "saDataSizeKilobytes": "[parameters('saDataSizeKilobytes')]",
-                        "ipsecEncryption": "[parameters('ipsecEncryption')]",
-                        "ipsecIntegrity": "[parameters('ipsecIntegrity')]",
-                        "ikeEncryption": "[parameters('iKEEncryption')]",
-                        "ikeIntegrity": "[parameters('ikeIntegrity')]",
-                        "dhGroup": "[parameters('dhGroup')]",
-                        "pfsGroup": "[parameters('pfsGroup')]"
-                    }
-                ]
+                }
             }
         }
     ]
