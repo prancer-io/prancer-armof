@@ -159,7 +159,6 @@
             "properties": {
                 "addressPrefix": "[variables('vnetSubnet')]",
                 "networkSecurityGroup": {
-                    "id": "",
                     "location": "eastus"
                 }    
             },

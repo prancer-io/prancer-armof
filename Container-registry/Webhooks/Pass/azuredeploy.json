@@ -1,0 +1,35 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "defaultValue": "myWebhooks"
+        }
+    },
+    "resources": [
+        {
+            "name": "[parameters('name')]",
+            "type": "Microsoft.ContainerRegistry/registries/webhooks",
+            "apiVersion": "2020-11-01-preview",
+            "location": "westus",
+            "tags": {
+                "key": "value"
+            },
+            "properties": {
+                "serviceUri": "http://myservice.com",
+                "customHeaders": {
+                    "Authorization": "Basic 000000000000000000000000000000000000000000000000000"
+                },
+                "status": "enabled",
+                "scope": "myRepository",
+                "actions": [
+                    "push"
+                ]
+            }
+        }
+    ]
+}
+
+
+
