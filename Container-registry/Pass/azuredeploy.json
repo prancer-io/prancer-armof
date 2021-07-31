@@ -162,9 +162,6 @@
       "apiVersion": "2019-05-01",
       "sku": {
         "name": "Basic"
-      },
-      "properties": {
-        "adminUserEnabled": false
       }
     }
   ],
