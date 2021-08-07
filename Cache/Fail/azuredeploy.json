@@ -63,7 +63,7 @@
       },
       "enableNonSslPort": {
         "type": "bool",
-        "defaultValue": true,
+        "defaultValue": false,
         "metadata": {
           "description": "Set to true to allow access to redis on port 6379, without SSL tunneling (less secure)."
         }

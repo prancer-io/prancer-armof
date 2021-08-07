@@ -7,6 +7,9 @@
         },
         "existingDiagnosticsStorageAccountId": {
             "value": "GET-PREREQ-diagnosticsStorageAccountId"
+        },
+        "enableNonSslPort": {
+            "value": true
         }
     }
 }
