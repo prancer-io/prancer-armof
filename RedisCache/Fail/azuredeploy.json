@@ -211,23 +211,6 @@
         "secondarySubnetId": "[resourceId(parameters('existingSecondaryVirtualNetworkResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingSecondaryVirtualNetworkName'), parameters('existingSecondaryCacheSubnetName'))]"
     },
     "resources": [
-         {
-      "name": "[parameters('actionGroupName')]",
-      "type": "microsoft.insights/actionGroups",
-      "apiVersion": "2019-06-01",
-      "location": "global",
-      "properties": {
-        "groupShortName": "[parameters('actionGroupShortName')]",
-        "enabled": true,
-        "emailReceivers": [
-          {
-            "name": "test",
-            "emailAddress": "[parameters('emails')[0]]",
-            "useCommonAlertSchema": true
-          }
-        ]
-      }
-    },
     {
       "apiVersion": "2014-04-01-preview",
       "name": "[parameters('redisCacheName')]",
@@ -243,21 +226,21 @@
         "enableNonSslPort": true
       }
     },
-        {
-            "type": "Microsoft.Cache/Redis/linkedServers",
-            "apiVersion": "2020-06-01",
-            "name": "[concat(parameters('newPrimaryCacheName'), '/', parameters('newSecondaryCacheName'))]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Cache/redis', parameters('newPrimaryCacheName'))]",
-                "[resourceId('Microsoft.Cache/redis', parameters('newSecondaryCacheName'))]"
-            ],
-            "comments": "Create a geo-replication link. This resource is created as a nested resource of the primary cache. Its name is fixed and cannot be changed. Its properties identifies the secondary cache and labels it as the secondary.",
-            "properties": {
-                "linkedRedisCacheId": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]",
-                "linkedRedisCacheLocation": "[parameters('secondaryLocation')]",
-                "serverRole": "Primary"
+    {
+        "type": "Microsoft.Cache/Redis/linkedServers",
+        "apiVersion": "2020-06-01",
+        "name": "[concat(parameters('newPrimaryCacheName'), '/', parameters('newSecondaryCacheName'))]",
+        "dependsOn": [
+            "[resourceId('Microsoft.Cache/redis', parameters('newPrimaryCacheName'))]",
+            "[resourceId('Microsoft.Cache/redis', parameters('newSecondaryCacheName'))]"
+        ],
+        "comments": "Create a geo-replication link. This resource is created as a nested resource of the primary cache. Its name is fixed and cannot be changed. Its properties identifies the secondary cache and labels it as the secondary.",
+        "properties": {
+            "linkedRedisCacheId": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]",
+            "linkedRedisCacheLocation": "[parameters('secondaryLocation')]",
+            "serverRole": "Primary"
             }
-        }
+    }
     ],
     "outputs": {
         "primaryLocation": {
