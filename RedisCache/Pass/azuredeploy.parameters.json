@@ -38,6 +38,15 @@
     "actionGroupShortName": {
       "value": "acg"
     },
+    "newPrimaryCacheName": {
+        "value": "GEN-UNIQUE"
+    },
+    "secondaryLocation": {
+        "value": "GET-PREREQ-existingSecondaryVirtualNetworkLocation"
+    },
+    "newSecondaryCacheName": {
+        "value": "GEN-UNIQUE"
+    },
     "emails": {
       "value": [
         "youremail@yourdomain.com"

@@ -1,177 +1,7 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "location": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-                "description": "The location of the existing primary virtual network and new primary cache."
-            }
-        },
-        "existingPrimaryVirtualNetworkResourceGroupName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the resource group of the existing primary virtual network."
-            }
-        },
-        "existingPrimaryVirtualNetworkName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing primary virtual network."
-            }
-        },
-        "existingPrimaryCacheSubnetName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing primary cache subnet."
-            }
-        },
-        "newPrimaryCacheName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the new primary cache."
-            }
-        },
-        "secondaryLocation": {
-            "type": "string",
-            "metadata": {
-                "description": "The location of the existing secondary virtual network and new secondary cache."
-            }
-        },
-        "existingSecondaryVirtualNetworkResourceGroupName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the resource group of the existing secondary virtual network."
-            }
-        },
-        "existingSecondaryVirtualNetworkName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing secondary virtual network."
-            }
-        },
-        "existingSecondaryCacheSubnetName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing secondary cache subnet."
-            }
-        },
-        "newSecondaryCacheName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the new secondary cache."
-            }
-        }
-    },
-     "actionGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the action group."
-      }
-    },
-    "actionGroupShortName": {
-      "type": "string",
-      "metadata": {
-        "description": "The short name of the action group."
-      }
-    },
-    "appInsightsResource": {
-      "type": "string",
-      "metadata": {
-        "description": "The id of the underlying Application Insights resource."
-      }
-    },
-    "appName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of azure web app."
-      }
-    },
-    "appServiceTier": {
-      "type": "string",
-      "allowedValues": [
-        "Standard",
-        "Premium"
-      ],
-      "defaultValue": "Standard",
-      "metadata": {
-        "description": "Choose either Standard or Premium Azure Web Apps pricing tiers. It defaults to Standard."
-      }
-    },
-    "appServiceWorkerSize": {
-      "type": "string",
-      "allowedValues": [
-        "0",
-        "1",
-        "2"
-      ],
-      "defaultValue": "0",
-      "metadata": {
-        "description": "Worker Size( 0=Small, 1=Medium, 2=Large )"
-      }
-    },
-    "dbServerName": {
-      "type": "string",
-      "metadata": {
-        "description": "SQL Azure DB Server name"
-      }
-    },
-    "dbAdministratorLogin": {
-      "type": "string",
-      "metadata": {
-        "description": "SQL Azure DB administrator  user login"
-      }
-    },
-    "dbAdministratorLoginPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Database admin user password"
-      }
-    },
-    "dbName": {
-      "type": "string",
-      "metadata": {
-        "description": "Database Name"
-      }
-    },
-    "dbEdition": {
-      "type": "string",
-      "allowedValues": [
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "defaultValue": "Standard",
-      "metadata": {
-        "description": "SQL DB appServiceTier : Basic,Standard,Premium"
-      }
-    },
-    "nonAdminDatabaseUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Non-admin Database User. Must be Unique"
-      }
-    },
-    "nonAdminDatabasePassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Non-admin Database User password"
-      }
-    },
-    "storageAccountType": {
-      "type": "string",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_GRS",
-        "Standard_RAGRS",
-        "Standard_ZRS"
-      ],
-      "defaultValue": "Standard_LRS",
-      "metadata": {
-        "description": "Storage Account Type : Standard-LRS, Standard-GRS,Standard-RAGRS,Standard-ZRS"
-      }
-    },
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
     "redisCacheName": {
       "type": "string",
       "metadata": {
@@ -189,12 +19,6 @@
         "description": "Redis Cache appServiceTier - Basic , Standard"
       }
     },
-    "emails": {
-      "type": "array",
-      "metadata": {
-        "description": "A list of strings representing the email addresses to send alerts to."
-      }
-    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -202,15 +26,27 @@
         "description": "Location for all resources."
       }
     },
-    "packageUri": {
-      "type": "string"
-    }
-  }
-    "variables": {
-        "primarySubnetId": "[resourceId(parameters('existingPrimaryVirtualNetworkResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingPrimaryVirtualNetworkName'), parameters('existingPrimaryCacheSubnetName'))]",
-        "secondarySubnetId": "[resourceId(parameters('existingSecondaryVirtualNetworkResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingSecondaryVirtualNetworkName'), parameters('existingSecondaryCacheSubnetName'))]"
-    },
-    "resources": [
+        "newPrimaryCacheName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the new primary cache."
+            }
+        },
+        "secondaryLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "The location of the existing secondary virtual network and new secondary cache."
+            }
+        },
+        "newSecondaryCacheName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the new secondary cache."
+            }
+        }
+  },
+  "variables": {},
+  "resources": [
     {
       "apiVersion": "2014-04-01-preview",
       "name": "[parameters('redisCacheName')]",
@@ -226,46 +62,20 @@
         "enableNonSslPort": true
       }
     },
-    {
-        "type": "Microsoft.Cache/Redis/linkedServers",
-        "apiVersion": "2020-06-01",
-        "name": "[concat(parameters('newPrimaryCacheName'), '/', parameters('newSecondaryCacheName'))]",
-        "dependsOn": [
-            "[resourceId('Microsoft.Cache/redis', parameters('newPrimaryCacheName'))]",
-            "[resourceId('Microsoft.Cache/redis', parameters('newSecondaryCacheName'))]"
-        ],
-        "comments": "Create a geo-replication link. This resource is created as a nested resource of the primary cache. Its name is fixed and cannot be changed. Its properties identifies the secondary cache and labels it as the secondary.",
-        "properties": {
-            "linkedRedisCacheId": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]",
-            "linkedRedisCacheLocation": "[parameters('secondaryLocation')]",
-            "serverRole": "Primary"
+        {
+            "type": "Microsoft.Cache/Redis/linkedServers",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('newPrimaryCacheName'), '/', parameters('newSecondaryCacheName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cache/redis', parameters('newPrimaryCacheName'))]",
+                "[resourceId('Microsoft.Cache/redis', parameters('newSecondaryCacheName'))]"
+            ],
+            "comments": "Create a geo-replication link. This resource is created as a nested resource of the primary cache. Its name is fixed and cannot be changed. Its properties identifies the secondary cache and labels it as the secondary.",
+            "properties": {
+                "linkedRedisCacheId": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]",
+                "linkedRedisCacheLocation": "[parameters('secondaryLocation')]",
+                "serverRole": "Primary"
             }
-    }
-    ],
-    "outputs": {
-        "primaryLocation": {
-            "type": "string",
-            "value": "[parameters('location')]"
-        },
-        "existingPrimaryCacheSubnetId": {
-            "type": "string",
-            "value": "[variables('primarySubnetId')]"
-        },
-        "newPrimaryCacheId": {
-            "type": "string",
-            "value": "[resourceId('Microsoft.Cache/Redis', parameters('newPrimaryCacheName'))]"
-        },
-        "secondaryLocation": {
-            "type": "string",
-            "value": "[parameters('secondaryLocation')]"
-        },
-        "existingSecondaryCacheSubnetId": {
-            "type": "string",
-            "value": "[variables('secondarySubnetId')]"
-        },
-        "newSecondaryCacheId": {
-            "type": "string",
-            "value": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]"
         }
-    }
+  ]
 }
