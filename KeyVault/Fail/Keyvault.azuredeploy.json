@@ -53,6 +53,9 @@
         "enableSoftDelete": {
             "type": "bool"
         },
+        "enablePurgeProtection": {
+            "type": "bool"
+        },
         "softDeleteRetentionInDays": {
             "type": "int"
         },
@@ -91,6 +94,7 @@
                     "family": "A"
                 },
                 "enableSoftDelete": "[parameters('enableSoftDelete')]",
+                "enablePurgeProtection":  "[parameters('enablePurgeProtection')]",
                 "softDeleteRetentionInDays": "[parameters('softDeleteRetentionInDays')]",
                 "networkAcls": "[parameters('networkAcls')]"
             },

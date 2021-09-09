@@ -43,6 +43,9 @@
         "enableSoftDelete": {
             "value": false
         },
+        "enablePurgeProtection": {
+            "value": false
+        },
         "softDeleteRetentionInDays": {
             "value": 90
         },
