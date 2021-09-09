@@ -59,7 +59,7 @@
           "capacity": 0
         },
         "redisVersion": "2.8",
-        "enableNonSslPort": true
+        "enableNonSslPort": false
       }
     },
         {
