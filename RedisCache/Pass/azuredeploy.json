@@ -2,67 +2,6 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "location": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-                "description": "The location of the existing primary virtual network and new primary cache."
-            }
-        },
-        "existingPrimaryVirtualNetworkResourceGroupName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the resource group of the existing primary virtual network."
-            }
-        },
-        "existingPrimaryVirtualNetworkName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing primary virtual network."
-            }
-        },
-        "existingPrimaryCacheSubnetName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing primary cache subnet."
-            }
-        },
-        "newPrimaryCacheName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the new primary cache."
-            }
-        },
-        "secondaryLocation": {
-            "type": "string",
-            "metadata": {
-                "description": "The location of the existing secondary virtual network and new secondary cache."
-            }
-        },
-        "existingSecondaryVirtualNetworkResourceGroupName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the resource group of the existing secondary virtual network."
-            }
-        },
-        "existingSecondaryVirtualNetworkName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing secondary virtual network."
-            }
-        },
-        "existingSecondaryCacheSubnetName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the existing secondary cache subnet."
-            }
-        },
-        "newSecondaryCacheName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the new secondary cache."
-            }
-        }
     },
      "actionGroupName": {
       "type": "string",
