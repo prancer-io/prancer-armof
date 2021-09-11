@@ -84,9 +84,10 @@
         },
         "networkPlugin": {
             "allowedValues": [
+                "azure",
                 "kubenet"
             ],
-            "defaultValue": "azure",
+            "defaultValue": "kubenet",
             "type": "string",
             "metadata": {
                 "description": "Network plugin used for building Kubernetes network."
