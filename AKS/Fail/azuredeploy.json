@@ -84,7 +84,6 @@
         },
         "networkPlugin": {
             "allowedValues": [
-                "azure",
                 "kubenet"
             ],
             "defaultValue": "azure",
@@ -182,7 +181,7 @@
                 "kubernetesVersion": "[parameters('kubernetesVersion')]",
                 "aadProfile": {
                     "managed": true,
-                    "enableAzureRBAC": true
+                    "enableAzureRBAC": false
                 },
                 "enableRBAC": "[parameters('enableRBAC')]",
                 "dnsPrefix": "[parameters('dnsPrefix')]",
