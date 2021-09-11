@@ -84,13 +84,23 @@
         },
         "networkPlugin": {
             "allowedValues": [
-                "azure",
                 "kubenet"
             ],
             "defaultValue": "azure",
             "type": "string",
             "metadata": {
                 "description": "Network plugin used for building Kubernetes network."
+            }
+        },
+        "networkPolicy": {
+            "allowedValues": [
+                "Azure",
+                "Calico"
+            ],
+            "defaultValue": "azure",
+            "type": "string",
+            "metadata": {
+                "description": "NetworkPolicy used for building Kubernetes network."
             }
         },
         "maxPods": {
@@ -179,12 +189,27 @@
                 "type": "SystemAssigned"
             },
             "properties": {
+                "apiServerAccessProfile": {
+                    "authorizedIPRanges": [
+                        "0.0.0.0"
+                    ]
+                },
                 "kubernetesVersion": "[parameters('kubernetesVersion')]",
+                "aadProfile": {
+                    "managed": true,
+                    "enableAzureRBAC": true
+                },
                 "enableRBAC": "[parameters('enableRBAC')]",
                 "dnsPrefix": "[parameters('dnsPrefix')]",
                 "addonProfiles": {
                     "httpApplicationRouting": {
                         "enabled": "[parameters('enableHttpApplicationRouting')]"
+                    },
+                    "omsagent": {
+                        "enabled": true
+                    },
+                    "kubeDashboard": {
+                        "enabled": false
                     }
                 },
                 "agentPoolProfiles": [
@@ -205,6 +230,7 @@
                 },
                 "networkProfile": {
                     "networkPlugin": "[parameters('networkPlugin')]",
+                    "networkPolicy": "[parameters('networkPolicy')]",
                     "serviceCidr": "[parameters('serviceCidr')]",
                     "dnsServiceIP": "[parameters('dnsServiceIP')]",
                     "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
