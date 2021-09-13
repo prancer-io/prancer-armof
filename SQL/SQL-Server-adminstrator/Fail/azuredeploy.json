@@ -204,7 +204,6 @@
                         "[resourceId('Microsoft.Sql/servers/', parameters('stackName'))]"
                     ],
                     "properties": {
-                        "administratorType": "ActiveDirectory",
                         "login": "[parameters('aadUsername')]",
                         "sid": "[parameters('aadUserObjectId')]",
                         "tenantId": "[subscription().tenantId]"
