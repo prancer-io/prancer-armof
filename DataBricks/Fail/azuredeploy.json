@@ -123,26 +123,6 @@
     },
     "resources": [
       {
-        "apiVersion": "2020-05-01",
-        "type": "Microsoft.Network/networkSecurityGroups",
-        "location": "[parameters('location')]",
-        "name": "[parameters('nsgName')]"
-      },
-      {
-        "apiVersion": "2020-06-01",
-        "type": "Microsoft.Network/publicIPAddresses",
-        "name": "[parameters('loadBalancerPublicIpName')]",
-        "location": "[parameters('location')]",
-        "sku": {
-          "name": "Standard"
-        },
-        "properties": {
-          "publicIPAddressVersion": "IPv4",
-          "publicIPAllocationMethod": "Static",
-          "idleTimeoutInMinutes": 4
-        }
-      },
-      {
         "apiVersion": "2019-04-01",
         "type": "Microsoft.Network/loadBalancers",
         "location": "[parameters('location')]",
@@ -186,58 +166,6 @@
                 "frontendIPConfigurations": [
                   {
                     "id": "[variables('loadBalancerFrontendConfigId')]"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      },
-      {
-        "apiVersion": "2019-06-01",
-        "type": "Microsoft.Network/virtualNetworks",
-        "location": "[parameters('location')]",
-        "name": "[parameters('vnetName')]",
-        "dependsOn": [
-          "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('nsgName'))]"
-        ],
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": [
-              "[parameters('vnetCidr')]"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "[parameters('publicSubnetName')]",
-              "properties": {
-                "addressPrefix": "[parameters('publicSubnetCidr')]",
-                "networkSecurityGroup": {
-                  "id": "[variables('nsgId')]"
-                },
-                "delegations": [
-                  {
-                    "name": "databricks-del-public",
-                    "properties": {
-                      "serviceName": "Microsoft.Databricks/workspaces"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "name": "[parameters('privateSubnetName')]",
-              "properties": {
-                "addressPrefix": "[parameters('privateSubnetCidr')]",
-                "networkSecurityGroup": {
-                  "id": "[variables('nsgId')]"
-                },
-                "delegations": [
-                  {
-                    "name": "databricks-del-private",
-                    "properties": {
-                      "serviceName": "Microsoft.Databricks/workspaces"
-                    }
                   }
                 ]
               }
