@@ -404,8 +404,8 @@
                 "location": "[parameters('location')]",
                 "name": "AllowAllIps",
                 "properties": {
-                   "endIpAddress": "0.0.0.0",
-                   "startIpAddress": "0.0.0.0"
+                   "endIpAddress": "1.1.1.1",
+                   "startIpAddress": "1.1.1.1"
                 }
              }
           ]
