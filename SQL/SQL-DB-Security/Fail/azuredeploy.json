@@ -49,20 +49,6 @@
     },
     "resources": [
         {
-            "type": "Microsoft.Sql/servers",
-            "apiVersion": "2020-02-02-preview",
-            "location": "[variables('databaseServerLocation')]",
-            "name": "[variables('databaseServerName')]",
-            "properties": {
-                "administratorLogin": "[variables('databaseServerAdminLogin')]",
-                "administratorLoginPassword": "[variables('databaseServerAdminLoginPassword')]",
-                "version": "12.0"
-            },
-            "tags": {
-                "DisplayName": "[variables('databaseServerName')]"
-            }
-        },
-        {
             "apiVersion": "2020-02-02-preview",
             "type": "Microsoft.Sql/servers/databases",
             "sku": {
