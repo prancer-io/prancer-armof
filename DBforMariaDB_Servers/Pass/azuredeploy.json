@@ -224,7 +224,7 @@
           "[resourceId('Microsoft.DBforMariaDB/servers/', parameters('serverName'))]"
         ],
         "properties": {
-          "startIpAddress": "0.0.0.0",
+          "startIpAddress": "255.255.255.255",
           "endIpAddress": "255.255.255.255"
         }
       }
