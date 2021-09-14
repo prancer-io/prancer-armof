@@ -224,8 +224,8 @@
           "[resourceId('Microsoft.DBforMariaDB/servers/', parameters('serverName'))]"
         ],
         "properties": {
-          "startIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].StartIpAddress]",
-          "endIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].EndIpAddress]"
+          "startIpAddress": "0.0.0.0",
+          "endIpAddress": "0.0.0.0"
         }
       }
     ]
