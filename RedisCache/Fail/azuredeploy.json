@@ -73,8 +73,7 @@
             "comments": "Create a geo-replication link. This resource is created as a nested resource of the primary cache. Its name is fixed and cannot be changed. Its properties identifies the secondary cache and labels it as the secondary.",
             "properties": {
                 "linkedRedisCacheId": "[resourceId('Microsoft.Cache/Redis', parameters('newSecondaryCacheName'))]",
-                "linkedRedisCacheLocation": "[parameters('secondaryLocation')]",
-                "serverRole": "Primary"
+                "linkedRedisCacheLocation": "[parameters('secondaryLocation')]"
             }
         }
   ]
