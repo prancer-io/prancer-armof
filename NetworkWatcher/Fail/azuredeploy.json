@@ -33,10 +33,10 @@
             "properties": {
                 "targetResourceId": "[parameters('existingNSG')]",
                 "storageId": "[parameters('storageAccountResourceId')]",
-                "enabled": true,
+                "enabled": false,
                 "retentionPolicy": {
                     "days": "[parameters('RetentionDays')]",
-                    "enabled": true
+                    "enabled": false
                 },
                 "format": {
                     "type": "JSON",
