@@ -191,32 +191,32 @@
             "type": "string"
         },
         "aadProfileManaged": {
-          "defaultValue": false,
-          "type": "bool",
-          "metadata": {
-            "description": "Specifies whether to enable managed AAD integration."
-          }
+            "defaultValue": false,
+            "type": "bool",
+            "metadata": {
+                "description": "Specifies whether to enable managed AAD integration."
+            }
         },
         "aadProfileEnableAzureRBAC": {
-          "defaultValue": false,
-          "type": "bool",
-          "metadata": {
-            "description": "Specifies whether to  to enable Azure RBAC for Kubernetes authorization."
-          }
+            "defaultValue": false,
+            "type": "bool",
+            "metadata": {
+                "description": "Specifies whether to  to enable Azure RBAC for Kubernetes authorization."
+            }
         },
         "aadProfileAdminGroupObjectIDs": {
-          "defaultValue": [],
-          "type": "array",
-          "metadata": {
-            "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
-          }
+            "defaultValue": [],
+            "type": "array",
+            "metadata": {
+                "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
+            }
         },
         "aadProfileTenantId": {
-          "defaultValue": "[subscription().tenantId]",
-          "type": "string",
-          "metadata": {
-            "description": "Specifies the tenant id of the Azure Active Directory used by the AKS cluster for authentication."
-          }
+            "defaultValue": "[subscription().tenantId]",
+            "type": "string",
+            "metadata": {
+                "description": "Specifies the tenant id of the Azure Active Directory used by the AKS cluster for authentication."
+            }
         }
     },
     "variables": {
@@ -237,7 +237,7 @@
                     {
                         "name": "prancer",
                         "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
-                        "count": 1,
+                        "count": 3,
                         "vmSize": "Standard_DS2_v2",
                         "osType": "Linux",
                         "storageProfile": "ManagedDisks",
@@ -257,13 +257,13 @@
                     "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
                 },
                 "aadProfile": {
-                  "managed": "[parameters('aadProfileManaged')]",
-                  "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
-                  "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
-                  "clientAppID": "",
-                  "serverAppID": "",
-                  "serverAppSecret": "",
-                  "tenantID": "[parameters('aadProfileTenantId')]"
+                    "managed": "[parameters('aadProfileManaged')]",
+                    "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
+                    "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
+                    "clientAppID": "",
+                    "serverAppID": "",
+                    "serverAppSecret": "",
+                    "tenantID": "[parameters('aadProfileTenantId')]"
                 },
                 "apiServerAccessProfile": {
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
@@ -305,9 +305,7 @@
                         {
                             "type": "Microsoft.Network/virtualNetworks/subnets/providers/roleAssignments",
                             "apiVersion": "2017-05-01",
-                            
                             "name": "[concat(parameters('VirtualNetworkName'), '/', parameters('SubnetName'), '/Microsoft.Authorization/', guid(resourceGroup().id, deployment().name))]",
-                            
                             "properties": {
                                 "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
                                 "principalId": "[reference(parameters('resourceName')).identityProfile.kubeletidentity.objectId]",
