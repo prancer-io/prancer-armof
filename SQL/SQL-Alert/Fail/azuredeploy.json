@@ -82,7 +82,9 @@
                     ],
                     "properties": {
                         "state": "Disabled",
-                        "emailAccountAdmins": true
+                        "emailAccountAdmins": true,
+                        "disabledAlerts": [ "Unsafe_Action" ],
+                        "retentionDays": 50
                     }
                 }
             ]

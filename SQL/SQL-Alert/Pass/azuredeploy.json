@@ -82,7 +82,9 @@
                     ],
                     "properties": {
                         "state": "Enabled",
-                        "emailAccountAdmins": true
+                        "emailAccountAdmins": true,
+                        "emailAddresses": [ "shahinshirvani@gmail.com" ],
+                        "retentionDays": 100
                     }
                 }
             ]
