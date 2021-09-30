@@ -44,16 +44,16 @@
         "aadTenantId": {
             "type": "securestring"
         },
-        "storageAccountName" : {
+        "storageAccountName": {
             "type": "string",
             "defaultValue": "storage-account"
         },
-        "firewallRuleName" : {
-            "type" : "string",
+        "firewallRuleName": {
+            "type": "string",
             "defaultValue": "IPRange1"
         },
-        "allowPublicAccess" : {
-            "type" : "string",
+        "allowPublicAccess": {
+            "type": "string",
             "defaultValue": "0.0.0.0"
         }
     },
@@ -111,7 +111,7 @@
                 {
                     "condition": "[parameters('allowAzureIPs')]",
                     "type": "firewallRules",
-                    "apiVersion": "2014-04-01-preview",
+                    "apiVersion": "2014-04-01-Preview",
                     "name": "AllowAllWindowsAzureIps",
                     "location": "[parameters('location')]",
                     "dependsOn": [
@@ -119,7 +119,11 @@
                     ],
                     "properties": {
                         "endIpAddress": "0.0.0.0",
-                        "startIpAddress": "0.0.0.0"
+                        "startIpAddress": "0.0.0.0",
+                        "administratorType": "ActiveDirectory",
+                        "login": "Prancer",
+                        "sid": null,
+                        "tenantId": "aadTenantId"
                     }
                 },
                 {
@@ -146,15 +150,15 @@
                     "type": "administrators",
                     "apiVersion": "2014-04-01-Preview",
                     "dependsOn": [
-                      "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
-                      "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
+                        "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
+                        "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
                     ],
                     "location": "[parameters('location')]",
                     "properties": {
-                      "administratorType": "",
-                      "login": "[parameters('administratorLogin')]",
-                      "sid": "[parameters('administratorLoginPassword')]",
-                      "tenantId": "[parameters('aadTenantId')]"
+                        "administratorType": "",
+                        "login": "[parameters('administratorLogin')]",
+                        "sid": "[parameters('administratorLoginPassword')]",
+                        "tenantId": "[parameters('aadTenantId')]"
                     }
                 }
             ]
@@ -179,7 +183,10 @@
             ],
             "properties": {
                 "state": "Disabled",
-                "disabledAlerts" : [ "Sql_Injection" , "Sql_Injection_Vulnerability" ]
+                "disabledAlerts": [
+                    "Sql_Injection",
+                    "Sql_Injection_Vulnerability"
+                ]
             }
         },
         {
