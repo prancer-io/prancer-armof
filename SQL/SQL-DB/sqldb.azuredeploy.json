@@ -58,6 +58,10 @@
         "storageAccountType": {
             "type": "string",
             "defaultValue": ""
+        },
+        "transparentDataEncryptionStatus": {
+            "type": "string",
+            "defaultValue": ""
         }
     },
     "variables": {},
@@ -81,6 +85,14 @@
             "sku": {
                 "name": "[parameters('skuName')]",
                 "tier": "[parameters('tier')]"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases/transparentDataEncryption",
+            "apiVersion": "2014-04-01",
+            "name": "current",
+            "properties": {
+              "status": "[parameters('transparentDataEncryptionStatus')]"
             }
         }
     ]

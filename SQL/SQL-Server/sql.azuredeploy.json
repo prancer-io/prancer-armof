@@ -236,6 +236,17 @@
                 "startIpAddress": "[parameters('allowPublicAccess')]",
                 "endIpAddress": "[parameters('allowPublicAccess')]"
             }
+        },
+        {
+            "type": "Microsoft.Sql/servers/administrators",
+            "apiVersion": "2019-06-01-preview",
+            "name": "ActiveDirectory",
+            "properties": {
+              "administratorType": "ActiveDirectory",
+              "login": "[parameters('administratorLogin')]",
+              "sid": "[parameters('administratorLoginPassword')]",
+              "tenantId": "[parameters('aadTenantId')]"
+            }
         }
     ]
 }
