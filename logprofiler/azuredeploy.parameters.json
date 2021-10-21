@@ -12,7 +12,10 @@
             "value": [
                 "Write",
                 "Delete",
-                "Action"
+                "Action",
+                "write",
+                "delete",
+                "action"
             ]
         },
         "enabled": {
