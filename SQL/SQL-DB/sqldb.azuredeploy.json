@@ -62,6 +62,10 @@
         "transparentDataEncryptionStatus": {
             "type": "string",
             "defaultValue": ""
+        },
+        "enableVA": {
+            "type": "bool",
+            "defaultValue": false
         }
     },
     "variables": {},
@@ -82,6 +86,22 @@
                 "minCapacity": "[parameters('minCapacity')]",
                 "autoPauseDelay": "[parameters('autoPauseDelay')]"
             },
+            "resources":[
+                {
+                        "condition": "[parameters('enableVA')]",
+                        "type": "vulnerabilityAssessments",
+                        "apiVersion": "2018-06-01-preview",
+                        "name": "Default",
+                        "properties": {
+                            "storageContainerPath": "",
+                            "storageAccountAccessKey": "",
+                            "recurringScans": {
+                                "isEnabled": true,
+                                "emailSubscriptionAdmins": false
+                            }
+                        }
+                  }
+            ]
             "sku": {
                 "name": "[parameters('skuName')]",
                 "tier": "[parameters('tier')]"
