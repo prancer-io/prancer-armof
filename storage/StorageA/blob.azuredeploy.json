@@ -75,7 +75,7 @@
                         "publicAccess": "Container"
                     }
                 }
-            ]
+            ],
             "dependsOn": [],
             "sku": {
                 "name": "[parameters('accountType')]"
