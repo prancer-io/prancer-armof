@@ -258,6 +258,16 @@
               "sid": "[parameters('administratorLoginPassword')]",
               "tenantId": "[parameters('aadTenantId')]"
             }
+        },
+        {
+          "type": "Microsoft.Sql/servers/encryptionProtector",
+          "apiVersion": "2021-02-01-preview",
+          "name": "current",
+          "properties": {
+            "autoRotationEnabled": "bool",
+            "serverKeyName": "encryptionProtectorKey",
+            "serverKeyType": "ServiceManaged"
+          }
         }
     ]
 }
