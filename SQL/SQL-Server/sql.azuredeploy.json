@@ -165,7 +165,8 @@
                         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
                     ],
                     "properties": {
-                        "state": "Disabled"
+                        "state": "Disabled",
+                        "disabledAlerts": ['Access_Anomaly']
                     }
                 },
                 {
