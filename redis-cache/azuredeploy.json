@@ -96,7 +96,8 @@
                     "family": "P",
                     "capacity": 1
                 },
-                "subnetId": "[variables('secondarySubnetId')]"
+                "subnetId": "[variables('secondarySubnetId')]",
+                "enableNonSslPort": true
             }
         },
         {
