@@ -52,7 +52,7 @@
       "apiVersion": "2016-09-01",
       "name": "DontDelete",
       "properties": {
-        "level": "CanNotDelete",
+        "level": "",
         "notes": "Prevent deletion of the resourceGroup"
       },
       "dependsOn": [
