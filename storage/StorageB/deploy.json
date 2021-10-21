@@ -98,7 +98,17 @@
                     "keySource": "Microsoft.Storage"
                 },
                 "accessTier": "Cool"
-            }
+            },
+            "resources": [
+                {
+                    "type": "providers/advancedThreatProtectionSettings",
+                    "apiVersion": "2019-01-01",
+                    "name": "<Specify the advanced threat protection settings name. visit https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json for details>",
+                    "properties": {
+                        "isEnabled": true
+                    }
+                }
+            ]
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
@@ -181,8 +191,19 @@
                     "keySource": "Microsoft.Storage"
                 },
                 "accessTier": "Cool"
-            }
-        },{
+            },
+            "resources": [
+                {
+                    "type": "providers/advancedThreatProtectionSettings",
+                    "apiVersion": "2019-01-01",
+                    "name": "<Specify the advanced threat protection settings name. visit https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json for details>",
+                    "properties": {
+                        "isEnabled": true
+                    }
+                }
+            ]
+        },
+        {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
             "name": "[parameters('storageAccountName3')]",
@@ -195,9 +216,7 @@
             "properties": {
                 "networkAcls": {
                     "bypass": "None",
-                    "virtualNetworkRules": [
-  
-                    ],
+                    "virtualNetworkRules": [],
                     "defaultAction": "Allow"
                 },
                 "supportsHttpsTrafficOnly": true,
@@ -215,7 +234,17 @@
                     "keySource": "Microsoft.Storage"
                 },
                 "accessTier": "Hot"
-            }
+            },
+            "resources": [
+                {
+                    "type": "providers/advancedThreatProtectionSettings",
+                    "apiVersion": "2019-01-01",
+                    "name": "<Specify the advanced threat protection settings name. visit https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json for details>",
+                    "properties": {
+                        "isEnabled": true
+                    }
+                }
+            ]
         }
     ]
 }
