@@ -2,6 +2,15 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "administratorLogin": {
+            "type": "string"
+        },
+        "administratorLoginPassword": {
+            "type": "securestring"
+        },
+        "aadTenantId": {
+            "type": "securestring"
+        },
         "vulnerabilityAssessments_Default_storageContainerPath": {
             "type": "SecureString"
         },
@@ -97,6 +106,17 @@
                     "emailSubscriptionAdmins": true
                 },
                 "storageContainerPath": "[parameters('vulnerabilityAssessments_Default_storageContainerPath')]"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/managedInstances/administrators",
+            "apiVersion": "2021-02-01-preview",
+            "name": "ActiveDirectory",
+            "properties": {
+              "administratorType": "ActiveDirectory",
+              "login": "[parameters('administratorLogin')]",
+              "sid": "[parameters('administratorLoginPassword')]",
+              "tenantId": "[parameters('aadTenantId')]"
             }
         }
     ]

@@ -1,0 +1,24 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccountName": {
+            "value": "GEN-UNIQUE"
+        },
+        "experience": {
+            "value": "DocumentDB"
+        },
+        "consistencyLevel": {
+            "value": "Session"
+        },
+        "maxStalenessPrefix": {
+            "value": 10
+        },
+        "maxIntervalInSeconds": {
+            "value": 5
+        },
+        "kind" : {
+            "value": "GlobalDocumentDB"
+        }
+    }
+}

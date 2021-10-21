@@ -70,6 +70,12 @@
         },
         "SubnetName":{
             "value": "AKS"
+        },
+        "aadProfileManaged": {
+            "value": true
+        },
+        "aadProfileEnableAzureRBAC": {
+            "value": true
         }
     }
 }

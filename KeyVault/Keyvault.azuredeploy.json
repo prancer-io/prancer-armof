@@ -70,6 +70,27 @@
             "metadata": {
                 "description": "Value for the Secrets to be store"
               }
+        },
+        "keyName":{
+            "type": "securestring",
+            "metadata": {
+                "description": "Value for the Key to be store"
+              }
+        },
+        "keyEnabled":{
+            "type": "bool"
+        },
+        "keyExp":{
+            "type": "int"
+        },
+        "keynbf":{
+            "type": "int"
+        },
+        "keyExpiryTime":{
+            "type": "string"
+        },
+        "keySize":{
+            "type": "int"
         }
     },
     "variables": {},
@@ -108,7 +129,28 @@
             "properties": {
               "value": "[parameters('secretValue')]"
             }
-          }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/keys",
+            "apiVersion": "2021-06-01-preview",
+            "name": "[concat(parameters('keyVaultName'), '/', parameters('keyName'))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+            ],
+            "properties": {
+              "attributes": {
+                "enabled": "[parameters('keyEnabled')]",
+                "exp": "[parameters('keyExp')]",
+                "nbf": "[parameters('keynbf')]"
+              },
+              "keySize": "[parameters('keySize')]",
+              "rotationPolicy": {
+                "attributes": {
+                  "expiryTime": "[parameters('keyExpiryTime')]"
+                }
+              }
+            }
+        }
     ],
     "outputs": {}
 }

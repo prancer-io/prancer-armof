@@ -93,6 +93,24 @@
         },
         "secretValue":{
             "value": "53cr3t"
+        },
+        "keyName":{
+            "value": "prancer-key"
+        },
+        "keyEnabled":{
+            "value": false
+        },
+        "keyExp":{
+            "value": 300000
+        },
+        "keynbf":{
+            "value": 300000
+        },
+        "keyExpiryTime":{
+            "value": "P90D"
+        },
+        "keySize":{
+            "value": 2048
         }
     }
 }

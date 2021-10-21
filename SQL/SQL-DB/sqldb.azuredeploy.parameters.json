@@ -49,6 +49,9 @@
       },
       "storageAccountType": {
         "value": null
+      },
+      "transparentDataEncryptionStatus": {
+        "value": "Disabled"
       }
     }
   }

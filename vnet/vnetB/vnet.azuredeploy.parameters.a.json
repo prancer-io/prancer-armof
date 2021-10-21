@@ -11,6 +11,9 @@
     "DNSServerAddress": {
       "value": ["10.254.0.1"]
     },
+    "defaultSubnetAddressPrefix": {
+      "value": "10.0.0.0/26"
+    },
     "tagsByResource": {
       "value": {
         "Project": "Prancer",

@@ -1,0 +1,97 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseAccountName": {
+            "defaultValue": null,
+            "type": "string"
+        },
+        "databasePassword": {
+            "defaultValue": null,
+            "type": "securestring"
+        },
+        "experience": {
+            "type": "string",
+            "defaultValue": "DocumentDB",
+            "allowedValues": [
+                "DocumentDB",
+                "Graph",
+                "Table",
+                "MongoDB"
+            ]
+        },
+        "consistencyLevel": {
+            "type": "string",
+            "defaultValue": "Session",
+            "allowedValues": [
+                "Strong",
+                "BoundedStaleness",
+                "Session",
+                "ConsistentPrefix",
+                "Eventual"
+            ]
+        },
+        "maxStalenessPrefix": {
+            "type": "int",
+            "minValue": 10,
+            "maxValue": 1000,
+            "defaultValue": 10,
+            "metadata": {
+                "description": "When consistencyLevel is set to BoundedStaleness, then this value is required, else it can be ignored."
+            }
+        },
+        "maxIntervalInSeconds": {
+            "type": "int",
+            "minValue": 5,
+            "maxValue": 600,
+            "defaultValue": 5,
+            "metadata": {
+                "description": "When consistencyLevel is set to BoundedStaleness, then this value is required, else it can be ignored."
+            }
+        },
+        "ipRangeFilter": {
+            "type": "string",
+             "metadata": {
+                "description": "IP addresses/ranges must be comma separated and must not contain any spaces"
+            }           
+        },
+        "kind": {
+            "type": "string",
+            "defaultValue": "GlobalDocumentDB",
+            "allowedValues": [
+                "GlobalDocumentDB",
+                "MongoDB",
+                "Parse"
+            ],
+            "metadata": {
+                "description": "Indicates the type of database account. This can only be set at database account creation. - GlobalDocumentDB, MongoDB, Parse"
+            }           
+        }
+    },
+    "variables": {
+        "offerType": "Standard"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "kind": "[parameters('kind')]",
+            "name": "[parameters('databaseAccountName')]",
+            "apiVersion": "2015-04-08",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "defaultExperience": "[parameters('experience')]"
+            },
+            "properties": {
+                "databaseAccountOfferType": "[variables('offerType')]",
+                "consistencyPolicy": {
+                    "defaultConsistencyLevel": "[parameters('consistencyLevel')]",
+                    "maxIntervalInSeconds": "[parameters('maxIntervalInSeconds')]",
+                    "maxStalenessPrefix": "[parameters('maxStalenessPrefix')]"
+                },
+                "ipRangeFilter":"[parameters('ipRangeFilter')]",
+                "name": "[parameters('databasePassword')]"
+            },
+            "dependsOn": []
+        }
+    ]
+}
