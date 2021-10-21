@@ -167,6 +167,23 @@
                     "properties": {
                         "state": "Disabled"
                     }
+                },
+                {
+                    "type": "auditingSettings",
+                    "apiVersion": "2020-08-01-preview",
+                    "name": "[concat(parameters('serverName'), '/Default')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+                    ],
+                    "properties": {
+                        "state": "Disabled",
+                        "storageEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').PrimaryEndpoints.Blob]",
+                        "storageAccountAccessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').keys[0].value]",
+                        "retentionDays": 30,
+                        "auditActionsAndGroups": null,
+                        "storageAccountSubscriptionId": "[subscription().subscriptionId]",
+                        "isStorageSecondaryKeyInUse": false
+                    }
                 }
             ]
         },
