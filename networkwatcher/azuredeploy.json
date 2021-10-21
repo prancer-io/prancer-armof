@@ -54,6 +54,34 @@
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkWatchers', parameters('networkWatcherName'))]"
       ]
+    },
+    {
+      "type": "Microsoft.Network/networkWatchers/flowLogs",
+      "apiVersion": "2021-02-01",
+      "name": "sampleflowLogs",
+      "location": "[parameters('location')]",
+      "properties": {
+        "enabled": false,
+        "flowAnalyticsConfiguration": {
+          "networkWatcherFlowAnalyticsConfiguration": {
+            "enabled": false,
+            "trafficAnalyticsInterval": 10,
+            "workspaceId": "",
+            "workspaceRegion": "",
+            "workspaceResourceId": ""
+          }
+        },
+        "format": {
+          "type": "JSON",
+          "version": 1
+        },
+        "retentionPolicy": {
+          "days": 30,
+          "enabled": false
+        },
+        "storageId": "",
+        "targetResourceId": ""
+      }
     }
   ],
   "outputs": {
