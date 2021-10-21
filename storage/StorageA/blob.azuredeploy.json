@@ -35,7 +35,7 @@
         "containerName": {
             "type": "string"
         },
-        "workspaceName" : {
+        "workspaceName": {
             "type": "string",
             "defaultValue": "GEN-UNIQUE"
         },
@@ -67,7 +67,17 @@
                 "name": "[parameters('accountType')]"
             },
             "kind": "[parameters('kind')]",
-            "tags": {}
+            "tags": {},
+            "resources": [
+                {
+                    "type": "providers/advancedThreatProtectionSettings",
+                    "apiVersion": "2019-01-01",
+                    "name": "<Specify the advanced threat protection settings name. visit https://docs.microsoft.com/en-us/azure/templates/microsoft.security/advancedthreatprotectionsettings?tabs=json for details>",
+                    "properties": {
+                        "isEnabled": true
+                    }
+                }
+            ]
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
@@ -102,36 +112,36 @@
             }
         },
         {
-            "type" : "Microsoft.Storage/storageAccounts/blobServices/providers/diagnosticsettings",
+            "type": "Microsoft.Storage/storageAccounts/blobServices/providers/diagnosticsettings",
             "name": "[concat(parameters('storageAccountName'), '/blobServices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
             "apiVersion": "2017-05-01-preview",
             "properties": {
-              "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
-              "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
-              "logs": [
-                  {
-                      "category": "StorageRead",
-                      "enabled": false
-                  },
-                  {
-                      "category": "StorageWrite",
-                      "enabled": true
-                  },
-                  {
-                      "category": "StorageDelete",
-                      "enabled": true
-                  }
-              ],
-              "metrics": [
-                  {
-                      "category": "Transaction",
-                      "enabled": true
-                  }
-              ]
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('workspaceName'))]",
+                "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageSinkName'))]",
+                "logs": [
+                    {
+                        "category": "StorageRead",
+                        "enabled": false
+                    },
+                    {
+                        "category": "StorageWrite",
+                        "enabled": true
+                    },
+                    {
+                        "category": "StorageDelete",
+                        "enabled": true
+                    }
+                ],
+                "metrics": [
+                    {
+                        "category": "Transaction",
+                        "enabled": true
+                    }
+                ]
             }
         },
         {
-            "type" : "Microsoft.Storage/storageAccounts/queueservices/providers/diagnosticsettings",
+            "type": "Microsoft.Storage/storageAccounts/queueservices/providers/diagnosticsettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('storageAccountName'), '/queueservices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
             "properties": {
@@ -160,7 +170,7 @@
             }
         },
         {
-            "type" : "Microsoft.Storage/storageAccounts/tableservices/providers/diagnosticsettings",
+            "type": "Microsoft.Storage/storageAccounts/tableservices/providers/diagnosticsettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('storageAccountName'), '/tableservices/', '/microsoft.insights/', parameters('storageAccountName'), 'LogSettings')]",
             "properties": {
