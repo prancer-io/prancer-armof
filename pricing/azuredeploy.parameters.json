@@ -13,6 +13,9 @@
       },
       "alertsToAdmins": {
         "value": "Off"
+      },
+      "pricingTierVMs":{
+        "value": "Free"
       }
     }
   }
