@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
       "email": {
-        "value": "inof@prancer.io"
+        "value": ""
       },
       "phone": {
         "value": "1234567890"
