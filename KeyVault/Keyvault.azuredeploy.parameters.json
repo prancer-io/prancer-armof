@@ -75,7 +75,7 @@
             "value": false
         },
         "enableSoftDelete": {
-            "value": true
+            "value": false
         },
         "softDeleteRetentionInDays": {
             "value": 90
