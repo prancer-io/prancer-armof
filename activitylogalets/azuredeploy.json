@@ -60,7 +60,7 @@
         "[parameters('actionGroupName')]"
       ],
       "properties": {
-        "enabled": true,
+        "enabled": false,
         "scopes": [
           "[subscription().id]"
         ],
