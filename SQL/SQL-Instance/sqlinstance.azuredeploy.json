@@ -48,7 +48,7 @@
                 "vCores": 4,
                 "storageSizeInGB": 32,
                 "collation": "SQL_Latin1_General_CP1_CI_AS",
-                "publicDataEndpointEnabled": false,
+                "publicDataEndpointEnabled": true,
                 "proxyOverride": "Proxy",
                 "timezoneId": "UTC",
                 "maintenanceConfigurationId": "/subscriptions/d34d6141-7a19-****-****-************/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default",
