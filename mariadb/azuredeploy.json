@@ -206,6 +206,25 @@
             "virtualNetworkSubnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
             "ignoreMissingVnetServiceEndpoint": true
           }
+        },
+        {
+          "type": "firewallRules",
+          "apiVersion": "2018-06-01",
+          "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[copyIndex()].Name)]",
+          "location": "[parameters('location')]",
+          "copy": {
+            "name": "firewallRulesCopy",
+            "mode": "Serial",
+            "batchSize": 1,
+            "count": "[length(variables('firewallrules').batch.rules)]"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.DBforMariaDB/servers/', parameters('serverName'))]"
+          ],
+          "properties": {
+            "startIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].StartIpAddress]",
+            "endIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].EndIpAddress]"
+          }
         }
       ]
     },
