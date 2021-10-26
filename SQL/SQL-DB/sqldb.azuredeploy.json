@@ -122,7 +122,16 @@
                     "properties": {
                       "status": "[parameters('transparentDataEncryptionStatus')]"
                     }
-                 }
+                 },
+                 {
+                    "type": "securityAlertPolicies",
+                    "apiVersion": "2020-02-02-preview",
+                    "name": "Default",
+                    "properties": {
+                        "state": "Disabled",
+                        "disabledAlerts": ['Access_Anomaly']
+                    }
+                }
             ]
             "sku": {
                 "name": "[parameters('skuName')]",
