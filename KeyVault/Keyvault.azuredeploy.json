@@ -150,6 +150,28 @@
                 }
               }
             }
+        },
+        {
+            "type" : "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
+            "name": "LogSettings",
+            "scope": "",
+            "apiVersion": "2021-05-01-preview",
+            "properties": {
+              "workspaceId": "",
+              "storageAccountId": "",
+              "logs": [
+                  {
+                      "category": "Auditevent",
+                      "enabled": false
+                  }
+              ],
+              "metrics": [
+                  {
+                      "category": "Transaction",
+                      "enabled": true
+                  }
+              ]
+            }
         }
     ],
     "outputs": {}
