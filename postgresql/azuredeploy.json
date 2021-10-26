@@ -86,7 +86,7 @@
     },
     "geoRedundantBackup": {
       "type": "string",
-      "defaultValue": "Disabled",
+      "defaultValue": "Enabled",
       "metadata": {
         "description": "Geo-Redundant Backup setting"
       }
