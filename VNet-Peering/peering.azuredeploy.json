@@ -29,7 +29,10 @@
     "AllowVirtualNetworkAccess": {
       "type": "string",
       "defaultvalue": "true",
-      "allowedValues": [ "true", "false" ],
+      "allowedValues": [
+        "true",
+        "false"
+      ],
       "metadata": {
         "description": "Select this option if you wish to allow communication betweem two virtual network"
       }
@@ -37,7 +40,10 @@
     "AllowForwardedTraffic": {
       "type": "string",
       "defaultvalue": "true",
-      "allowedValues": [ "true", "false" ],
+      "allowedValues": [
+        "true",
+        "false"
+      ],
       "metadata": {
         "description": "allow traffic forwarded by a network virtual appliance in a virtual network to flow to this virtual network through a peering"
       }
@@ -45,7 +51,10 @@
     "AllowGatewayTransit": {
       "type": "string",
       "defaultvalue": "false",
-      "allowedValues": [ "true", "false" ],
+      "allowedValues": [
+        "true",
+        "false"
+      ],
       "metadata": {
         "description": "Allow if you have a virtual network gateway attached to this virtual network and want to allow traffic from the peered virtual network to flow through the gateway"
       }
@@ -53,7 +62,10 @@
     "UseRemoteGateways": {
       "type": "string",
       "defaultvalue": "false",
-      "allowedValues": [ "true", "false" ],
+      "allowedValues": [
+        "true",
+        "false"
+      ],
       "metadata": {
         "description": "Allow traffic from this virtual network to flow through a virtual network gateway attached to the virtual network you're peering with"
       }
@@ -62,7 +74,6 @@
   "variables": {
     "PeeringName1": "[concat(parameters('VNET1'),'-to-',parameters('VNET2'),'-vnetpeering')]",
     "PeeringName2": "[concat(parameters('VNET2'),'-to-',parameters('VNET1'),'-vnetpeering')]"
-    
   },
   "resources": [
     {
@@ -77,7 +88,8 @@
         "useRemoteGateways": "[parameters('UseRemoteGateways')]",
         "remoteVirtualNetwork": {
           "id": "[resourceId(parameters('VNET2RG'), 'Microsoft.Network/virtualNetworks', parameters('VNET2'))]"
-        }
+        },
+        "peeringState": "Connected"
       }
     },
     {
@@ -93,7 +105,7 @@
         "remoteVirtualNetwork": {
           "id": "[resourceId(parameters('VNET1RG'), 'Microsoft.Network/virtualNetworks', parameters('VNET1'))]"
         },
-        "peeringState" : "Disconnected"
+        "peeringState": "Connected"
       }
     }
   ]
