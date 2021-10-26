@@ -15,7 +15,7 @@
             "value": "1.17.11"
         },
         "networkPlugin": {
-            "value": "kubenet"
+            "value": "azure"
         },
         "enableRBAC": {
             "value": false
@@ -62,13 +62,13 @@
         "acrResourceGroup": {
             "value": "Prancer"
         },
-        "VirtualNetworkRGName":{
+        "VirtualNetworkRGName": {
             "value": "Prancer"
         },
-        "VirtualNetworkName":{
+        "VirtualNetworkName": {
             "value": "prancer-vnet"
         },
-        "SubnetName":{
+        "SubnetName": {
             "value": "AKS"
         },
         "aadProfileManaged": {
