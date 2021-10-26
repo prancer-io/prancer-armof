@@ -61,10 +61,10 @@
       "name": "sampleflowLogs",
       "location": "[parameters('location')]",
       "properties": {
-        "enabled": false,
+        "enabled": true,
         "flowAnalyticsConfiguration": {
           "networkWatcherFlowAnalyticsConfiguration": {
-            "enabled": false,
+            "enabled": true,
             "trafficAnalyticsInterval": 10,
             "workspaceId": "",
             "workspaceRegion": "",
