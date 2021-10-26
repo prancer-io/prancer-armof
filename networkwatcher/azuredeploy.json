@@ -76,8 +76,8 @@
           "version": 1
         },
         "retentionPolicy": {
-          "days": 30,
-          "enabled": false
+          "days": 90,
+          "enabled": true
         },
         "storageId": "",
         "targetResourceId": ""
