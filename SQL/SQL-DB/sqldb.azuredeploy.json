@@ -100,7 +100,21 @@
                                 "emailSubscriptionAdmins": false
                             }
                         }
-                  }
+                  },
+                  {
+                    "type": "auditingSettings",
+                    "apiVersion": "2020-08-01-preview",
+                    "name": "Default"
+                    "properties": {
+                        "state": "Disabled",
+                        "storageEndpoint": "",
+                        "storageAccountAccessKey": "",
+                        "retentionDays": 30,
+                        "auditActionsAndGroups": null,
+                        "storageAccountSubscriptionId": "",
+                        "isStorageSecondaryKeyInUse": false
+                    }
+                 }
             ]
             "sku": {
                 "name": "[parameters('skuName')]",
