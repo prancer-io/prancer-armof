@@ -127,9 +127,11 @@
               "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
             ],
             "properties": {
-              "value": "[parameters('secretValue')]",
-              "enabled": "[parameters('keyEnabled')]",
-              "exp": "[parameters('keyExp')]"
+              "attributes": {
+                "value": "[parameters('secretValue')]",
+                "enabled": "[parameters('keyEnabled')]",
+                "exp": "[parameters('keyExp')]"
+               }
             }
         },
         {
