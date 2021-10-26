@@ -72,10 +72,10 @@
             "value": "AKS"
         },
         "aadProfileManaged": {
-            "value": true
+            "value": false
         },
         "aadProfileEnableAzureRBAC": {
-            "value": true
+            "value": false
         }
     }
 }
