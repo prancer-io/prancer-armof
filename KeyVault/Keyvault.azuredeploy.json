@@ -6,19 +6,19 @@
             "type": "string",
             "metadata": {
                 "description": "Name of the KeyVault"
-              }
+            }
         },
         "location": {
             "type": "string",
             "metadata": {
                 "description": "Location of the Keyvault Deploy"
-              }
+            }
         },
         "sku": {
             "type": "string",
             "metadata": {
                 "description": "Mentioned the SKU of the azure Keyvault"
-              }
+            }
         },
         "accessPolicies": {
             "type": "array"
@@ -30,25 +30,25 @@
             "type": "bool",
             "metadata": {
                 "description": "Enable for Azure Virtual Machines for deployment"
-              }
+            }
         },
         "enabledForTemplateDeployment": {
             "type": "bool",
             "metadata": {
                 "description": "Enable Azure Resource Manager for template deployment"
-              }
+            }
         },
         "enabledForDiskEncryption": {
             "type": "bool",
             "metadata": {
                 "description": "Enable for Azure Disk Encryption for volume encryption"
-              }
+            }
         },
         "enableRbacAuthorization": {
             "type": "bool",
             "metadata": {
                 "description": "Enable RBAC authntication for the keyvault access"
-              }
+            }
         },
         "enableSoftDelete": {
             "type": "bool"
@@ -59,37 +59,37 @@
         "networkAcls": {
             "type": "object"
         },
-        "secretName":{
+        "secretName": {
             "type": "securestring",
             "metadata": {
                 "description": "Value for the Secrets to be store"
-              }
+            }
         },
-        "secretValue":{
+        "secretValue": {
             "type": "securestring",
             "metadata": {
                 "description": "Value for the Secrets to be store"
-              }
+            }
         },
-        "keyName":{
+        "keyName": {
             "type": "securestring",
             "metadata": {
                 "description": "Value for the Key to be store"
-              }
+            }
         },
-        "keyEnabled":{
+        "keyEnabled": {
             "type": "bool"
         },
-        "keyExp":{
+        "keyExp": {
             "type": "int"
         },
-        "keynbf":{
+        "keynbf": {
             "type": "int"
         },
-        "keyExpiryTime":{
+        "keyExpiryTime": {
             "type": "string"
         },
-        "keySize":{
+        "keySize": {
             "type": "int"
         }
     },
@@ -113,7 +113,8 @@
                 },
                 "enableSoftDelete": "[parameters('enableSoftDelete')]",
                 "softDeleteRetentionInDays": "[parameters('softDeleteRetentionInDays')]",
-                "networkAcls": "[parameters('networkAcls')]"
+                "networkAcls": "[parameters('networkAcls')]",
+                "enablePurgeProtection": true
             },
             "tags": {},
             "dependsOn": []
@@ -124,10 +125,10 @@
             "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'))]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-              "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
             ],
             "properties": {
-              "value": "[parameters('secretValue')]"
+                "value": "[parameters('secretValue')]"
             }
         },
         {
@@ -138,17 +139,17 @@
                 "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
             ],
             "properties": {
-              "attributes": {
-                "enabled": "[parameters('keyEnabled')]",
-                "exp": "[parameters('keyExp')]",
-                "nbf": "[parameters('keynbf')]"
-              },
-              "keySize": "[parameters('keySize')]",
-              "rotationPolicy": {
                 "attributes": {
-                  "expiryTime": "[parameters('keyExpiryTime')]"
+                    "enabled": "[parameters('keyEnabled')]",
+                    "exp": "[parameters('keyExp')]",
+                    "nbf": "[parameters('keynbf')]"
+                },
+                "keySize": "[parameters('keySize')]",
+                "rotationPolicy": {
+                    "attributes": {
+                        "expiryTime": "[parameters('keyExpiryTime')]"
+                    }
                 }
-              }
             }
         }
     ],
