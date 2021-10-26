@@ -24,7 +24,7 @@
             "value": true
         },
         "allowBlobPublicAccess": {
-            "value": true
+            "value": false
         },
         "networkAclsBypass": {
             "value": "AzureServices"
@@ -32,7 +32,7 @@
         "networkAclsDefaultAction": {
             "value": "Allow"
         },
-        "containerName":{
+        "containerName": {
             "value": "prancerstoragecontainer"
         }
     }
