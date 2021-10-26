@@ -96,7 +96,7 @@
                             "storageContainerPath": "",
                             "storageAccountAccessKey": "",
                             "recurringScans": {
-                                "isEnabled": true,
+                                "isEnabled": false,
                                 "emailSubscriptionAdmins": false
                             }
                         }
