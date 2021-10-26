@@ -132,7 +132,7 @@
       ],
       "properties": {
         "serverKeyName": "[variables('sqlServerKeyName')]",
-        "serverKeyType": "ServiceManaged"
+        "serverKeyType": "AzureKeyVault"
       }
     }
   ]
