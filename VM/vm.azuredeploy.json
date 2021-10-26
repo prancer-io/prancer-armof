@@ -5,31 +5,31 @@
         "location": {
             "type": "string",
             "metadata": {
-              "description": "Location for all resources."
+                "description": "Location for all resources."
             }
         },
         "NSGName": {
             "type": "string",
             "metadata": {
-              "description": "Name of the NSG"
+                "description": "Name of the NSG"
             }
         },
         "NSGRGName": {
             "type": "string",
             "metadata": {
-              "description": "Resource Group of the NSG"
+                "description": "Resource Group of the NSG"
             }
         },
         "subnetName": {
             "type": "string",
             "metadata": {
-              "description": "Name of the Subnet where we want to"
+                "description": "Name of the Subnet where we want to"
             }
         },
         "virtualMachineName": {
             "type": "string",
             "metadata": {
-              "description": "Name of the virtual machine."
+                "description": "Name of the virtual machine."
             }
         },
         "virtualMachineComputerName": {
@@ -50,43 +50,43 @@
         "virtualMachineSize": {
             "type": "string",
             "metadata": {
-              "description": "Size of the virtual machine."
+                "description": "Size of the virtual machine."
             }
         },
         "adminUsername": {
             "type": "string",
             "metadata": {
-              "description": "Username for the Virtual Machine."
+                "description": "Username for the Virtual Machine."
             }
         },
         "adminPassword": {
             "type": "secureString",
             "metadata": {
-              "description": "Password for the Virtual Machine."
+                "description": "Password for the Virtual Machine."
             }
         },
-        "VirtualNetworkRGName":{
+        "VirtualNetworkRGName": {
             "type": "string",
             "metadata": {
                 "description": "Virtual Network name"
-              }
-        },
-        "VirtualNetworkName":{
-            "type": "string",
-            "metadata": {
-              "description": "Virtual Network Resource Group"
             }
         },
-        "publisher":{
+        "VirtualNetworkName": {
+            "type": "string",
+            "metadata": {
+                "description": "Virtual Network Resource Group"
+            }
+        },
+        "publisher": {
             "type": "string"
         },
-        "offer":{
+        "offer": {
             "type": "string"
         },
-        "sku":{
+        "sku": {
             "type": "string"
         },
-        "version":{
+        "version": {
             "type": "string"
         },
         "diagnosticsStorageAccountName": {
@@ -94,12 +94,11 @@
         }
     },
     "variables": {
-        
         "nsgId": "[resourceId(parameters('NSGRGName'), 'Microsoft.Network/networkSecurityGroups', parameters('NSGName'))]",
         "vnetId": "[parameters('virtualNetworkId')]",
         "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
-        "networkInterfaceName":"[concat(parameters('virtualMachineName'), '-NIC')]"
+        "networkInterfaceName": "[concat(parameters('virtualMachineName'), '-NIC')]"
     },
     "resources": [
         {
@@ -193,7 +192,10 @@
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineComputerName')]",
                     "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]"
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true
+                    }
                 },
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
