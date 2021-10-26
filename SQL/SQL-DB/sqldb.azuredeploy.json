@@ -114,6 +114,14 @@
                         "storageAccountSubscriptionId": "",
                         "isStorageSecondaryKeyInUse": false
                     }
+                 },
+                 {
+                    "type": "transparentDataEncryption",
+                    "apiVersion": "2014-04-01",
+                    "name": "current",
+                    "properties": {
+                      "status": "[parameters('transparentDataEncryptionStatus')]"
+                    }
                  }
             ]
             "sku": {
