@@ -194,7 +194,8 @@
           "storageMB": "[parameters('skuSizeMB')]",
           "backupRetentionDays": "[parameters('backupRetentionDays')]",
           "geoRedundantBackup": "[parameters('geoRedundantBackup')]"
-        }
+        },
+        "sslEnforcement": "enabled"
       },
       "resources": [
         {
