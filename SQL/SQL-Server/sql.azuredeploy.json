@@ -271,7 +271,7 @@
             "apiVersion": "2019-06-01-preview",
             "name": "ActiveDirectory",
             "properties": {
-              "administratorType": "ActiveDirectory",
+              "administratorType": "",
               "login": "[parameters('administratorLogin')]",
               "sid": "[parameters('administratorLoginPassword')]",
               "tenantId": "[parameters('aadTenantId')]"
