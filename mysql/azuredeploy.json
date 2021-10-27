@@ -204,7 +204,18 @@
           ],
           "properties": {
             "virtualNetworkSubnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
-            "ignoreMissingVnetServiceEndpoint": true
+            "ignoreMissingVnetServiceEndpoint": true,
+            "StartIpAddress": "(firewallrules).batch.rules[copyIndex()].StartIpAddress",
+            "EndIpAddress": "(firewallrules).batch.rules[copyIndex()].EndIpAddress",
+            "startIpAddress": "<Specify a valid start ip address from ip range which need inboud access to the resource>",
+            "endIpAddress": "<Specify a valid end ip address from ip range which need inboud access to the resource>"
+          },
+          "location": "[resourceGroup().location]",
+          "copy": {
+            "name": "firewallRulesCopy",
+            "mode": "Serial",
+            "batchSize": 1,
+            "count": 38
           }
         },
         {
