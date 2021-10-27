@@ -210,7 +210,7 @@
         {
           "type": "firewallRules",
           "apiVersion": "2018-06-01",
-          "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[copyIndex()].Name)]",
+          "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[0].Name)]",
           "location": "[parameters('location')]",
           "copy": {
             "name": "firewallRulesCopy",
@@ -222,8 +222,8 @@
             "[resourceId('Microsoft.DBforMariaDB/servers/', parameters('serverName'))]"
           ],
           "properties": {
-            "startIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].StartIpAddress]",
-            "endIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].EndIpAddress]"
+            "startIpAddress": "[variables('firewallrules').batch.rules[0].StartIpAddress]",
+            "endIpAddress": "[variables('firewallrules').batch.rules[0].EndIpAddress]"
           }
         }
       ]
