@@ -210,7 +210,7 @@
         {
           "type": "firewallRules",
           "apiVersion": "2017-12-01",
-          "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[copyIndex()].Name)]",
+          "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[0].Name)]",
           "location": "[parameters('location')]",
           "copy": {
             "name": "firewallRulesCopy",
@@ -222,8 +222,8 @@
             "[resourceId('Microsoft.DBforMySQL/servers/', parameters('serverName'))]"
           ],
           "properties": {
-            "StartIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].StartIpAddress]",
-            "EndIpAddress": "[variables('firewallrules').batch.rules[copyIndex()].EndIpAddress]"
+            "StartIpAddress": "[variables('firewallrules').batch.rules[0].StartIpAddress]",
+            "EndIpAddress": "[variables('firewallrules').batch.rules[0].EndIpAddress]"
           }
         }
       ]
