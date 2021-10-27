@@ -166,7 +166,7 @@
                     ],
                     "properties": {
                         "state": "Disabled",
-                        "disabledAlerts": ['Access_Anomaly']
+                        "disabledAlerts": ["Access_Anomaly"]
                     }
                 },
                 {
@@ -197,7 +197,7 @@
             ],
             "properties": {
                 "state": "Disabled",
-                "disabledAlerts": ['Access_Anomaly']
+                "disabledAlerts": ["Access_Anomaly"]
             }
         },
         {
