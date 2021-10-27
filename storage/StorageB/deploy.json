@@ -88,7 +88,7 @@
                     "services": {
                         "file": {
                             "keyType": "Account",
-                            "enabled": true
+                            "enabled": false
                         },
                         "blob": {
                             "keyType": "Account",
@@ -171,7 +171,7 @@
                     "services": {
                         "file": {
                             "keyType": "Account",
-                            "enabled": true
+                            "enabled": false
                         },
                         "blob": {
                             "keyType": "Account",
@@ -205,7 +205,7 @@
                     "services": {
                         "file": {
                             "keyType": "Account",
-                            "enabled": true
+                            "enabled": false
                         },
                         "blob": {
                             "keyType": "Account",
