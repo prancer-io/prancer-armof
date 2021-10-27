@@ -53,6 +53,13 @@
                 "description": "Boolean flag to turn on and off of RBAC."
             }
         },
+        "enablekubeDashboard": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "description": "Boolean flag to turn on and off of kube dashboard."
+            }
+        },
         "vmssNodePool": {
             "type": "bool",
             "defaultValue": false,
@@ -298,6 +305,9 @@
                         "config": {
                             "logAnalyticsWorkspaceResourceID": "[parameters('omsWorkspaceId')]"
                         }
+                    },
+                    "kubeDashboard": {
+                        "enabled": "[parameters('enablekubeDashboard')]"
                     }
                 }
             },
