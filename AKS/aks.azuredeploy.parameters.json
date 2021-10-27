@@ -20,6 +20,9 @@
         "enableRBAC": {
             "value": false
         },
+        "enablekubeDashboard": {
+            "value": true
+        },
         "enablePrivateCluster": {
             "value": false
         },
