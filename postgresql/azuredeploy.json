@@ -208,6 +208,25 @@
             "virtualNetworkSubnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
             "ignoreMissingVnetServiceEndpoint": true
           }
+        },
+        {
+          "type": "firewallRules",
+          "apiVersion": "2017-12-01",
+          "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[0].Name)]",
+          "location": "[parameters('location')]",
+          "copy": {
+            "name": "firewallRulesCopy",
+            "mode": "Serial",
+            "batchSize": 1,
+            "count": "[length(variables('firewallrules').batch.rules)]"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.DBforPostgreSQL/servers/', parameters('serverName'))]"
+          ],
+          "properties": {
+            "startIpAddress": "[variables('firewallrules').batch.rules[0].StartIpAddress]",
+            "endIpAddress": "[variables('firewallrules').batch.rules[0].EndIpAddress]"
+          }
         }
       ]
     },
