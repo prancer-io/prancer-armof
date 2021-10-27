@@ -212,12 +212,6 @@
           "apiVersion": "2018-06-01",
           "name": "[concat(parameters('serverName'),'/',variables('firewallrules').batch.rules[0].Name)]",
           "location": "[parameters('location')]",
-          "copy": {
-            "name": "firewallRulesCopy",
-            "mode": "Serial",
-            "batchSize": 1,
-            "count": "[length(variables('firewallrules').batch.rules)]"
-          },
           "dependsOn": [
             "[resourceId('Microsoft.DBforMariaDB/servers/', parameters('serverName'))]"
           ],
