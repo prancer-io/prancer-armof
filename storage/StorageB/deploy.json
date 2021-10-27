@@ -92,7 +92,7 @@
                         },
                         "blob": {
                             "keyType": "Account",
-                            "enabled": true
+                            "enabled": false
                         }
                     },
                     "keySource": "Microsoft.Storage"
@@ -175,7 +175,7 @@
                         },
                         "blob": {
                             "keyType": "Account",
-                            "enabled": true
+                            "enabled": false
                         }
                     },
                     "keySource": "Microsoft.Storage"
@@ -209,7 +209,7 @@
                         },
                         "blob": {
                             "keyType": "Account",
-                            "enabled": true
+                            "enabled": false
                         }
                     },
                     "keySource": "Microsoft.Storage"
