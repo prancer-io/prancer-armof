@@ -83,7 +83,7 @@
                     ],
                     "defaultAction": "Deny"
                 },
-                "supportsHttpsTrafficOnly": true,
+                "supportsHttpsTrafficOnly": false,
                 "encryption": {
                     "services": {
                         "file": {
@@ -166,7 +166,7 @@
                     ],
                     "defaultAction": "Deny"
                 },
-                "supportsHttpsTrafficOnly": true,
+                "supportsHttpsTrafficOnly": false,
                 "encryption": {
                     "services": {
                         "file": {
@@ -200,7 +200,7 @@
                     ],
                     "defaultAction": "Allow"
                 },
-                "supportsHttpsTrafficOnly": true,
+                "supportsHttpsTrafficOnly": false,
                 "encryption": {
                     "services": {
                         "file": {
