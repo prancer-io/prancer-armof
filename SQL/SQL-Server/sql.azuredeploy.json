@@ -75,6 +75,9 @@
             "sku": {
                 "name": "Standard_LRS"
             },
+            "properties": {
+                "supportsHttpsTrafficOnly": false
+            },
             "kind": "StorageV2",
             "resources": [
                 {
