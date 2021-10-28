@@ -76,7 +76,20 @@
                 "name": "Standard_LRS"
             },
             "properties": {
-                "supportsHttpsTrafficOnly": false
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": false
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": false
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
             },
             "kind": "StorageV2",
             "resources": [
