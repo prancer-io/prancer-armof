@@ -44,16 +44,16 @@
         "aadTenantId": {
             "type": "securestring"
         },
-        "storageAccountName" : {
+        "storageAccountName": {
             "type": "string",
             "defaultValue": "storage-account"
         },
-        "firewallRuleName" : {
-            "type" : "string",
+        "firewallRuleName": {
+            "type": "string",
             "defaultValue": "IPRange1"
         },
-        "allowPublicAccess" : {
-            "type" : "string",
+        "allowPublicAccess": {
+            "type": "string",
             "defaultValue": "0.0.0.0"
         }
     },
@@ -96,7 +96,7 @@
                 {
                     "condition": "[parameters('useVAManagedIdentity')]",
                     "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
-                    "apiVersion": "2018-09-01-preview",
+                    "apiVersion": "2019-01-01",
                     "name": "[concat(variables('storageName'), '/Microsoft.Authorization/', variables('uniqueRoleGuid') )]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]",
@@ -106,7 +106,8 @@
                         "roleDefinitionId": "[variables('StorageBlobContributor')]",
                         "principalId": "[reference(resourceId('Microsoft.Sql/servers', parameters('serverName')), '2018-06-01-preview', 'Full').identity.principalId]",
                         "scope": "[resourceId('Microsoft.Storage/storageAccounts', variables('storageName'))]",
-                        "principalType": "ServicePrincipal"
+                        "principalType": "ServicePrincipal",
+                        "isEnabled": true
                     }
                 }
             ]
@@ -162,15 +163,15 @@
                     "type": "administrators",
                     "apiVersion": "2014-04-01-Preview",
                     "dependsOn": [
-                      "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
-                      "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
+                        "[concat('Microsoft.Sql/servers/', parameters('serverName'))]",
+                        "[concat('Microsoft.Sql/servers/', parameters('serverName'), '/databases/',parameters('databaseName'))]"
                     ],
                     "location": "[parameters('location')]",
                     "properties": {
-                      "administratorType": "",
-                      "login": "[parameters('administratorLogin')]",
-                      "sid": "[parameters('administratorLoginPassword')]",
-                      "tenantId": "[parameters('aadTenantId')]"
+                        "administratorType": "",
+                        "login": "[parameters('administratorLogin')]",
+                        "sid": "[parameters('administratorLoginPassword')]",
+                        "tenantId": "[parameters('aadTenantId')]"
                     }
                 },
                 {
@@ -182,7 +183,9 @@
                     ],
                     "properties": {
                         "state": "Disabled",
-                        "disabledAlerts": ["Access_Anomaly"]
+                        "disabledAlerts": [
+                            "Access_Anomaly"
+                        ]
                     }
                 },
                 {
@@ -213,7 +216,9 @@
             ],
             "properties": {
                 "state": "Disabled",
-                "disabledAlerts": ["Access_Anomaly"]
+                "disabledAlerts": [
+                    "Access_Anomaly"
+                ]
             }
         },
         {
@@ -225,7 +230,10 @@
             ],
             "properties": {
                 "state": "Disabled",
-                "disabledAlerts" : [ "Sql_Injection" , "Sql_Injection_Vulnerability" ]
+                "disabledAlerts": [
+                    "Sql_Injection",
+                    "Sql_Injection_Vulnerability"
+                ]
             }
         },
         {
@@ -288,21 +296,21 @@
             "apiVersion": "2019-06-01-preview",
             "name": "ActiveDirectory",
             "properties": {
-              "administratorType": "",
-              "login": "[parameters('administratorLogin')]",
-              "sid": "[parameters('administratorLoginPassword')]",
-              "tenantId": "[parameters('aadTenantId')]"
+                "administratorType": "",
+                "login": "[parameters('administratorLogin')]",
+                "sid": "[parameters('administratorLoginPassword')]",
+                "tenantId": "[parameters('aadTenantId')]"
             }
         },
         {
-          "type": "Microsoft.Sql/servers/encryptionProtector",
-          "apiVersion": "2021-02-01-preview",
-          "name": "current",
-          "properties": {
-            "autoRotationEnabled": "bool",
-            "serverKeyName": "encryptionProtectorKey",
-            "serverKeyType": "ServiceManaged"
-          }
+            "type": "Microsoft.Sql/servers/encryptionProtector",
+            "apiVersion": "2021-02-01-preview",
+            "name": "current",
+            "properties": {
+                "autoRotationEnabled": "bool",
+                "serverKeyName": "encryptionProtectorKey",
+                "serverKeyType": "ServiceManaged"
+            }
         }
     ]
 }
