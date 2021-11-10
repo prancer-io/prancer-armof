@@ -61,7 +61,7 @@
       "name": "sampleflowLogs",
       "location": "[parameters('location')]",
       "properties": {
-        "enabled": false,
+        "enabled": true,
         "flowAnalyticsConfiguration": {
           "networkWatcherFlowAnalyticsConfiguration": {
             "enabled": false,
