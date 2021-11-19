@@ -104,7 +104,7 @@
                   {
                     "type": "auditingSettings",
                     "apiVersion": "2020-08-01-preview",
-                    "name": "Default"
+                    "name": "Default",
                     "properties": {
                         "state": "Disabled",
                         "storageEndpoint": "",
