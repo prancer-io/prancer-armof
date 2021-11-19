@@ -31,7 +31,8 @@
           "allowedValues": [
               "Basic",
               "Standard",
-              "Premium"
+              "Premium",
+              "Classic"
           ]
       },
       "status": {
