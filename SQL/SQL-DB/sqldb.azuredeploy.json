@@ -129,10 +129,10 @@
                     "name": "Default",
                     "properties": {
                         "state": "Disabled",
-                        "disabledAlerts": ['Access_Anomaly']
+                        "disabledAlerts": ["Access_Anomaly"]
                     }
                 }
-            ]
+            ],
             "sku": {
                 "name": "[parameters('skuName')]",
                 "tier": "[parameters('tier')]"
