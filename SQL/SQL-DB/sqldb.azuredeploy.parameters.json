@@ -6,7 +6,7 @@
         "value": "SQL_Latin1_General_CP1_CI_AS"
       },
       "databaseName": {
-        "value": "sqldb-pancer"
+        "value": "sqldb-prancer"
       },
       "tier": {
         "value": "Basic"
@@ -18,7 +18,7 @@
         "value": 2147483648
       },
       "serverName": {
-        "value": "pancersqlserver"
+        "value": "prancersqlserver"
       },
       "serverLocation": {
         "value": "eastus"
@@ -49,6 +49,9 @@
       },
       "storageAccountType": {
         "value": null
+      },
+      "transparentDataEncryptionStatus": {
+        "value": "Disabled"
       }
     }
   }

@@ -20,6 +20,9 @@
         "enableRBAC": {
             "value": false
         },
+        "enablekubeDashboard": {
+            "value": true
+        },
         "enablePrivateCluster": {
             "value": false
         },
@@ -70,6 +73,12 @@
         },
         "SubnetName":{
             "value": "AKS"
+        },
+        "aadProfileManaged": {
+            "value": false
+        },
+        "aadProfileEnableAzureRBAC": {
+            "value": false
         }
     }
 }

@@ -21,13 +21,13 @@
             "value": "TLS1_2"
         },
         "supportsHttpsTrafficOnly": {
-            "value": true
+            "value": false
         },
         "allowBlobPublicAccess": {
             "value": true
         },
         "networkAclsBypass": {
-            "value": "AzureServices"
+            "value": "None"
         },
         "networkAclsDefaultAction": {
             "value": "Allow"

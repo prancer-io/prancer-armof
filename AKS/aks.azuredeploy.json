@@ -53,6 +53,13 @@
                 "description": "Boolean flag to turn on and off of RBAC."
             }
         },
+        "enablekubeDashboard": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "description": "Boolean flag to turn on and off of kube dashboard."
+            }
+        },
         "vmssNodePool": {
             "type": "bool",
             "defaultValue": false,
@@ -189,8 +196,53 @@
         },
         "SubnetName": {
             "type": "string"
+        },
+        "aadProfileManaged": {
+          "defaultValue": false,
+          "type": "bool",
+          "metadata": {
+            "description": "Specifies whether to enable managed AAD integration."
+          }
+        },
+        "aadProfileEnableAzureRBAC": {
+          "defaultValue": false,
+          "type": "bool",
+          "metadata": {
+            "description": "Specifies whether to  to enable Azure RBAC for Kubernetes authorization."
+          }
+        },
+        "aadProfileAdminGroupObjectIDs": {
+          "defaultValue": [],
+          "type": "array",
+          "metadata": {
+            "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
+          }
+        },
+        "clientAppID": {
+            "type": "string",
+            "metadata": {
+              "description": "The client AAD application ID."
+            }
+        },
+        "serverAppID": {
+            "type": "string",
+            "metadata": {
+              "description": "The server AAD application ID."
+            }
+        },
+        "serverAppSecret": {
+            "type": "string",
+            "metadata": {
+              "description": "The server AAD application secret."
+            }
+        },
+        "aadProfileTenantId": {
+          "defaultValue": "[subscription().tenantId]",
+          "type": "string",
+          "metadata": {
+            "description": "Specifies the tenant id of the Azure Active Directory used by the AKS cluster for authentication."
+          }
         }
-
     },
     "variables": {
         "vnetID": "[resourceId(parameters('VirtualNetworkRGName'), 'Microsoft.Network/virtualNetworks', parameters('VirtualNetworkName'))]",
@@ -229,6 +281,15 @@
                     "dnsServiceIP": "[parameters('dnsServiceIP')]",
                     "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
                 },
+                "aadProfile": {
+                  "managed": "[parameters('aadProfileManaged')]",
+                  "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
+                  "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
+                  "clientAppID": "[parameters('clientAppID')]",
+                  "serverAppID": "[parameters('serverAppID')]",
+                  "serverAppSecret": "[parameters('serverAppSecret')]",
+                  "tenantID": "[parameters('aadProfileTenantId')]"
+                },
                 "apiServerAccessProfile": {
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
                 },
@@ -244,6 +305,9 @@
                         "config": {
                             "logAnalyticsWorkspaceResourceID": "[parameters('omsWorkspaceId')]"
                         }
+                    },
+                    "kubeDashboard": {
+                        "enabled": "[parameters('enablekubeDashboard')]"
                     }
                 }
             },

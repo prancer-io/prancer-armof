@@ -75,6 +75,22 @@
             "sku": {
                 "name": "Standard_LRS"
             },
+            "properties": {
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": false
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": false
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            },
             "kind": "StorageV2",
             "resources": [
                 {
@@ -137,7 +153,7 @@
                         "storageAccountAccessKey": "[if(and(parameters('enableVA'),not(parameters('useVAManagedIdentity'))), listKeys(variables('storageName'), '2018-02-01').keys[0].value, '')]",
                         "recurringScans": {
                             "isEnabled": true,
-                            "emailSubscriptionAdmins": true
+                            "emailSubscriptionAdmins": false
                         }
                     }
                 },
@@ -156,6 +172,35 @@
                       "sid": "[parameters('administratorLoginPassword')]",
                       "tenantId": "[parameters('aadTenantId')]"
                     }
+                },
+                {
+                    "type": "securityAlertPolicies",
+                    "apiVersion": "2020-02-02-preview",
+                    "name": "[concat(parameters('serverName'), '/Default')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+                    ],
+                    "properties": {
+                        "state": "Disabled",
+                        "disabledAlerts": ["Access_Anomaly"]
+                    }
+                },
+                {
+                    "type": "auditingSettings",
+                    "apiVersion": "2020-08-01-preview",
+                    "name": "[concat(parameters('serverName'), '/Default')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
+                    ],
+                    "properties": {
+                        "state": "Disabled",
+                        "storageEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').PrimaryEndpoints.Blob]",
+                        "storageAccountAccessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').keys[0].value]",
+                        "retentionDays": 30,
+                        "auditActionsAndGroups": null,
+                        "storageAccountSubscriptionId": "[subscription().subscriptionId]",
+                        "isStorageSecondaryKeyInUse": false
+                    }
                 }
             ]
         },
@@ -167,7 +212,8 @@
                 "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
             ],
             "properties": {
-                "state": "Disabled"
+                "state": "Disabled",
+                "disabledAlerts": ["Access_Anomaly"]
             }
         },
         {
@@ -204,7 +250,7 @@
                 "[resourceId('Microsoft.Sql/servers', parameters('serverName'))]"
             ],
             "properties": {
-                "state": "Enabled",
+                "state": "Disabled",
                 "storageEndpoint": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').PrimaryEndpoints.Blob]",
                 "storageAccountAccessKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2018-03-01-preview').keys[0].value]",
                 "retentionDays": 30,
@@ -236,6 +282,27 @@
                 "startIpAddress": "[parameters('allowPublicAccess')]",
                 "endIpAddress": "[parameters('allowPublicAccess')]"
             }
+        },
+        {
+            "type": "Microsoft.Sql/servers/administrators",
+            "apiVersion": "2019-06-01-preview",
+            "name": "ActiveDirectory",
+            "properties": {
+              "administratorType": "",
+              "login": "[parameters('administratorLogin')]",
+              "sid": "[parameters('administratorLoginPassword')]",
+              "tenantId": "[parameters('aadTenantId')]"
+            }
+        },
+        {
+          "type": "Microsoft.Sql/servers/encryptionProtector",
+          "apiVersion": "2021-02-01-preview",
+          "name": "current",
+          "properties": {
+            "autoRotationEnabled": "bool",
+            "serverKeyName": "encryptionProtectorKey",
+            "serverKeyType": "ServiceManaged"
+          }
         }
     ]
 }

@@ -60,8 +60,35 @@
                     "bypass": "[parameters('networkAclsBypass')]",
                     "defaultAction": "[parameters('networkAclsDefaultAction')]",
                     "ipRules": []
+                },
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": false
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": false
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
                 }
             },
+            "resources":[
+                {
+                    "type": "blobServices/containers",
+                    "apiVersion": "2019-06-01",
+                    "name": "[concat(parameters('storageAccountname'), '/default/', parameters('containerName'))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
+                        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+                    ],
+                    "properties": {
+                        "publicAccess": "Container"
+                    }
+                }
+            ],
             "dependsOn": [],
             "sku": {
                 "name": "[parameters('accountType')]"
@@ -92,7 +119,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('storageAccounts_pancerstorage_name'), '/default/', parameters('containerName'))]",
+            "name": "[concat(parameters('storageAccountname'), '/default/', parameters('containerName'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
                 "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"

@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the KeyVault"
+              }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location of the Keyvault Deploy"
+              }
+        },
+        "categories": {
+            "type": "array"
+        },
+        "enabled": {
+            "type": "bool"
+        },
+        "days": {
+            "type": "int"
+        },
+        "serviceBusRuleId":{
+            "type": "string"
+        },
+        "storageAccountId":{
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Insights/logprofiles",
+            "apiVersion": "2016-03-01",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+              "categories": "[parameters('categories')]",
+              "retentionPolicy": {
+                "days": "[parameters('days')]",
+                "enabled": "[parameters('enabled')]"
+              },
+              "serviceBusRuleId": "[parameters('serviceBusRuleId')]",
+              "storageAccountId": "[parameters('storageAccountId')]"
+            }
+        }
+    ],
+    "outputs": {}
+}

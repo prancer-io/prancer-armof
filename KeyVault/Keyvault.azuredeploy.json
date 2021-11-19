@@ -71,66 +71,26 @@
                 "description": "Value for the Secrets to be store"
               }
         },
-        "logsRetentionInDays": {
-            "type": "int",
-            "defaultValue": 0,
-            "minValue": 0,
-            "maxValue": 365,
+        "keyName":{
+            "type": "securestring",
             "metadata": {
-                "description": "Specifies the number of days that logs are gonna be kept. If you do not want to apply any retention policy and retain data forever, set value to 0."
-            }
+                "description": "Value for the Key to be store"
+              }
         },
-        "keyName": {
-            "type": "string",
-            "defaultValue" : "GEN-UNIQUE",
-            "metadata": {
-                "description": "Specifies the name of the key to be created."
-            }
+        "keyEnabled":{
+            "type": "bool"
         },
-        "attributes": {
-            "type": "object",
-            "defaultValue": {
-                "enabled": false,
-                "nbf": 1585206000,
-                "exp": 1679814000
-            },
-            "metadata": {
-                "description": "The attributes of a key managed by the key vault service."
-            }
+        "keyExp":{
+            "type": "int"
         },
-        "key_ops": {
-            "type": "array",
-            "defaultValue": [],
-            "metadata": {
-                "description": "JSON web key operations. Operations include: 'encrypt', 'decrypt', 'sign', 'verify', 'wrapKey', 'unwrapKey'"
-            }
+        "keynbf":{
+            "type": "int"
         },
-        "key_size": {
-            "type": "int",
-            "defaultValue": 4096,
-            "metadata": {
-                "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
-            }
+        "keyExpiryTime":{
+            "type": "string"
         },
-        "kty": {
-            "type": "string",
-            "defaultValue": "RSA",
-            "allowedValues": [
-                "EC",
-                "EC-HSM",
-                "RSA",
-                "RSA-HSM"
-            ],
-            "metadata": {
-                "description": "The type of key to create"
-            }
-        },
-        "tags": {
-            "type": "object",
-            "defaultValue": {},
-            "metadata": {
-                "description": "Tags to be assigned to the Key."
-            }
+        "keySize":{
+            "type": "int"
         }
     },
     "variables": {
@@ -170,74 +130,54 @@
               "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
             ],
             "properties": {
+              "attributes": {
                 "value": "[parameters('secretValue')]",
-                "attributes": {
-                    "enabled": false
-                }
-            }
-        },
-        {
-            "type": "Microsoft.KeyVault/vaults/secrets",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'), '-default')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-              "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
-            ],
-            "properties": {
-                "value": "[parameters('secretValue')]",
-                "attributes": {
-                    "enabled": true
-                }
-            }
-        },
-        {
-            "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
-            "name": "[concat(parameters('keyVaultName'), '/Microsoft.Insights/service')]",
-            "apiVersion": "2016-09-01",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('diagnosticStorageAccountName'))]"
-            ],
-            "properties": {
-                "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', variables('diagnosticStorageAccountName'))]",
-                "logs": [
-                    {
-                        "category": "AuditEvent",
-                        "enabled": false,
-                        "retentionPolicy": {
-                            "enabled": false,
-                            "days": "[parameters('LogsRetentionInDays')]"
-                        }
-                    }
-                ]
+                "enabled": "[parameters('keyEnabled')]",
+                "exp": "[parameters('keyExp')]"
+               }
             }
         },
         {
             "type": "Microsoft.KeyVault/vaults/keys",
-            "apiVersion": "2019-09-01",
+            "apiVersion": "2021-06-01-preview",
             "name": "[concat(parameters('keyVaultName'), '/', parameters('keyName'))]",
-            "tags": "[parameters('tags')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName'))]"
+            ],
             "properties": {
-                "attributes": "[parameters('attributes')]",
-                "kty": "[parameters('kty')]",
-                "key_ops": "[parameters('key_ops')]",
-                "key_size": "[parameters('key_size')]"
+              "attributes": {
+                "enabled": "[parameters('keyEnabled')]",
+                "exp": "[parameters('keyExp')]",
+                "nbf": "[parameters('keynbf')]"
+              },
+              "keySize": "[parameters('keySize')]",
+              "rotationPolicy": {
+                "attributes": {
+                  "expiryTime": "[parameters('keyExpiryTime')]"
+                }
+              }
             }
         },
         {
-            "type": "Microsoft.KeyVault/vaults/keys",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(parameters('keyVaultName'), '/', parameters('keyName'), '-default')]",
-            "tags": "[parameters('tags')]",
+            "type" : "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
+            "name": "LogSettings",
+            "scope": "",
+            "apiVersion": "2021-05-01-preview",
             "properties": {
-                "attributes": {
-                    "enabled": true
-                },
-                "kty": "[parameters('kty')]",
-                "key_ops": "[parameters('key_ops')]",
-                "key_size": "[parameters('key_size')]"
+              "workspaceId": "",
+              "storageAccountId": "",
+              "logs": [
+                  {
+                      "category": "Auditevent",
+                      "enabled": false
+                  }
+              ],
+              "metrics": [
+                  {
+                      "category": "Transaction",
+                      "enabled": true
+                  }
+              ]
             }
         }
     ],
