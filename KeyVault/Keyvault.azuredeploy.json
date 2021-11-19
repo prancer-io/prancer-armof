@@ -93,7 +93,10 @@
             "type": "int"
         }
     },
-    "variables": {},
+    "variables": {
+        "uniqueString": "[uniqueString(subscription().id, resourceGroup().id)]",
+        "diagnosticStorageAccountName": "[toLower( substring( replace( concat( parameters('keyVaultName'), variables('uniqueString'), variables('uniqueString') ), '-', ''), 0, 23) )]"
+    },
     "resources": [
         {
             "apiVersion": "2018-02-14",
