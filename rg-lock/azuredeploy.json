@@ -51,6 +51,7 @@
       "type": "Microsoft.Authorization/locks",
       "apiVersion": "2016-09-01",
       "name": "DontDelete",
+      "scope": "[subscriptionResourceId('Microsoft.Resources/resourceGroups', parameters('rgName'))]",
       "properties": {
         "level": "",
         "notes": "Prevent deletion of the resourceGroup"
