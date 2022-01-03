@@ -83,9 +83,7 @@
         },
         "enableHttpApplicationRouting": {
             "type": "bool",
-            "defaultValue": true,
-            "metadata": {
-                "description": "Boolean flag to turn on and off http application routing."
+            "defaultValue": true
             }
         },
         "enableAzurePolicy": {
