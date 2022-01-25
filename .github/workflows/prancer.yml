@@ -45,6 +45,7 @@ jobs:
           
       - name: Run Prancer
         run: |
+          export PATH=.:$PATH
           prancer --db REMOTE --env QA --company prancer-liquware armof
 
           
