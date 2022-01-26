@@ -24,18 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Export secrets
-      - name: Export secrets
-        run: |
-          export APITOKEN=${{ secrets.APITOKEN }}
-          export GITTOKEN=${{ secrets.GITTOKEN }}
           
       # Runs a set of commands using the runners shell
       - name: Install OPA
         run: |
-          mkdir remotetesting
-          cd remotetesting
           curl -L -o opa https://openpolicyagent.org/downloads/v0.36.1/opa_linux_amd64_static
           chmod 755 ./opa
           
@@ -47,7 +39,6 @@ jobs:
         run: |
           export APITOKEN=${{ secrets.APITOKEN }}
           export GITTOKEN=${{ secrets.GITTOKEN }}
-          export PATH=.:$PATH
           prancer --db REMOTE --env QA --company prancer-liquware armof
 
           
