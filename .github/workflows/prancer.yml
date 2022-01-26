@@ -35,6 +35,8 @@ jobs:
         run: |
           curl -L -o opa https://openpolicyagent.org/downloads/v0.36.1/opa_linux_amd64_static
           chmod 755 ./opa
+          ls -l
+          echo $PATH
           export APITOKEN=${{ secrets.APITOKEN }}
           export GITTOKEN=${{ secrets.GITTOKEN }}
           prancer --db REMOTE --env QA --company prancer-liquware armof
