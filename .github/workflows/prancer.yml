@@ -25,27 +25,20 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
           
-      # Runs a set of commands using the runners shell
-          
+      # Runs a set of commands using the runners shell  
       - name: Install Prancer
         run: |
           pip3 install -U prancer-basic
           
       - name: Install opa and then run Prancer
         run: |
-          echo "Current pwd"
-          pwd
-          curpwd=`pwd`
           curl -L -o opa https://openpolicyagent.org/downloads/v0.36.1/opa_linux_amd64_static
           chmod 755 ./opa
           ls -l
-          echo $PATH
+          curpwd=`pwd`
           export PATH=$curpwd:$PATH
-          echo $PATH
           export APITOKEN=${{ secrets.APITOKEN }}
           export GITTOKEN=${{ secrets.GITTOKEN }}
-          echo "Before running pwd"
-          pwd
           prancer --db REMOTE --env QA --company prancer-liquware armof
 
           
