@@ -33,12 +33,19 @@ jobs:
           
       - name: Install opa and then run Prancer
         run: |
+          echo "Current pwd"
+          pwd
+          curpwd=`pwd`
           curl -L -o opa https://openpolicyagent.org/downloads/v0.36.1/opa_linux_amd64_static
           chmod 755 ./opa
           ls -l
           echo $PATH
+          export PATH=$curpwd:$PATH
+          echo $PATH
           export APITOKEN=${{ secrets.APITOKEN }}
           export GITTOKEN=${{ secrets.GITTOKEN }}
+          echo "Before running pwd"
+          pwd
           prancer --db REMOTE --env QA --company prancer-liquware armof
 
           
