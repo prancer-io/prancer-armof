@@ -4,7 +4,7 @@
   "parameters": {
     "actionGroupName": {
       "type": "string",
-      "defaultValue":  "autoscaleActionGroup",
+      "defaultValue": "autoscaleActionGroup",
       "minLength": 1,
       "metadata": {
         "description": "Name for the Action group."
@@ -60,7 +60,7 @@
         "[parameters('actionGroupName')]"
       ],
       "properties": {
-        "enabled": false,
+        "enabled": true,
         "scopes": [
           "[subscription().id]"
         ],
