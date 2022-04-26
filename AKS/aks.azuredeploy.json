@@ -198,50 +198,50 @@
             "type": "string"
         },
         "aadProfileManaged": {
-          "defaultValue": false,
-          "type": "bool",
-          "metadata": {
-            "description": "Specifies whether to enable managed AAD integration."
-          }
+            "defaultValue": false,
+            "type": "bool",
+            "metadata": {
+                "description": "Specifies whether to enable managed AAD integration."
+            }
         },
         "aadProfileEnableAzureRBAC": {
-          "defaultValue": false,
-          "type": "bool",
-          "metadata": {
-            "description": "Specifies whether to  to enable Azure RBAC for Kubernetes authorization."
-          }
+            "defaultValue": false,
+            "type": "bool",
+            "metadata": {
+                "description": "Specifies whether to  to enable Azure RBAC for Kubernetes authorization."
+            }
         },
         "aadProfileAdminGroupObjectIDs": {
-          "defaultValue": [],
-          "type": "array",
-          "metadata": {
-            "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
-          }
+            "defaultValue": [],
+            "type": "array",
+            "metadata": {
+                "description": "Specifies the AAD group object IDs that will have admin role of the cluster."
+            }
         },
         "clientAppID": {
             "type": "string",
             "metadata": {
-              "description": "The client AAD application ID."
+                "description": "The client AAD application ID."
             }
         },
         "serverAppID": {
             "type": "string",
             "metadata": {
-              "description": "The server AAD application ID."
+                "description": "The server AAD application ID."
             }
         },
         "serverAppSecret": {
             "type": "string",
             "metadata": {
-              "description": "The server AAD application secret."
+                "description": "The server AAD application secret."
             }
         },
         "aadProfileTenantId": {
-          "defaultValue": "[subscription().tenantId]",
-          "type": "string",
-          "metadata": {
-            "description": "Specifies the tenant id of the Azure Active Directory used by the AKS cluster for authentication."
-          }
+            "defaultValue": "[subscription().tenantId]",
+            "type": "string",
+            "metadata": {
+                "description": "Specifies the tenant id of the Azure Active Directory used by the AKS cluster for authentication."
+            }
         }
     },
     "variables": {
@@ -282,16 +282,19 @@
                     "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
                 },
                 "aadProfile": {
-                  "managed": "[parameters('aadProfileManaged')]",
-                  "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
-                  "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
-                  "clientAppID": "[parameters('clientAppID')]",
-                  "serverAppID": "[parameters('serverAppID')]",
-                  "serverAppSecret": "[parameters('serverAppSecret')]",
-                  "tenantID": "[parameters('aadProfileTenantId')]"
+                    "managed": "[parameters('aadProfileManaged')]",
+                    "enableAzureRBAC": "[parameters('aadProfileEnableAzureRBAC')]",
+                    "adminGroupObjectIDs": "[parameters('aadProfileAdminGroupObjectIDs')]",
+                    "clientAppID": "[parameters('clientAppID')]",
+                    "serverAppID": "[parameters('serverAppID')]",
+                    "serverAppSecret": "[parameters('serverAppSecret')]",
+                    "tenantID": "[parameters('aadProfileTenantId')]"
                 },
                 "apiServerAccessProfile": {
-                    "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
+                    "enablePrivateCluster": "[parameters('enablePrivateCluster')]",
+                    "authorizedIPRanges": [
+                        "<IP ranges are specified in CIDR format, e.g. 137.117.106.88/29>. This feature is not compatible with clusters that use Public IP Per Node, or clusters that are using a Basic Load Balancer."
+                    ]
                 },
                 "addonProfiles": {
                     "httpApplicationRouting": {
@@ -333,9 +336,7 @@
                         {
                             "type": "Microsoft.Network/virtualNetworks/subnets/providers/roleAssignments",
                             "apiVersion": "2017-05-01",
-                            
                             "name": "[concat(parameters('VirtualNetworkName'), '/', parameters('SubnetName'), '/Microsoft.Authorization/', guid(resourceGroup().id, deployment().name))]",
-                            
                             "properties": {
                                 "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
                                 "principalId": "[reference(parameters('resourceName')).identityProfile.kubeletidentity.objectId]",
