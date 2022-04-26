@@ -6,7 +6,7 @@
             "value": false
         },
         "administratorLogin": {
-            "value": "Administrator"
+            "value": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
         },
         "administratorLoginPassword": {
             "value": null
@@ -30,7 +30,7 @@
             "value": {
                 "Project": "Prancer",
                 "Envirnment": "Production"
-                  }
+            }
         }
     }
 }
