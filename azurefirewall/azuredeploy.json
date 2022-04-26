@@ -103,7 +103,8 @@
                 "sku": {
                     "name": "Standard",
                     "family": "A"
-                }
+                },
+                "enablePurgeProtection": true
             }
         },
         {
@@ -175,8 +176,8 @@
                         }
                     }
                 ]
-            }            
-        },        
+            }
+        },
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-07-01",
