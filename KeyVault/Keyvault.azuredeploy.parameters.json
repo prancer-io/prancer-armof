@@ -88,28 +88,28 @@
                 "virtualNetworkRules": []
             }
         },
-        "secretName":{
+        "secretName": {
             "value": "prancer-secret"
         },
-        "secretValue":{
+        "secretValue": {
             "value": "53cr3t"
         },
-        "keyName":{
+        "keyName": {
             "value": "prancer-key"
         },
-        "keyEnabled":{
-            "value": false
+        "keyEnabled": {
+            "value": true
         },
-        "keyExp":{
-            "value": -1
+        "keyExp": {
+            "value": 1682505025
         },
-        "keynbf":{
+        "keynbf": {
             "value": 300000
         },
-        "keyExpiryTime":{
+        "keyExpiryTime": {
             "value": ""
         },
-        "keySize":{
+        "keySize": {
             "value": 2048
         }
     }
