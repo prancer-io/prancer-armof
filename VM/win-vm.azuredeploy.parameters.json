@@ -74,6 +74,16 @@
                             "createOption": "empty"
                         }
                     }
+                },
+                {
+                    "name": "prancerlinvm_DataDisk_1",
+                    "sku": "Premium_LRS",
+                    "properties": {
+                        "diskSizeGB": 1024,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
                 }
             ]
         },

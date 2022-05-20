@@ -4,6 +4,12 @@
     "parameters": {
         "originHostName": {
             "value": "GET-PREREQ-staticWebsiteHostName"
+        },
+        "frontDoorName": {
+            "value": "GEN-UNIQUE"
+        },
+        "backendAddress": {
+            "value": "GEN-CUSTOM-FQDN-NAME"
         }
     }
 }
