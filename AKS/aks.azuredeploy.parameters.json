@@ -57,7 +57,7 @@
             "value": "eastus"
         },
         "networkPolicy": {
-            "value": "calico"
+            "value": "azure"
         },
         "acrName": {
             "value": "asadsadasdas"
@@ -65,13 +65,13 @@
         "acrResourceGroup": {
             "value": "Prancer"
         },
-        "VirtualNetworkRGName":{
+        "VirtualNetworkRGName": {
             "value": "Prancer"
         },
-        "VirtualNetworkName":{
+        "VirtualNetworkName": {
             "value": "prancer-vnet"
         },
-        "SubnetName":{
+        "SubnetName": {
             "value": "AKS"
         },
         "aadProfileManaged": {
