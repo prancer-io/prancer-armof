@@ -11,7 +11,8 @@
         "categories": {
             "value": [
                 "Delete",
-                "Action"
+                "Action",
+                "Write"
             ]
         },
         "enabled": {
