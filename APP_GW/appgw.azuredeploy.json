@@ -148,8 +148,8 @@
                     {
                         "name": "Pancer_Http",
                         "properties": {
-                            "Port": 80,
-                            "Protocol": "Http",
+                            "port": 80,
+                            "protocol": "Http",
                             "cookieBasedAffinity": "Disabled",
                             "requestTimeout": 20
                         }
