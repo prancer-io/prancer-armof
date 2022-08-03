@@ -24,7 +24,7 @@
             "value": false
         },
         "allowBlobPublicAccess": {
-            "value": true
+            "value": false
         },
         "networkAclsBypass": {
             "value": "None"
