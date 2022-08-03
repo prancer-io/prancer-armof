@@ -145,11 +145,11 @@
                 "description": "Load balancer name."
             }
         },
-        "omsWorkspaceName":{  
-            "type":"string",
-            "minLength":1,
-            "metadata":{  
-              "description":"Name of the OMS workspace used for diagnostic log integration."
+        "omsWorkspaceName": {
+            "type": "string",
+            "minLength": 1,
+            "metadata": {
+                "description": "Name of the OMS workspace used for diagnostic log integration."
             }
         }
     },
@@ -248,51 +248,52 @@
                 ]
             }
         },
-        {  
-            "type":"Microsoft.Storage/storageAccounts",
-            "name":"loadbanacerDiagonsticsettings",
-            "apiVersion":"2016-12-01",
-            "location":"[resourceGroup().location]",
-            "sku":{  
-              "name":"Standard_LRS"
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "loadbanacerDiagonsticsettings",
+            "apiVersion": "2016-12-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard_LRS"
             },
-            "kind":"Storage",
-            "tags":{  
-              "displayName":"Key Vault Diagnostic Storage Account')"
+            "kind": "Storage",
+            "tags": {
+                "displayName": "Key Vault Diagnostic Storage Account')"
             },
             "properties": {
-              "encryption": {
-                "keySource":"Microsoft.Storage",
-                "services": {
-                  "blob": {
-                    "enabled":true
-                  }
-                }
-              }
+                "encryption": {
+                    "keySource": "Microsoft.Storage",
+                    "services": {
+                        "blob": {
+                            "enabled": true
+                        }
+                    }
+                },
+                "allowBlobPublicAccess": false
             }
         },
-        {  
-            "type":"microsoft.network/loadbalancers/providers/diagnosticsettings",
-            "name":"[concat(parameters('loadBalancerName'), '/Microsoft.Insights/service')]",
-            "apiVersion":"2016-09-01",
-            "location":"[resourceGroup().location]",
-            "dependsOn":[  
-              "[concat('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))]",
-              "[concat('Microsoft.Storage/storageAccounts/', 'loadbanacerDiagonsticsettings')]"
+        {
+            "type": "microsoft.network/loadbalancers/providers/diagnosticsettings",
+            "name": "[concat(parameters('loadBalancerName'), '/Microsoft.Insights/service')]",
+            "apiVersion": "2016-09-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))]",
+                "[concat('Microsoft.Storage/storageAccounts/', 'loadbanacerDiagonsticsettings')]"
             ],
-            "properties":{  
-              "storageAccountId":"[resourceId('Microsoft.Storage/storageAccounts', 'loadbanacerDiagonsticsettings')]",
-              "workspaceId":"[resourceId('Microsoft.OperationalInsights/workspaces', parameters('omsWorkspaceName'))]",
-              "logs":[  
-                {  
-                  "category":"AuditEvent",
-                  "enabled":false,
-                  "retentionPolicy":{  
-                    "enabled":false,
-                    "days":30
-                  }
-                }
-              ]
+            "properties": {
+                "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', 'loadbanacerDiagonsticsettings')]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('omsWorkspaceName'))]",
+                "logs": [
+                    {
+                        "category": "AuditEvent",
+                        "enabled": false,
+                        "retentionPolicy": {
+                            "enabled": false,
+                            "days": 30
+                        }
+                    }
+                ]
             }
         },
         {
