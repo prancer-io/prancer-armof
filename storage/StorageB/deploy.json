@@ -97,7 +97,8 @@
                     },
                     "keySource": "Microsoft.Storage"
                 },
-                "accessTier": "Cool"
+                "accessTier": "Cool",
+                "allowBlobPublicAccess": false
             }
         },
         {
@@ -182,7 +183,8 @@
                 },
                 "accessTier": "Cool"
             }
-        },{
+        },
+        {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
             "name": "[parameters('storageAccountName3')]",
@@ -195,9 +197,7 @@
             "properties": {
                 "networkAcls": {
                     "bypass": "None",
-                    "virtualNetworkRules": [
-  
-                    ],
+                    "virtualNetworkRules": [],
                     "defaultAction": "Allow"
                 },
                 "supportsHttpsTrafficOnly": false,
