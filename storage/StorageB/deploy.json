@@ -71,16 +71,7 @@
             "properties": {
                 "networkAcls": {
                     "bypass": "None",
-                    "virtualNetworkRules": [
-                        {
-                            "id": "[variables('containerSubnetRef')]",
-                            "action": "Allow"
-                        },
-                        {
-                            "id": "[variables('storageSubnetRef')]",
-                            "action": "Allow"
-                        }
-                    ],
+                    "virtualNetworkRules": [],
                     "defaultAction": "Deny"
                 },
                 "supportsHttpsTrafficOnly": false,
@@ -182,7 +173,8 @@
                 },
                 "accessTier": "Cool"
             }
-        },{
+        },
+        {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
             "name": "[parameters('storageAccountName3')]",
@@ -195,9 +187,7 @@
             "properties": {
                 "networkAcls": {
                     "bypass": "None",
-                    "virtualNetworkRules": [
-  
-                    ],
+                    "virtualNetworkRules": [],
                     "defaultAction": "Allow"
                 },
                 "supportsHttpsTrafficOnly": false,
