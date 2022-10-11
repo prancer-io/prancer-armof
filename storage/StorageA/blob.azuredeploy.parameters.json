@@ -24,7 +24,7 @@
             "value": false
         },
         "allowBlobPublicAccess": {
-            "value": true
+            "value": false
         },
         "networkAclsBypass": {
             "value": "None"
@@ -32,7 +32,7 @@
         "networkAclsDefaultAction": {
             "value": "Allow"
         },
-        "containerName":{
+        "containerName": {
             "value": "prancerstoragecontainer"
         }
     }
