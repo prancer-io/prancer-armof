@@ -217,7 +217,9 @@
           ],
           "properties": {
             "StartIpAddress": "[variables('firewallrules').batch.rules[0].StartIpAddress]",
-            "EndIpAddress": "[variables('firewallrules').batch.rules[0].EndIpAddress]"
+            "EndIpAddress": "[variables('firewallrules').batch.rules[0].EndIpAddress]",
+            "startIpAddress": "<Specify a valid start ip address from ip range which need inboud access to the resource>",
+            "endIpAddress": "<Specify a valid end ip address from ip range which need inboud access to the resource>"
           }
         }
       ]
