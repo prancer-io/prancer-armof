@@ -134,6 +134,13 @@
         "serverKeyName": "[variables('sqlServerKeyName')]",
         "serverKeyType": "ServiceManaged"
       }
+    },
+    {
+      "type": "microsoft.sql/servers/securityalertpolicies",
+      "name": "String<Name of the sql servers securityalertpolicies>",
+      "properties": {
+        "state": "Enabled"
+      }
     }
   ]
 }
