@@ -20,22 +20,22 @@
         "osDiskType": {
             "value": "Premium_LRS"
         },
-        "publisher":{
+        "publisher": {
             "value": "MicrosoftWindowsServer"
         },
-        "offer":{
+        "offer": {
             "value": "WindowsServer"
         },
-        "sku":{
+        "sku": {
             "value": "2016-Datacenter"
         },
-        "version":{
+        "version": {
             "value": "latest"
         },
-        "VirtualNetworkRGName":{
+        "VirtualNetworkRGName": {
             "value": "Prancer"
         },
-        "VirtualNetworkName":{
+        "VirtualNetworkName": {
             "value": "prancer-vnet"
         },
         "NSGName": {
@@ -47,7 +47,6 @@
         "diagnosticsStorageAccountName": {
             "value": "prancerstorageaccount007"
         },
-
         "dataDisks": {
             "value": [
                 {
@@ -64,28 +63,14 @@
             ]
         },
         "dataDiskResources": {
-            "value": [
-                {
-                    "name": "prancerlinvm_DataDisk_0",
-                    "sku": "Premium_LRS",
-                    "properties": {
-                        "diskSizeGB": 1024,
-                        "creationData": {
-                            "createOption": "empty"
-                        }
-                    }
-                },
-                {
-                    "name": "prancerlinvm_DataDisk_1",
-                    "sku": "Premium_LRS",
-                    "properties": {
-                        "diskSizeGB": 1024,
-                        "creationData": {
-                            "createOption": "empty"
-                        }
-                    }
+            "value": {
+                "encryptionSettingsCollection": {
+                    "enabled": true,
+                    "encryptionSettings": [
+                        "<Please visit https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/disks?tabs=json#encryptionsettingselement for full configuration details>"
+                    ]
                 }
-            ]
+            }
         },
         "virtualMachineSize": {
             "value": "Standard_DS1_v2"
