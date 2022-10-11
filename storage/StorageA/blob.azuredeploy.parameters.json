@@ -30,9 +30,9 @@
             "value": "None"
         },
         "networkAclsDefaultAction": {
-            "value": "Allow"
+            "value": "Deny"
         },
-        "containerName":{
+        "containerName": {
             "value": "prancerstoragecontainer"
         }
     }
