@@ -60,6 +60,9 @@
           "enableNoPublicIp": {
             "value": "[parameters('disablePublicIp')]"
           }
+        },
+        "customVirtualNetworkId": {
+          "value": "<Specify the target vnet id where azure databricks need to be integrated>"
         }
       }
     }
