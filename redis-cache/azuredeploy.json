@@ -76,11 +76,12 @@
             "location": "[parameters('location')]",
             "properties": {
                 "sku": {
-                  "name": "Premium",
-                  "family": "P",
-                  "capacity": 1
+                    "name": "Premium",
+                    "family": "P",
+                    "capacity": 1
                 },
-                "subnetId": "[variables('primarySubnetId')]"
+                "subnetId": "[variables('primarySubnetId')]",
+                "enableNonSslPort": false
             },
             "comments": "Create a Premium cache in the primary location in the primary virtual network."
         },
