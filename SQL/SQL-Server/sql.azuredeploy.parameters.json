@@ -15,7 +15,7 @@
             "value": false
         },
         "location": {
-            "value": "eastus"
+            "value": "northeurope"
         },
         "serverName": {
             "value": "prancersqlserver"
@@ -30,7 +30,7 @@
             "value": {
                 "Project": "Prancer",
                 "Envirnment": "Production"
-                  }
+            }
         }
     }
 }
