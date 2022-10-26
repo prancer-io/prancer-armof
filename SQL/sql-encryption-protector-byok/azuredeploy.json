@@ -134,6 +134,118 @@
         "serverKeyName": "[variables('sqlServerKeyName')]",
         "serverKeyType": "ServiceManaged"
       }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
+    },
+    {
+      "type": "microsoft.sql/servers/administrators",
+      "name": "String<Name of the sql server administrator. please vist https://learn.microsoft.com/en-us/azure/templates/microsoft.sql/servers/administrators?pivots=deployment-language-arm-template for details>",
+      "properties": {
+        "login": "<Specify the sql server administrator login name. make sure it does not contain 'Admin/Administrator'>"
+      }
     }
   ]
 }
