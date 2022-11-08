@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "topics_testevgtopic_name": {
+          "defaultValue": "testevgtopic",
+          "type": "String"
+      },
+      "privateEndpoints_testevgtopicpe_externalid": {
+          "defaultValue": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dev-rezoan/providers/Microsoft.Network/privateEndpoints/testevgtopicpe",
+          "type": "String"
+      }
+  },
+  "variables": {},
+  "resources": [
+      {
+          "type": "Microsoft.EventGrid/topics",
+          "apiVersion": "2022-06-15",
+          "name": "[parameters('topics_testevgtopic_name')]",
+          "location": "eastus",
+          "identity": {
+              "type": "SystemAssigned"
+          },
+          "properties": {
+              "inputSchema": "EventGridSchema",
+              "publicNetworkAccess": "Disabled",
+              "inboundIpRules": [],
+              "disableLocalAuth": true,
+              "dataResidencyBoundary": "WithinGeopair"
+          }
+      },
+      {
+          "type": "Microsoft.EventGrid/topics/privateEndpointConnections",
+          "apiVersion": "2022-06-15",
+          "name": "[concat(parameters('topics_testevgtopic_name'), '/', parameters('topics_testevgtopic_name'), 'pe.75e1cbfb-e1d1-433e-bc5e-253c10acc064')]",
+          "dependsOn": [
+              "[resourceId('Microsoft.EventGrid/topics', parameters('topics_testevgtopic_name'))]"
+          ],
+          "properties": {
+              "privateEndpoint": {
+                  "id": "[parameters('privateEndpoints_testevgtopicpe_externalid')]"
+              },
+              "groupIds": [
+                  "topic"
+              ],
+              "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+              },
+              "provisioningState": "Succeeded"
+          }
+      }
+  ]
+}
