@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "partnerNamespaces_r4reduevgpanamespace_name": {
+          "defaultValue": "r4reduevgpanamespace",
+          "type": "String"
+      },
+      "partnerRegistrations_testevgpregistration_externalid": {
+          "defaultValue": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dev-rezoan/providers/Microsoft.EventGrid/partnerRegistrations/testevgpregistration",
+          "type": "String"
+      }
+  },
+  "variables": {},
+  "resources": [
+      {
+          "type": "Microsoft.EventGrid/partnerNamespaces",
+          "apiVersion": "2022-06-15",
+          "name": "[parameters('partnerNamespaces_r4reduevgpanamespace_name')]",
+          "location": "eastus",
+          "properties": {
+              "partnerRegistrationFullyQualifiedId": "[parameters('partnerRegistrations_testevgpregistration_externalid')]",
+              "publicNetworkAccess": "Enabled",
+              "inboundIpRules": [],
+              "disableLocalAuth": true,
+              "partnerTopicRoutingMode": "ChannelNameHeader"
+          }
+      }
+  ]
+}
