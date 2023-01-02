@@ -144,6 +144,10 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "location": "[parameters('location')]",
+            "tags": {
+                "resource_type": "Microsoft.Compute/virtualMachines",
+                "prancer_unique_id": "15f36246-6937-45b3-94f1-dfd76cc0bef5"
+            },
             "dependsOn": [
                 "managedDiskResources",
                 "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
