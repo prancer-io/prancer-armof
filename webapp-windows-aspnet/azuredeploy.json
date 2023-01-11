@@ -34,6 +34,10 @@
             "apiVersion": "2020-06-01",
             "name": "[parameters('webAppName')]",
             "type": "Microsoft.Web/sites",
+            "tags": {
+                "prancer_unique_id":"9b0b53c1-6619-47ac-b646-599b6bc5ae02",
+                "resource_type": "Microsoft.Web/sites"
+            },
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Insights/components/', variables('appInsight'))]",
@@ -41,53 +45,11 @@
             ],
             "properties": {
                 "name": "[parameters('webAppName')]",
+                "httpsOnly": false,
                 "siteConfig": {
-                    "appSettings": [
-                        {
-                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference(resourceId('microsoft.insights/components/', variables('appInsight')), '2020-02-02').InstrumentationKey]"
-                        },
-                        {
-                            "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
-                            "value": "~2"
-                        },
-                        {
-                            "name": "XDT_MicrosoftApplicationInsights_Mode",
-                            "value": "default"
-                        },
-                        {
-                            "name": "DiagnosticServices_EXTENSION_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "InstrumentationEngine_EXTENSION_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "SnapshotDebugger_EXTENSION_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
-                            "value": "disabled"
-                        }
-                    ],
-                    "metadata": [
-                        {
-                            "name": "CURRENT_STACK",
-                            "value": "[variables('currentStack')]"
-                        }
-                    ],
-                    "netFrameworkVersion": "[variables('netFrameworkVersion')]",
-                    "alwaysOn": "[variables('alwaysOn')]"
+                    "linuxFxVersion": "[parameters('linuxFxVersion')]",
+                    "minTlsVersion": "1.1",
+                    "ftpsState": "FtpsOnly"
                 },
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
                 "clientAffinityEnabled": true
