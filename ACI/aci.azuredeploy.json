@@ -1,0 +1,93 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "containerGroups_prancer_instances_name": {
+            "defaultValue": "prancer-instances",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2021-10-01",
+            "name": "[parameters('containerGroups_prancer_instances_name')]",
+            "location": "eastus",
+            "properties": {
+                "sku": "Standard",
+                "containers": [
+                    {
+                        "name": "prancer-pentest-instance",
+                        "properties": {
+                            "image": "prancer/prancer-pac:custom-script",
+                            "ports": [
+                                {
+                                    "port": 80
+                                },
+                                {
+                                    "port": 8080
+                                },
+                                {
+                                    "port": 8090
+                                }
+                            ],
+                            "environmentVariables": [
+                                {
+                                    "name": "PAC_CONFIG_ID",
+                                    "value": "63b56e55d19172cc99c1cade"
+                                },
+                                {
+                                    "name": "PAC_CONFIG_TOKEN",
+                                    "value": "0eccbfcd58304856937f1cd613dcf608"
+                                },
+                                {
+                                    "name": "PAC_CONFIG_DOMAIN",
+                                    "value": "dev"
+                                },
+                                {
+                                    "name": "PAC_CONFIG_CUSTOMER_ID",
+                                    "value": "vatsal"
+                                },
+                                {
+                                    "name": "PAC_CONFIG_ID_TOKEN",
+                                    "value": "63b56ea26c0af4098ba3286d"
+                                }
+                            ],
+                            "resources": {
+                                "requests": {
+                                    "memoryInGB": 8,
+                                    "cpu": 4
+                                },
+                                "limits": {
+                                    "memoryInGB": 8,
+                                    "cpu": 4
+                                }
+                            }
+                        }
+                    }
+                ],
+                "initContainers": [],
+                "ipAddress": {
+                    "ports": [
+                        {
+                            "protocol": "TCP",
+                            "port": 80
+                        },
+                        {
+                            "protocol": "TCP",
+                            "port": 8080
+                        },
+                        {
+                            "protocol": "TCP",
+                            "port": 8090
+                        }
+                    ],
+                    "ip": "20.121.225.90",
+                    "type": "Public"
+                },
+                "osType": "Linux"
+            }
+        }
+    ]
+}
