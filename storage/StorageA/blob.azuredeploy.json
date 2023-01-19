@@ -51,6 +51,10 @@
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
             "location": "[parameters('location')]",
+            "tags": {
+                "prancer_unique_id": "7846b5c5-4f0c-420f-a797-0c82845e80dd",
+                "resource_type": "Microsoft.Storage/storageAccounts"
+            },
             "properties": {
                 "accessTier": "[parameters('accessTier')]",
                 "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
@@ -75,26 +79,11 @@
                     "keySource": "Microsoft.Storage"
                 }
             },
-            "resources":[
-                {
-                    "type": "blobServices/containers",
-                    "apiVersion": "2019-06-01",
-                    "name": "[concat(parameters('storageAccountname'), '/default/', parameters('containerName'))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
-                        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
-                    ],
-                    "properties": {
-                        "publicAccess": "Container"
-                    }
-                }
-            ],
             "dependsOn": [],
             "sku": {
                 "name": "[parameters('accountType')]"
             },
-            "kind": "[parameters('kind')]",
-            "tags": {}
+            "kind": "[parameters('kind')]"
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
