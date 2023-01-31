@@ -1,0 +1,63 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "location": "eastus",
+        "profileName": "example-profile",
+        "endpointName": "example-endpoint",
+        "skuName": "Standard_Microsoft",
+        "storageAccountHostName": "example.blob.core.windows.net"
+    },
+    "resources": [
+        {
+            "name": "[variables('profileName')]",
+            "type": "Microsoft.Cdn/profiles",
+            "location": "[variables('location')]",
+            "apiVersion": "2020-09-01",
+            "kind": "cdn",
+            "sku": {
+                "name": "[variables('skuName')]"
+            },
+            "properties": {}
+        },
+        {
+            "apiVersion": "2020-09-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', variables('profileName'))]"
+            ],
+            "location": "[variables('location')]",
+            "name": "[variables('endpointName')]",
+            "type": "Microsoft.Cdn/profiles/endpoints",
+            "properties": {
+                "originHostHeader": "[variables('storageAccountHostName')]",
+                "isHttpAllowed": false,
+                "isHttpsAllowed": true,
+                "queryStringCachingBehavior": "BypassCaching",
+                "origins": [
+                    {
+                        "name": "storageaccount",
+                        "properties": {
+                            "hostName": "[variables('storageAccountHostName')]",
+                            "httpsPort": 443,
+                            "originHostHeader": "[variables('storageAccountHostName')]",
+                            "enabled": true
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "2020-09-01",
+            "name": "[variables('location')]",
+            "type": "Microsoft.Cdn/profiles/endpoints/customDomains",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', variables('profileName'))]",
+                "[resourceId('Microsoft.Cdn/profiles/endpoints', variables('profileName'), variables('endpointName'))]"
+            ],
+            "properties": {
+                "hostName": "custom.domain.com"
+            }
+        }
+    ],
+    "outputs": {}
+}
