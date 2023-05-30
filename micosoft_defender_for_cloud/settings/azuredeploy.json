@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "defaultValue": "MCAS",
+            "metadata": {
+                "description": "Name of the settings"
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Security/settings",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('name')]",
+            "kind": "DataExportSettings",
+            "properties": {
+                "enabled": true
+            }
+        }
+    ]
+}
