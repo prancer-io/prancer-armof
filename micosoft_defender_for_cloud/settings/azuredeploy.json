@@ -10,6 +10,8 @@
             }
         }
     },
+    "functions": [],
+    "variables": {},
     "resources": [
         {
             "type": "Microsoft.Security/settings",
@@ -20,5 +22,6 @@
                 "enabled": true
             }
         }
-    ]
+    ],
+    "outputs": {}
 }
