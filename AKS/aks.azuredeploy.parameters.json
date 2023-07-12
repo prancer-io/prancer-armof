@@ -65,20 +65,20 @@
         "acrResourceGroup": {
             "value": "Prancer"
         },
-        "VirtualNetworkRGName":{
+        "VirtualNetworkRGName": {
             "value": "Prancer"
         },
-        "VirtualNetworkName":{
+        "VirtualNetworkName": {
             "value": "prancer-vnet"
         },
-        "SubnetName":{
+        "SubnetName": {
             "value": "AKS"
         },
         "aadProfileManaged": {
-            "value": false
+            "value": true
         },
         "aadProfileEnableAzureRBAC": {
-            "value": false
+            "value": true
         }
     }
 }
