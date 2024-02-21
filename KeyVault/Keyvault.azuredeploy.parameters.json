@@ -75,7 +75,7 @@
             "value": false
         },
         "enableSoftDelete": {
-            "value": false
+            "value": true
         },
         "softDeleteRetentionInDays": {
             "value": 90
@@ -88,28 +88,28 @@
                 "virtualNetworkRules": []
             }
         },
-        "secretName":{
+        "secretName": {
             "value": "prancer-secret"
         },
-        "secretValue":{
+        "secretValue": {
             "value": "53cr3t"
         },
-        "keyName":{
+        "keyName": {
             "value": "prancer-key"
         },
-        "keyEnabled":{
+        "keyEnabled": {
             "value": false
         },
-        "keyExp":{
+        "keyExp": {
             "value": -1
         },
-        "keynbf":{
+        "keynbf": {
             "value": 300000
         },
-        "keyExpiryTime":{
+        "keyExpiryTime": {
             "value": ""
         },
-        "keySize":{
+        "keySize": {
             "value": 2048
         }
     }
