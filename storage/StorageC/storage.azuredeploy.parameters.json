@@ -21,7 +21,7 @@
             "value": "TLS1_2"
         },
         "supportsHttpsTrafficOnly": {
-            "value": false
+            "value": true
         },
         "allowBlobPublicAccess": {
             "value": true
