@@ -489,7 +489,7 @@
             "properties": {
               "description": "allow inbound traffic on ICMP protocol",
               "protocol": "ICMP",
-              "access": "Allow",
+              "access": "Deny",
               "priority": 127,
               "direction": "Inbound",
               "sourcePortRange": "*",
