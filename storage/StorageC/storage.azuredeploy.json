@@ -6,31 +6,31 @@
             "type": "string",
             "metadata": {
                 "description": "Location of the storagr account"
-              }
+            }
         },
         "storageAccountName": {
             "type": "string",
             "metadata": {
                 "description": "Name of the storage account"
-              }
+            }
         },
         "accountType": {
             "type": "string",
             "metadata": {
                 "description": "Type of account i.e Standard/Premium LRS/GRS"
-              }
+            }
         },
         "kind": {
             "type": "string",
             "metadata": {
                 "description": "Kind of storag account required for teh storage account"
-              }
+            }
         },
         "accessTier": {
             "type": "string",
             "metadata": {
                 "description": "Access Tier of the storage account default Hot, will chnage it to the Cold "
-              }
+            }
         },
         "minimumTlsVersion": {
             "type": "string"
@@ -42,7 +42,7 @@
             "type": "bool",
             "metadata": {
                 "description": "Allow Blob public access to Blob storage"
-              }
+            }
         },
         "networkAclsBypass": {
             "type": "string"
