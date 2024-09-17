@@ -86,22 +86,22 @@
                 "minCapacity": "[parameters('minCapacity')]",
                 "autoPauseDelay": "[parameters('autoPauseDelay')]"
             },
-            "resources":[
+            "resources": [
                 {
-                        "condition": "[parameters('enableVA')]",
-                        "type": "vulnerabilityAssessments",
-                        "apiVersion": "2018-06-01-preview",
-                        "name": "Default",
-                        "properties": {
-                            "storageContainerPath": "",
-                            "storageAccountAccessKey": "",
-                            "recurringScans": {
-                                "isEnabled": false,
-                                "emailSubscriptionAdmins": false
-                            }
+                    "condition": "[parameters('enableVA')]",
+                    "type": "vulnerabilityAssessments",
+                    "apiVersion": "2018-06-01-preview",
+                    "name": "Default",
+                    "properties": {
+                        "storageContainerPath": "",
+                        "storageAccountAccessKey": "",
+                        "recurringScans": {
+                            "isEnabled": false,
+                            "emailSubscriptionAdmins": true
                         }
-                  },
-                  {
+                    }
+                },
+                {
                     "type": "auditingSettings",
                     "apiVersion": "2020-08-01-preview",
                     "name": "Default",
@@ -114,22 +114,24 @@
                         "storageAccountSubscriptionId": "",
                         "isStorageSecondaryKeyInUse": false
                     }
-                 },
-                 {
+                },
+                {
                     "type": "transparentDataEncryption",
                     "apiVersion": "2014-04-01",
                     "name": "current",
                     "properties": {
-                      "status": "[parameters('transparentDataEncryptionStatus')]"
+                        "status": "[parameters('transparentDataEncryptionStatus')]"
                     }
-                 },
-                 {
+                },
+                {
                     "type": "securityAlertPolicies",
                     "apiVersion": "2020-02-02-preview",
                     "name": "Default",
                     "properties": {
                         "state": "Disabled",
-                        "disabledAlerts": ["Access_Anomaly"]
+                        "disabledAlerts": [
+                            "Access_Anomaly"
+                        ]
                     }
                 }
             ],
@@ -143,7 +145,7 @@
             "apiVersion": "2014-04-01",
             "name": "current",
             "properties": {
-              "status": "[parameters('transparentDataEncryptionStatus')]"
+                "status": "[parameters('transparentDataEncryptionStatus')]"
             }
         }
     ]
