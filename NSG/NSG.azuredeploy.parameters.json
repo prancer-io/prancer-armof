@@ -507,7 +507,7 @@
             "properties": {
               "description": "allow outbound traffic on any source",
               "protocol": "TCP",
-              "access": "Allow",
+              "access": "Deny",
               "priority": 128,
               "direction": "Outbound",
               "sourcePortRange": "*",
