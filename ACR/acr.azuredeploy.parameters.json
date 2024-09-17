@@ -26,7 +26,7 @@
       ]
     },
     "webhooks__serviceUri": {
-      "value": "http://mywebhookreceiver.example/mytag"
+      "value": "https://mywebhookreceiver.example/mytag"
     }
   }
 }
