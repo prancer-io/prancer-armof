@@ -235,7 +235,7 @@
             "properties": {
               "description": "allow inbound traffic",
               "protocol": "TCP",
-              "access": "Allow",
+              "access": "Deny",
               "priority": 112,
               "direction": "Inbound",
               "sourcePortRange": "*",
@@ -381,7 +381,7 @@
             "properties": {
               "description": "allow inbound traffic",
               "protocol": "TCP",
-              "access": "Allow",
+              "access": "Deny",
               "priority": 120,
               "direction": "Inbound",
               "sourcePortRange": "*",
@@ -471,7 +471,7 @@
             "properties": {
               "description": "allow inbound traffic on any protocol",
               "protocol": "*",
-              "access": "Allow",
+              "access": "Deny",
               "priority": 125,
               "direction": "Inbound",
               "sourcePortRange": "*",
