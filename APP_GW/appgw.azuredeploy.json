@@ -40,39 +40,39 @@
             "type": "bool",
             "defaultValue": false,
             "metadata": {
-            "description": "WAF Enabled"
+                "description": "WAF Enabled"
             }
         },
         "wafMode": {
             "type": "string",
             "allowedValues": [
-            "Detection",
-            "Prevention"
+                "Detection",
+                "Prevention"
             ],
             "defaultValue": "Detection",
             "metadata": {
-            "description": "WAF Mode"
+                "description": "WAF Mode"
             }
         },
         "wafRuleSetType": {
             "type": "string",
             "allowedValues": [
-            "OWASP"
+                "OWASP"
             ],
             "defaultValue": "OWASP",
             "metadata": {
-            "description": "WAF Rule Set Type"
+                "description": "WAF Rule Set Type"
             }
         },
         "wafRuleSetVersion": {
             "type": "string",
             "allowedValues": [
-            "2.2.9",
-            "3.0"
+                "2.2.9",
+                "3.0"
             ],
             "defaultValue": "3.0",
             "metadata": {
-            "description": "WAF Rule Set Version"
+                "description": "WAF Rule Set Version"
             }
         }
     },
@@ -189,7 +189,7 @@
                 ],
                 "sslPolicy": {
                     "policyType": "Custom",
-                    "minProtocolVersion": "TLSv1_1",
+                    "minProtocolVersion": "TLSv1_2",
                     "cipherSuites": [
                         "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
                         "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
